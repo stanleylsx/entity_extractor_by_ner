@@ -1,0 +1,4 @@
+tensorflow==1.13.2
+numpy==1.16.0
+pandas==0.25.3
+jieba==0.41
