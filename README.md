@@ -41,7 +41,7 @@ Date|Version|Details
 设定system.config的Status中的为interactive_predict。  
 运行main.py开始在线预测。 
 下图为在线预测结果。  
-![test](img/online predict.png)  
+![test](img/online_predict.png)  
 ## Reference
 + NER相关的论文整理在[papers](papers)下。  
 + [https://github.com/scofield7419/sequence-labeling-BiLSTM-CRF](https://github.com/scofield7419/sequence-labeling-BiLSTM-CRF)
