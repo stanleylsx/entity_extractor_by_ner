@@ -7,7 +7,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 
 class Model(object):
-    def __init__(self, configs, logger, data_manager):
+    def __init__(self, configs, data_manager):
         os.environ['CUDA_VISIBLE_DEVICES'] = configs.CUDA_VISIBLE_DEVICES
         if configs.mode == 'train':
             self.is_training = True

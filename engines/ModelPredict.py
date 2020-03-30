@@ -20,7 +20,7 @@ class Predictor:
         logger.info('loading model parameter')
         with self.sess.as_default():
             with self.graph.as_default():
-                self.model = Model(configs, logger, data_manager)
+                self.model = Model(configs, data_manager)
                 tf.initialize_all_variables().run(session=self.sess)
                 saver = tf.train.Saver()
                 saver.restore(self.sess, tf.train.latest_checkpoint(configs.checkpoints_dir))

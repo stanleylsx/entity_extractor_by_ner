@@ -17,7 +17,7 @@ class Train:
         logger.info('loading model...')
         with self.sess.as_default():
             with self.graph.as_default():
-                self.model = Model(configs, logger, data_manager)
+                self.model = Model(configs, data_manager)
                 tf.initialize_all_variables().run(session=self.sess)
                 self.saver = tf.train.Saver(max_to_keep=self.max_to_keep)
         logger.info('loading model successfully...')
