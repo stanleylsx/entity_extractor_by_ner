@@ -49,34 +49,38 @@ class DataManager:
         self.logger.info('dataManager initialed...')
 
     def load_vocab(self):
+        """
+        若不存在词表则生成，若已经存在则加载词表
+        :return:
+        """
         if not os.path.isfile(self.token2id_file):
             self.logger.info('vocab files not exist, building vocab...')
             return self.build_vocab(self.train_file)
 
         self.logger.info('loading vocab...')
-        token2id = {}
-        id2token = {}
+        token2id, id2token = {}, {}
         with open(self.token2id_file, 'r', encoding='utf-8') as infile:
             for row in infile:
-                row = row.rstrip()
-                token = row.split('\t')[0]
-                token_id = int(row.split('\t')[1])
+                row = row.strip()
+                token, token_id = row.split('\t')[0], int(row.split('\t')[1])
                 token2id[token] = token_id
                 id2token[token_id] = token
 
-        label2id = {}
-        id2label = {}
+        label2id, id2label = {}, {}
         with open(self.label2id_file, 'r', encoding='utf-8') as infile:
             for row in infile:
-                row = row.rstrip()
-                label = row.split('\t')[0]
-                label_id = int(row.split('\t')[1])
+                row = row.strip()
+                label, label_id = row.split('\t')[0], int(row.split('\t')[1])
                 label2id[label] = label_id
                 id2label[label_id] = label
-
         return token2id, id2token, label2id, id2label
 
     def build_vocab(self, train_path):
+        """
+        根据训练集生成词表
+        :param train_path:
+        :return:
+        """
         df_train = read_csv(train_path, names=['token', 'label'], delimiter=self.configs.delimiter)
         tokens = list(set(df_train['token'][df_train['token'].notnull()]))
         labels = list(set(df_train['label'][df_train['label'].notnull()]))
@@ -84,18 +88,24 @@ class DataManager:
         label2id = dict(zip(labels, range(1, len(labels) + 1)))
         id2token = dict(zip(range(1, len(tokens) + 1), tokens))
         id2label = dict(zip(range(1, len(labels) + 1), labels))
+        # 向生成的词表和标签表中加入<PAD>
         id2token[0] = self.PADDING
         id2label[0] = self.PADDING
         token2id[self.PADDING] = 0
         label2id[self.PADDING] = 0
+        # 向生成的词表中加入<UNK>
         id2token[len(tokens) + 1] = self.UNKNOWN
         token2id[self.UNKNOWN] = len(tokens) + 1
-
         self.save_vocab(id2token, id2label)
-
         return token2id, id2token, label2id, id2label
 
     def save_vocab(self, id2token, id2label):
+        """
+        保存词表及标签表
+        :param id2token:
+        :param id2label:
+        :return:
+        """
         with open(self.token2id_file, 'w', encoding='utf-8') as outfile:
             for idx in id2token:
                 outfile.write(id2token[idx] + '\t' + str(idx) + '\n')
