@@ -72,10 +72,6 @@ class Configure:
             self.measuring_metrics = config[the_item]
 
         # ModelConfiguration
-        the_item = 'use_crf'
-        if the_item in config:
-            self.use_crf = self.str2bool(config[the_item])
-
         the_item = 'cell_type'
         if the_item in config:
             self.cell_type = config[the_item]
@@ -211,7 +207,6 @@ class Configure:
         logger.info('     measuring     metrics: {}'.format(self.measuring_metrics))
         logger.info(' ' + '++' * 20)
         logger.info('Model Configuration:')
-        logger.info('     use               crf: {}'.format(self.use_crf))
         logger.info('     cell             type: {}'.format(self.cell_type))
         logger.info('     bidirectional        : {}'.format(self.bidirectional))
         logger.info('     encoder        layers: {}'.format(self.encoder_layers))

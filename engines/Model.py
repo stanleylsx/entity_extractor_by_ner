@@ -14,11 +14,10 @@ class Model(object):
         else:
             self.is_training = False
 
-        self.bidirectional = configs.bidirectional
-        self.num_layers = configs.encoder_layers
-        self.emb_dim = configs.embedding_dim
-        self.hidden_dim = configs.hidden_dim
-        self.is_crf = configs.use_crf
+        self.bidirectional = configs.bidirectional  # True
+        self.num_layers = configs.encoder_layers  # 1
+        self.emb_dim = configs.embedding_dim  # 200
+        self.hidden_dim = configs.hidden_dim  # 200
         if configs.cell_type == 'LSTM':
             if self.bidirectional:
                 self.cell = tf.nn.rnn_cell.LSTMCell(self.hidden_dim)
@@ -29,19 +28,19 @@ class Model(object):
                 self.cell = tf.nn.rnn_cell.GRUCell(self.hidden_dim)
             else:
                 self.cell = tf.nn.rnn_cell.GRUCell(2 * self.hidden_dim)
-        self.batch_size = configs.batch_size
-        self.max_sequence_length = configs.max_sequence_length
-        self.num_tokens = data_manager.max_token_number
-        self.num_classes = data_manager.max_label_number
+        self.batch_size = configs.batch_size  # 32
+        self.max_sequence_length = configs.max_sequence_length  # 300
+        self.num_tokens = data_manager.max_token_number  # 4314
+        self.num_classes = data_manager.max_label_number  # 8
         self.initializer = tf.contrib.layers.xavier_initializer()
         if configs.use_pre_trained_embedding:
             embedding_matrix = data_manager.get_embedding(configs.token_emb_dir)
             self.embedding = tf.Variable(embedding_matrix, trainable=False, name='emb', dtype=tf.float32)
         else:
             self.embedding = tf.get_variable('emb', [self.num_tokens, self.emb_dim], trainable=True,
-                                             initializer=self.initializer)
-        self.learning_rate = configs.learning_rate
-        self.dropout_rate = configs.dropout
+                                             initializer=self.initializer)  # (4314, 200)
+        self.learning_rate = configs.learning_rate  # 0.001
+        self.dropout_rate = configs.dropout  # 0.5
         if configs.optimizer == 'Adagrad':
             self.optimizer = tf.train.AdagradOptimizer(self.learning_rate)
         elif configs.optimizer == 'Adadelta':
@@ -56,13 +55,13 @@ class Model(object):
         self.build()
 
     def build(self):
-        self.inputs = tf.placeholder(tf.int32, [None, self.max_sequence_length])
-        self.targets = tf.placeholder(tf.int32, [None, self.max_sequence_length])
+        self.inputs = tf.placeholder(shape=[None, self.max_sequence_length], dtype=tf.int32)  # (?, 300)
+        self.targets = tf.placeholder(shape=[None, self.max_sequence_length], dtype=tf.int32)  # (?, 300)
 
-        self.inputs_emb = tf.nn.embedding_lookup(self.embedding, self.inputs)
-        self.inputs_emb = tf.transpose(self.inputs_emb, [1, 0, 2])
-        self.inputs_emb = tf.reshape(self.inputs_emb, [-1, self.emb_dim])
-        self.inputs_emb = tf.split(self.inputs_emb, self.max_sequence_length, 0)
+        inputs_emb = tf.nn.embedding_lookup(self.embedding, self.inputs)  # (?, 300, 200)
+        inputs_emb = tf.transpose(inputs_emb, [1, 0, 2])   # (300, ?, 200)
+        inputs_emb = tf.reshape(inputs_emb, [-1, self.emb_dim])  # (?, 200)
+        inputs_emb = tf.split(inputs_emb, self.max_sequence_length, 0)
 
         # lstm cell
         if self.bidirectional:
@@ -76,16 +75,15 @@ class Model(object):
 
             lstm_cell_fw = tf.nn.rnn_cell.MultiRNNCell([lstm_cell_fw] * self.num_layers)
             lstm_cell_bw = tf.nn.rnn_cell.MultiRNNCell([lstm_cell_bw] * self.num_layers)
-
             # get the length of each sample
-            self.length = tf.reduce_sum(tf.sign(self.inputs), reduction_indices=1)
-            self.length = tf.cast(self.length, tf.int32)
+            self.length = tf.reduce_sum(tf.sign(self.inputs), reduction_indices=1)  # (?,)
+            self.length = tf.cast(self.length, tf.int32)  # (?,)
 
             # forward and backward
             outputs, _, _ = tf.contrib.rnn.static_bidirectional_rnn(
                 lstm_cell_fw,
                 lstm_cell_bw,
-                self.inputs_emb,
+                inputs_emb,
                 dtype=tf.float32,
                 sequence_length=self.length
             )
@@ -99,37 +97,24 @@ class Model(object):
 
             outputs, _ = tf.contrib.rnn.static_rnn(
                 lstm_cell,
-                self.inputs_emb,
+                inputs_emb,
                 dtype=tf.float32,
                 sequence_length=self.length
             )
         # outputs: list_steps[batch, 2*dim]
-        outputs = tf.concat(outputs, 1)
-        outputs = tf.reshape(outputs, [self.batch_size, self.max_sequence_length, self.hidden_dim * 2])
+        outputs = tf.concat(outputs, 1)  # (?, 120000)
+        outputs = tf.reshape(outputs, [self.batch_size, self.max_sequence_length, self.hidden_dim * 2])  # (32, 300, 400)
 
         # linear
-        self.outputs = tf.reshape(outputs, [-1, self.hidden_dim * 2])
-        self.softmax_w = tf.get_variable('softmax_w', [self.hidden_dim * 2, self.num_classes], initializer=self.initializer)
-        self.softmax_b = tf.get_variable('softmax_b', [self.num_classes], initializer=self.initializer)
-        self.logits = tf.matmul(self.outputs, self.softmax_w) + self.softmax_b
-        self.logits = tf.reshape(self.logits, [self.batch_size, self.max_sequence_length, self.num_classes])
-        # print(self.logits.get_shape().as_list())
-        if not self.is_crf:
-            # softmax
-            softmax_out = tf.nn.softmax(self.logits, axis=-1)
-            self.batch_pred_sequence = tf.cast(tf.argmax(softmax_out, -1), tf.int32)
-            losses = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=self.logits, labels=self.targets)
-            mask = tf.sequence_mask(self.length)
-            self.losses = tf.boolean_mask(losses, mask)
-            self.loss = tf.reduce_mean(losses)
-        else:
-            # crf
-            self.log_likelihood, self.transition_params = tf.contrib.crf.crf_log_likelihood(
-                self.logits, self.targets, self.length)
-            self.batch_pred_sequence, self.batch_viterbi_score = tf.contrib.crf.crf_decode(self.logits,
-                                                                                           self.transition_params,
-                                                                                           self.length)
-            self.loss = tf.reduce_mean(-self.log_likelihood)
+        outputs = tf.reshape(outputs, [-1, self.hidden_dim * 2])  # shape=(9600, 400)
+        softmax_w = tf.get_variable('softmax_w', [self.hidden_dim * 2, self.num_classes], initializer=self.initializer)  # (400, 8)
+        softmax_b = tf.get_variable('softmax_b', [self.num_classes], initializer=self.initializer)  # (8,)
+        logits = tf.matmul(outputs, softmax_w) + softmax_b  # (9600, 8)
+        logits = tf.reshape(logits, [self.batch_size, self.max_sequence_length, self.num_classes])  # (32, 300, 8)
+        # print(logits.get_shape().as_list())
+        log_likelihood, transition_params = tf.contrib.crf.crf_log_likelihood(logits, self.targets, self.length)
+        self.batch_pred_sequence, self.batch_viterbi_score = tf.contrib.crf.crf_decode(logits, transition_params, self.length)
+        self.loss = tf.reduce_mean(-log_likelihood)
         self.train_summary = tf.summary.scalar('loss', self.loss)
         self.dev_summary = tf.summary.scalar('loss', self.loss)
         self.opt_op = self.optimizer.minimize(self.loss, global_step=self.global_step)

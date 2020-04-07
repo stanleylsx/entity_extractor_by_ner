@@ -22,8 +22,6 @@ class Train:
                 self.saver = tf.train.Saver(max_to_keep=self.max_to_keep)
         logger.info('loading model successfully...')
         self.best_f1_val = 0
-        self.inputs = self.model.inputs
-        self.targets = self.model.targets
 
     def train(self):
         X_train, y_train, X_val, y_val = self.dataManager.get_training_set()
@@ -59,8 +57,8 @@ class Train:
                     self.model.train_summary
                 ],
                     feed_dict={
-                        self.inputs: X_train_batch,
-                        self.targets: y_train_batch,
+                        self.model.inputs: X_train_batch,
+                        self.model.targets: y_train_batch,
                     })
 
                 if iteration % self.configs.print_per_batch == 0:
@@ -89,8 +87,8 @@ class Train:
                     self.model.dev_summary
                 ],
                     feed_dict={
-                        self.inputs: X_val_batch,
-                        self.targets: y_val_batch,
+                        self.model.inputs: X_val_batch,
+                        self.model.targets: y_val_batch,
                     })
 
                 measures = metrics(X_val_batch, y_val_batch, val_batch_viterbi_sequence,
