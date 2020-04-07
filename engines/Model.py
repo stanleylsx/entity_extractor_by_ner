@@ -9,11 +9,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 class Model(object):
     def __init__(self, configs, data_manager):
         os.environ['CUDA_VISIBLE_DEVICES'] = configs.CUDA_VISIBLE_DEVICES
-        if configs.mode == 'train':
-            self.is_training = True
-        else:
-            self.is_training = False
-
+        self.is_training = True if configs.mode == 'train' else False
         self.bidirectional = configs.bidirectional  # True
         self.num_layers = configs.encoder_layers  # 1
         self.emb_dim = configs.embedding_dim  # 200
@@ -51,13 +47,12 @@ class Model(object):
             self.optimizer = tf.train.GradientDescentOptimizer(self.learning_rate)
         else:
             self.optimizer = tf.train.AdamOptimizer(self.learning_rate)
+        self.inputs = tf.placeholder(shape=[None, self.max_sequence_length], dtype=tf.int32)  # (?, 300)
+        self.targets = tf.placeholder(shape=[None, self.max_sequence_length], dtype=tf.int32)  # (?, 300)
         self.global_step = tf.Variable(0, trainable=False, name='global_step', dtype=tf.int32)
         self.build()
 
     def build(self):
-        self.inputs = tf.placeholder(shape=[None, self.max_sequence_length], dtype=tf.int32)  # (?, 300)
-        self.targets = tf.placeholder(shape=[None, self.max_sequence_length], dtype=tf.int32)  # (?, 300)
-
         inputs_emb = tf.nn.embedding_lookup(self.embedding, self.inputs)  # (?, 300, 200)
         inputs_emb = tf.transpose(inputs_emb, [1, 0, 2])   # (300, ?, 200)
         inputs_emb = tf.reshape(inputs_emb, [-1, self.emb_dim])  # (?, 200)
@@ -113,7 +108,7 @@ class Model(object):
         logits = tf.reshape(logits, [self.batch_size, self.max_sequence_length, self.num_classes])  # (32, 300, 8)
         # add crf
         log_likelihood, transition_params = tf.contrib.crf.crf_log_likelihood(logits, self.targets, self.length)
-        self.batch_pred_sequence, self.batch_viterbi_score = tf.contrib.crf.crf_decode(logits, transition_params, self.length)
+        self.batch_pred_sequence, _ = tf.contrib.crf.crf_decode(logits, transition_params, self.length)
         self.loss = tf.reduce_mean(-log_likelihood)
         self.summary = tf.summary.scalar('loss', self.loss)
         self.opt_op = self.optimizer.minimize(self.loss, global_step=self.global_step)
