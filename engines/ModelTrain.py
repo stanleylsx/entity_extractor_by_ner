@@ -54,7 +54,7 @@ class Train:
                     self.model.opt_op,
                     self.model.loss,
                     self.model.batch_pred_sequence,
-                    self.model.train_summary
+                    self.model.summary
                 ],
                     feed_dict={
                         self.model.inputs: X_train_batch,
@@ -84,7 +84,7 @@ class Train:
                 loss_val, val_batch_viterbi_sequence, dev_summary = self.sess.run([
                     self.model.loss,
                     self.model.batch_pred_sequence,
-                    self.model.dev_summary
+                    self.model.summary
                 ],
                     feed_dict={
                         self.model.inputs: X_val_batch,

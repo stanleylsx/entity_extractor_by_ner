@@ -111,10 +111,9 @@ class Model(object):
         softmax_b = tf.get_variable('softmax_b', [self.num_classes], initializer=self.initializer)  # (8,)
         logits = tf.matmul(outputs, softmax_w) + softmax_b  # (9600, 8)
         logits = tf.reshape(logits, [self.batch_size, self.max_sequence_length, self.num_classes])  # (32, 300, 8)
-        # print(logits.get_shape().as_list())
+        # add crf
         log_likelihood, transition_params = tf.contrib.crf.crf_log_likelihood(logits, self.targets, self.length)
         self.batch_pred_sequence, self.batch_viterbi_score = tf.contrib.crf.crf_decode(logits, transition_params, self.length)
         self.loss = tf.reduce_mean(-log_likelihood)
-        self.train_summary = tf.summary.scalar('loss', self.loss)
-        self.dev_summary = tf.summary.scalar('loss', self.loss)
+        self.summary = tf.summary.scalar('loss', self.loss)
         self.opt_op = self.optimizer.minimize(self.loss, global_step=self.global_step)
