@@ -131,6 +131,13 @@ class DataManager:
         return emb_matrix
 
     def next_batch(self, X, y, start_index):
+        """
+        下一次个训练批次
+        :param X:
+        :param y:
+        :param start_index:
+        :return:
+        """
         last_index = start_index + self.batch_size
         X_batch = list(X[start_index:min(last_index, len(X))])
         y_batch = list(y[start_index:min(last_index, len(X))])
@@ -144,60 +151,54 @@ class DataManager:
         y_batch = np.array(y_batch)
         return X_batch, y_batch
 
-    def next_random_batch(self, X, y):
-        X_batch = []
-        y_batch = []
-        for i in range(self.batch_size):
-            index = np.random.randint(len(X))
-            X_batch.append(X[index])
-            y_batch.append(y[index])
-        X_batch = np.array(X_batch)
-        y_batch = np.array(y_batch)
-        return X_batch, y_batch
-
     def padding(self, sample):
+        """
+        长度不足max_sequence_length则补齐
+        :param sample:
+        :return:
+        """
         for i in range(len(sample)):
             if len(sample[i]) < self.max_sequence_length:
                 sample[i] += [self.token2id[self.PADDING] for _ in range(self.max_sequence_length - len(sample[i]))]
         return sample
 
-    def prepare(self, tokens, labels, is_padding=True, return_psyduo_label=False):
+    def prepare(self, tokens, labels, is_padding=True):
+        """
+        输出X矩阵和y向量
+        :param tokens:
+        :param labels:
+        :param is_padding:
+        :return:
+        """
         X = []
         y = []
-        y_psyduo = []
         tmp_x = []
         tmp_y = []
-        tmp_y_psyduo = []
-
         for record in zip(tokens, labels):
-            c = record[0]
-            l = record[1]
-            if c == -1:  # empty line
+            taken = record[0]
+            label = record[1]
+            if taken == -1:  # empty line
                 if len(tmp_x) <= self.max_sequence_length:
                     X.append(tmp_x)
                     y.append(tmp_y)
-                    if return_psyduo_label:
-                        y_psyduo.append(tmp_y_psyduo)
                 tmp_x = []
                 tmp_y = []
-                if return_psyduo_label:
-                    tmp_y_psyduo = []
             else:
-                tmp_x.append(c)
-                tmp_y.append(l)
-                if return_psyduo_label:
-                    tmp_y_psyduo.append(self.label2id['O'])
+                tmp_x.append(taken)
+                tmp_y.append(label)
         if is_padding:
             X = np.array(self.padding(X))
         else:
             X = np.array(X)
         y = np.array(self.padding(y))
-        if return_psyduo_label:
-            y_psyduo = np.array(self.padding(y_psyduo))
-            return X, y_psyduo
         return X, y
 
     def get_training_set(self, train_val_ratio=0.9):
+        """
+        获取训练数据集、验证集
+        :param train_val_ratio:
+        :return:
+        """
         df_train = read_csv(self.train_file, names=['token', 'label'], delimiter=self.configs.delimiter)
         # map the token and label into id
         df_train['token_id'] = df_train.token.map(lambda x: -1 if str(x) == str(np.nan) else self.token2id[x])
@@ -224,27 +225,15 @@ class DataManager:
         return X_train, y_train, X_val, y_val
 
     def get_valid_set(self):
+        """
+        获取验证集
+        :return:
+        """
         df_val = read_csv(self.dev_file, names=['token', 'label'], delimiter=self.configs.delimiter)
         df_val['token_id'] = df_val.token.map(lambda x: self.map_func(x, self.token2id))
         df_val['label_id'] = df_val.label.map(lambda x: -1 if str(x) == str(np.nan) else self.label2id[x])
         X_val, y_val = self.prepare(df_val['token_id'], df_val['label_id'])
         return X_val, y_val
-
-    def get_testing_set(self):
-        df_test = read_csv(self.test_file, names=None, delimiter=self.configs.delimiter)
-
-        if len(list(df_test.columns)) == 2:
-            df_test.columns = ['token', 'label']
-            df_test = df_test[['token']]
-        elif len(list(df_test.columns)) == 1:
-            df_test.columns = ['token']
-
-        df_test['token_id'] = df_test.token.map(lambda x: self.map_func(x, self.token2id))
-        df_test['token'] = df_test.token.map(lambda x: -1 if str(x) == str(np.nan) else x)
-        X_test_id, y_test_psyduo_label = self.prepare(df_test['token_id'], df_test['token_id'], return_psyduo_label=True)
-        X_test_token, _ = self.prepare(df_test['token'], df_test['token'])
-        self.logger.info('testing set size: {}'.format(len(X_test_id)))
-        return X_test_id, y_test_psyduo_label, X_test_token
 
     def map_func(self, x, token2id):
         if str(x) == str(np.nan):
@@ -255,6 +244,11 @@ class DataManager:
             return token2id[x]
 
     def prepare_single_sentence(self, sentence):
+        """
+        把预测的句子转成矩阵和向量
+        :param sentence:
+        :return:
+        """
         if self.labeling_level == 'word':
             if self.check_contain_chinese(sentence):
                 sentence = list(jieba.cut(sentence))
@@ -264,10 +258,8 @@ class DataManager:
             sentence = list(sentence)
 
         gap = self.batch_size - 1
-
         x = []
         y = []
-
         for token in sentence:
             # noinspection PyBroadException
             try:
@@ -284,18 +276,11 @@ class DataManager:
             sentence = sentence[:self.max_sequence_length]
             x = x[:self.max_sequence_length]
             y = y[:self.max_sequence_length]
-
-        X = [x]
-        Sentence = [sentence]
-        Y = [y]
-        X += [[0 for j in range(self.max_sequence_length)] for i in range(gap)]
-        Sentence += [['x' for j in range(self.max_sequence_length)] for i in range(gap)]
-        Y += [[self.label2id['O'] for j in range(self.max_sequence_length)] for i in range(gap)]
-        X = np.array(X)
-        Sentence = np.array(Sentence)
-        Y = np.array(Y)
-
-        return X, Sentence, Y
+        X, Sentence, Y = [x], [sentence], [y]
+        X += [[0 for _ in range(self.max_sequence_length)] for _ in range(gap)]
+        Sentence += [['x' for _ in range(self.max_sequence_length)] for _ in range(gap)]
+        Y += [[self.label2id['O'] for _ in range(self.max_sequence_length)] for _ in range(gap)]
+        return np.array(X), np.array(Sentence), np.array(Y)
 
     @staticmethod
     def check_contain_chinese(check_str):
