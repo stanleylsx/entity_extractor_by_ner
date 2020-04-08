@@ -220,6 +220,7 @@ class DataManager:
             y_train = y[:int(num_samples * train_val_ratio)]
             X_val = X[int(num_samples * train_val_ratio):]
             y_val = y[int(num_samples * train_val_ratio):]
+            self.logger.info('validating set is not exist, built...')
         self.logger.info('training set size: {}, validating set size: {}'.format(len(X_train), len(y_val)))
         return X_train, y_train, X_val, y_val
 
