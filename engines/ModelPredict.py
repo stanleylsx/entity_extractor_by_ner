@@ -1,10 +1,6 @@
 import tensorflow as tf
-import numpy as np
-import pandas as pd
-import math
 from engines.Model import Model
 from engines.utils.ExtractEntity import extract_entity
-from engines.utils.IOFunctions import save_csv
 
 
 class Predictor:

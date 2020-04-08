@@ -20,7 +20,6 @@ class DataManager:
 
         self.train_file = configs.datasets_fold + '/' + configs.train_file
         self.dev_file = configs.datasets_fold + '/' + configs.dev_file
-        self.test_file = configs.datasets_fold + '/' + configs.test_file
 
         self.output_test_file = configs.datasets_fold + '/' + configs.output_test_file
         self.is_output_sentence_entity = configs.is_output_sentence_entity
