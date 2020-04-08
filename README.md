@@ -18,6 +18,7 @@ pip install -r requirements.txt
 Date|Version|Details
 :---|:---|---
 2020-01-12|v1.0.0|initial project
+2020-04-08|v1.1.0|refactored code
 
 ## How to use
 ### Train
@@ -29,13 +30,6 @@ Date|Version|Details
 运行main.py开始训练。  
 下图为日志记录训练完毕。  
 ![model](img/train.png)  
-### Batch test
-外部模型需要配置好vocab_dir，checkpoints_dir，模型参数。本项目训练好的模型保持和训练时的参数不变即可。  
-在system.config的Model Configuration/Training Settings下配置测试输出的参数。  
-设定system.config的Status中的为test。  
-运行main.py开始对测试数据集的数据进行批量预测。    
-下图为测试数据集批量预测之后的结果。  
-![test](img/test.png)  
 ### Online predict
 外部模型需要配置好vocab_dir，checkpoints_dir，模型参数。本项目训练好的模型保持和训练时的参数不变即可。  
 设定system.config的Status中的为interactive_predict。  
