@@ -20,6 +20,8 @@ class Configure:
             the_item = 'dev_file'
         if the_item in config:
             self.dev_file = config[the_item]
+        else:
+            self.dev_file = None
         the_item = 'delimiter'
         if the_item in config:
             self.delimiter = config[the_item]

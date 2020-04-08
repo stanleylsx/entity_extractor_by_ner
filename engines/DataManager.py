@@ -19,7 +19,11 @@ class DataManager:
         self.PADDING = '<PAD>'
 
         self.train_file = configs.datasets_fold + '/' + configs.train_file
-        self.dev_file = configs.datasets_fold + '/' + configs.dev_file
+
+        if configs.dev_file is not None:
+            self.dev_file = configs.datasets_fold + '/' + configs.dev_file
+        else:
+            self.dev_file = None
 
         self.output_test_file = configs.datasets_fold + '/' + configs.output_test_file
         self.is_output_sentence_entity = configs.is_output_sentence_entity
