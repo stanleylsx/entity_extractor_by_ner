@@ -18,7 +18,7 @@ pip install -r requirements.txt
 Date|Version|Details
 :---|:---|---
 2020-01-12|v1.0.0|initial project
-2020-04-08|v1.1.0|refactored code
+2020-04-08|v1.1.0|refactored code(remove batch test function and give some annotation)
 
 ## How to use
 ### Train
