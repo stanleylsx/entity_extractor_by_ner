@@ -22,6 +22,9 @@ class Configure:
             self.dev_file = config[the_item]
         else:
             self.dev_file = None
+        the_item = 'test_file'
+        if the_item in config:
+            self.test_file = config[the_item]
         the_item = 'delimiter'
         if the_item in config:
             self.delimiter = config[the_item]
@@ -190,6 +193,7 @@ class Configure:
         logger.info('     datasets         fold: {}'.format(self.datasets_fold))
         logger.info('     train            file: {}'.format(self.train_file))
         logger.info('     validation       file: {}'.format(self.dev_file))
+        logger.info('     test             file: {}'.format(self.test_file))
         logger.info('     pre-trained embedding: {}'.format(self.use_pre_trained_embedding))
         logger.info('     embedding        file: {}'.format(self.token_emb_dir))
         logger.info('     vocab             dir: {}'.format(self.vocabs_dir))
@@ -225,5 +229,10 @@ class Configure:
         logger.info('     print       per_batch: {}'.format(self.print_per_batch))
         logger.info('     is     early     stop: {}'.format(self.is_early_stop))
         logger.info('     patient              : {}'.format(self.patient))
+        logger.info(' ' + '++' * 20)
+        logger.info(' Testing Settings:')
+        logger.info('     output    test   file: {}'.format(self.output_test_file))
+        logger.info('     output sent  and  ent: {}'.format(self.is_output_sentence_entity))
+        logger.info('     output  sen&ent  file: {}'.format(self.output_sentence_entity_file))
         logger.info('++' * 20 + 'CONFIGURATION SUMMARY END' + '++' * 20)
         sys.stdout.flush()

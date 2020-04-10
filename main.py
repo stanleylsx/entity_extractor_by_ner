@@ -64,6 +64,10 @@ if __name__ == '__main__':
         logger.info('mode: train')
         trainer = Train(configs, logger, dataManager)
         trainer.train()
+    elif mode == 'test':
+        logger.info('mode: test')
+        predictor = Predictor(configs, logger, dataManager)
+        predictor.test_batch_predict()
     elif mode == 'interactive_predict':
         logger.info('mode: predict_one')
         predictor = Predictor(configs, logger, dataManager)
@@ -72,5 +76,6 @@ if __name__ == '__main__':
             sentence = input()
             if sentence == 'exit':
                 break
+            logger.info(sentence)
             results = predictor.predict(sentence)
             print(results)

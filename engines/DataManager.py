@@ -24,6 +24,7 @@ class DataManager:
             self.dev_file = configs.datasets_fold + '/' + configs.dev_file
         else:
             self.dev_file = None
+        self.test_file = configs.datasets_fold + '/' + configs.test_file
 
         self.output_test_file = configs.datasets_fold + '/' + configs.output_test_file
         self.is_output_sentence_entity = configs.is_output_sentence_entity
@@ -165,18 +166,21 @@ class DataManager:
                 sample[i] += [self.token2id[self.PADDING] for _ in range(self.max_sequence_length - len(sample[i]))]
         return sample
 
-    def prepare(self, tokens, labels, is_padding=True):
+    def prepare(self, tokens, labels, is_padding=True, return_prepare_label=False):
         """
         输出X矩阵和y向量
         :param tokens:
         :param labels:
         :param is_padding:
+        :param return_prepare_label:
         :return:
         """
         X = []
         y = []
+        y_prepare = []
         tmp_x = []
         tmp_y = []
+        tmp_y_prepare = []
         for record in zip(tokens, labels):
             taken = record[0]
             label = record[1]
@@ -184,16 +188,25 @@ class DataManager:
                 if len(tmp_x) <= self.max_sequence_length:
                     X.append(tmp_x)
                     y.append(tmp_y)
+                    if return_prepare_label:
+                        y_prepare.append(tmp_y_prepare)
                 tmp_x = []
                 tmp_y = []
+                if return_prepare_label:
+                    tmp_y_prepare = []
             else:
                 tmp_x.append(taken)
                 tmp_y.append(label)
+                if return_prepare_label:
+                    tmp_y_prepare.append(self.label2id['O'])
         if is_padding:
             X = np.array(self.padding(X))
         else:
             X = np.array(X)
         y = np.array(self.padding(y))
+        if return_prepare_label:
+            y_psyduo = np.array(self.padding(y_prepare))
+            return X, y_psyduo
         return X, y
 
     def get_training_set(self, train_val_ratio=0.9):
@@ -227,6 +240,22 @@ class DataManager:
             self.logger.info('validating set is not exist, built...')
         self.logger.info('training set size: {}, validating set size: {}'.format(len(X_train), len(y_val)))
         return X_train, y_train, X_val, y_val
+
+    def get_testing_set(self):
+        df_test = read_csv(self.test_file, names=None, delimiter=self.configs.delimiter)
+
+        if len(list(df_test.columns)) == 2:
+            df_test.columns = ['token', 'label']
+            df_test = df_test[['token']]
+        elif len(list(df_test.columns)) == 1:
+            df_test.columns = ['token']
+
+        df_test['token_id'] = df_test.token.map(lambda x: self.map_func(x, self.token2id))
+        df_test['token'] = df_test.token.map(lambda x: -1 if str(x) == str(np.nan) else x)
+        X_test_id, y_test_psyduo_label = self.prepare(df_test['token_id'], df_test['token_id'], return_prepare_label=True)
+        X_test_token, _ = self.prepare(df_test['token'], df_test['token'])
+        self.logger.info('testing set size: {}'.format(len(X_test_id)))
+        return X_test_id, y_test_psyduo_label, X_test_token
 
     def get_valid_set(self):
         """
