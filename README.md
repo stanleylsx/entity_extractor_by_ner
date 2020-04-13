@@ -19,6 +19,7 @@ Date|Version|Details
 :---|:---|---
 2020-01-12|v1.0.0|initial project
 2020-04-08|v1.1.0|refactored code(give some annotation)
+2020-04-13|v1.2.0|show the metrics of each suffix(validation)
 
 ## How to use
 ### Train
