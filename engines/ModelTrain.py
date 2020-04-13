@@ -64,8 +64,8 @@ class Train:
                 if iteration % self.configs.print_per_batch == 0:
                     cnt += 1
                     train_writer.add_summary(train_summary, cnt)
-                    measures = metrics(X_train_batch, y_train_batch, train_batch_viterbi_sequence,
-                                       self.configs.measuring_metrics, self.dataManager)
+                    measures, _ = metrics(X_train_batch, y_train_batch, train_batch_viterbi_sequence,
+                                          self.configs.measuring_metrics, self.dataManager)
                     res_str = ''
                     for k, v in measures.items():
                         res_str += (k + ': %.3f ' % v)
@@ -74,8 +74,14 @@ class Train:
             # validation
             loss_values = list()
             val_results = dict()
+            val_labels_results = dict()
+            for label in self.dataManager.suffix:
+                val_labels_results.setdefault(label, {})
             for measure in self.configs.measuring_metrics:
                 val_results[measure] = 0
+            for label, content in val_labels_results.items():
+                for measure in self.configs.measuring_metrics:
+                    val_labels_results[label][measure] = 0
 
             for iteration in range(num_val_iterations):
                 cnt_dev += 1
@@ -91,12 +97,15 @@ class Train:
                         self.model.targets: y_val_batch,
                     })
 
-                measures = metrics(X_val_batch, y_val_batch, val_batch_viterbi_sequence,
-                                   self.configs.measuring_metrics, self.dataManager)
+                measures, lab_measures = metrics(X_val_batch, y_val_batch, val_batch_viterbi_sequence,
+                                                 self.configs.measuring_metrics, self.dataManager)
                 dev_writer.add_summary(dev_summary, cnt_dev)
 
                 for k, v in measures.items():
                     val_results[k] += v
+                for lab in lab_measures:
+                    for k, v in lab_measures[lab].items():
+                        val_labels_results[lab][k] += v
                 loss_values.append(loss_val)
 
             time_span = (time.time() - start_time) / 60
@@ -107,7 +116,12 @@ class Train:
                 val_res_str += (k + ': %.3f ' % val_results[k])
                 if k == 'f1':
                     dev_f1_avg = val_results[k]
-
+            for label, content in val_labels_results.items():
+                val_label_str = ''
+                for k, v in content.items():
+                    val_labels_results[label][k] /= num_val_iterations
+                    val_label_str += (k + ': %.3f ' % val_labels_results[label][k])
+                self.logger.info('label: %s, %s' % (label, val_label_str))
             self.logger.info('time consumption:%.2f(min),  validation loss: %.5f, %s' %
                              (time_span, np.array(loss_values).mean(), val_res_str))
             if np.array(dev_f1_avg).mean() > self.best_f1_val:
@@ -122,14 +136,13 @@ class Train:
 
             if self.configs.is_early_stop:
                 if unprocessed >= self.configs.patient:
-                    self.logger.info('early stopped, no progress obtained within {} epochs'.format(self.configs.patient))
+                    self.logger.info(
+                        'early stopped, no progress obtained within {} epochs'.format(self.configs.patient))
                     self.logger.info('overall best f1 is {} at {} epoch'.format(self.best_f1_val, best_at_epoch))
-                    self.logger.info('total training time consumption: %.3f(min)' % ((time.time() - very_start_time) / 60))
+                    self.logger.info(
+                        'total training time consumption: %.3f(min)' % ((time.time() - very_start_time) / 60))
                     self.sess.close()
                     return
         self.logger.info('overall best f1 is {} at {} epoch'.format(self.best_f1_val, best_at_epoch))
         self.logger.info('total training time consumption: %.3f(min)' % ((time.time() - very_start_time) / 60))
         self.sess.close()
-
-
-
