@@ -29,21 +29,27 @@ Date|Version|Details
 在system.config的Model Configuration/Training Settings下配置模型参数和训练参数。  
 设定system.config的Status中的为train。  
 运行main.py开始训练。  
-下图为日志记录训练完毕。  
+下图为日志记录训练完毕。 
+ 
 ![model](img/train.png)  
+
 ### Batch test
 外部模型需要配置好vocab_dir，checkpoints_dir，模型参数。本项目训练好的模型保持和训练时的参数不变即可。  
 在system.config的Model Configuration/Training Settings下配置测试输出的参数。  
 设定system.config的Status中的为test。  
 运行main.py开始对测试数据集的数据进行批量预测。    
 下图为测试数据集批量预测之后的结果。  
+
 ![test](img/test.png) 
+
 ### Online predict
 外部模型需要配置好vocab_dir，checkpoints_dir，模型参数。本项目训练好的模型保持和训练时的参数不变即可。  
 设定system.config的Status中的为interactive_predict。  
 运行main.py开始在线预测。 
 下图为在线预测结果。  
+
 ![test](img/online_predict.png)  
+
 ## Reference
 + NER相关的论文整理在[papers](papers)下。  
 + [https://github.com/scofield7419/sequence-labeling-BiLSTM-CRF](https://github.com/scofield7419/sequence-labeling-BiLSTM-CRF)
