@@ -1,0 +1,1676 @@
+2020-09-08 12:14:17
+++++++++++++++++++++++++++++++++++++++++CONFIGURATION SUMMARY++++++++++++++++++++++++++++++++++++++++
+ Status:
+     mode                 : train
+ ++++++++++++++++++++++++++++++++++++++++
+ Datasets:
+     datasets         fold: data/example_datasets2
+     train            file: train.csv
+     validation       file: None
+     test             file: test.csv
+     vocab             dir: data/example_datasets2/vocabs
+     delimiter            : b
+     checkpoints       dir: checkpoints/datasets2
+     log               dir: data/example_datasets2/logs
+ ++++++++++++++++++++++++++++++++++++++++
+Labeling Scheme:
+     label          scheme: BIO
+     label           level: 2
+     suffixes             : ['ORG', 'PER', 'LOC']
+     labeling_level       : char
+     measuring     metrics: ['precision', 'recall', 'f1', 'accuracy']
+ ++++++++++++++++++++++++++++++++++++++++
+Model Configuration:
+     embedding         dim: 300
+     max  sequence  length: 300
+     hidden            dim: 200
+     CUDA  VISIBLE  DEVICE: 0
+     seed                 : 42
+ ++++++++++++++++++++++++++++++++++++++++
+ Training Settings:
+     epoch                : 300
+     batch            size: 32
+     dropout              : 0.5
+     learning         rate: 0.001
+     optimizer            : Adam
+     checkpoint       name: model
+     max       checkpoints: 3
+     print       per_batch: 20
+     is     early     stop: True
+     patient              : 15
+ ++++++++++++++++++++++++++++++++++++++++
+ Testing Settings:
+     output    test   file: test.out
+     output sent  and  ent: True
+     output  sen&ent  file: test.entity.out
+++++++++++++++++++++++++++++++++++++++++CONFIGURATION SUMMARY END++++++++++++++++++++++++++++++++++++++++
+vocab files not exist, building vocab...
+dataManager initialed...
+mode: train
+validating set is not exist, built...
+training set size: 20842, validating set size: 2316
+++++++++++++++++++++training starting++++++++++++++++++++
+epoch:1/300
+training batch:     0, loss: 92.78587, precision: 0.000 recall: 0.000 f1: -1.000 accuracy: 0.040 
+training batch:    20, loss: 21.35730, precision: -1.000 recall: 0.000 f1: -1.000 accuracy: 0.914 
+training batch:    40, loss: 15.58512, precision: -1.000 recall: 0.000 f1: -1.000 accuracy: 0.934 
+training batch:    60, loss: 19.51675, precision: -1.000 recall: 0.000 f1: -1.000 accuracy: 0.910 
+training batch:    80, loss: 16.21766, precision: 0.000 recall: 0.000 f1: -1.000 accuracy: 0.909 
+training batch:   100, loss: 14.36401, precision: 0.000 recall: 0.000 f1: -1.000 accuracy: 0.905 
+training batch:   120, loss: 21.55576, precision: 0.200 recall: 0.013 f1: 0.024 accuracy: 0.872 
+training batch:   140, loss: 11.92804, precision: 0.000 recall: 0.000 f1: -1.000 accuracy: 0.923 
+training batch:   160, loss: 9.29986, precision: 0.300 recall: 0.150 f1: 0.200 accuracy: 0.915 
+training batch:   180, loss: 19.91598, precision: 0.233 recall: 0.103 f1: 0.143 accuracy: 0.878 
+training batch:   200, loss: 14.08276, precision: 0.257 recall: 0.188 f1: 0.217 accuracy: 0.905 
+training batch:   220, loss: 10.67246, precision: 0.536 recall: 0.312 f1: 0.395 accuracy: 0.931 
+training batch:   240, loss: 9.33484, precision: 0.269 recall: 0.175 f1: 0.212 accuracy: 0.912 
+training batch:   260, loss: 8.59551, precision: 0.462 recall: 0.267 f1: 0.338 accuracy: 0.941 
+training batch:   280, loss: 9.84089, precision: 0.590 recall: 0.460 f1: 0.517 accuracy: 0.925 
+training batch:   300, loss: 5.78524, precision: 0.444 recall: 0.364 f1: 0.400 accuracy: 0.947 
+training batch:   320, loss: 8.07223, precision: 0.350 recall: 0.280 f1: 0.311 accuracy: 0.929 
+training batch:   340, loss: 8.05428, precision: 0.587 recall: 0.509 f1: 0.545 accuracy: 0.948 
+training batch:   360, loss: 7.71735, precision: 0.627 recall: 0.533 f1: 0.577 accuracy: 0.947 
+training batch:   380, loss: 7.31887, precision: 0.500 recall: 0.542 f1: 0.520 accuracy: 0.954 
+training batch:   400, loss: 5.48322, precision: 0.654 recall: 0.472 f1: 0.548 accuracy: 0.959 
+training batch:   420, loss: 5.63161, precision: 0.639 recall: 0.548 f1: 0.590 accuracy: 0.959 
+training batch:   440, loss: 8.37337, precision: 0.558 recall: 0.453 f1: 0.500 accuracy: 0.934 
+training batch:   460, loss: 5.86145, precision: 0.596 recall: 0.674 f1: 0.633 accuracy: 0.954 
+training batch:   480, loss: 4.51287, precision: 0.571 recall: 0.488 f1: 0.526 accuracy: 0.956 
+training batch:   500, loss: 9.06970, precision: 0.544 recall: 0.500 f1: 0.521 accuracy: 0.926 
+training batch:   520, loss: 6.75076, precision: 0.771 recall: 0.482 f1: 0.593 accuracy: 0.944 
+training batch:   540, loss: 7.19574, precision: 0.591 recall: 0.510 f1: 0.547 accuracy: 0.942 
+training batch:   560, loss: 4.35978, precision: 0.568 recall: 0.512 f1: 0.538 accuracy: 0.960 
+training batch:   580, loss: 5.69494, precision: 0.524 recall: 0.478 f1: 0.500 accuracy: 0.954 
+training batch:   600, loss: 4.93015, precision: 0.471 recall: 0.381 f1: 0.421 accuracy: 0.942 
+training batch:   620, loss: 3.94971, precision: 0.711 recall: 0.667 f1: 0.688 accuracy: 0.964 
+training batch:   640, loss: 4.62251, precision: 0.613 recall: 0.543 f1: 0.576 accuracy: 0.964 
+start evaluate engines...
+label: ORG, precision: 0.518 recall: 0.431 f1: 0.462 accuracy: 0.000 
+label: PER, precision: 0.719 recall: 0.560 f1: 0.621 accuracy: 0.000 
+label: LOC, precision: 0.648 recall: 0.542 f1: 0.587 accuracy: 0.000 
+time consumption:7.10(min), precision: 0.659 recall: 0.539 f1: 0.592 accuracy: 0.955 
+saved the new best model with f1: 0.592
+epoch:2/300
+training batch:     0, loss: 3.63758, precision: 0.744 recall: 0.659 f1: 0.699 accuracy: 0.977 
+training batch:    20, loss: 3.71431, precision: 0.643 recall: 0.545 f1: 0.590 accuracy: 0.970 
+training batch:    40, loss: 3.45751, precision: 0.690 recall: 0.690 f1: 0.690 accuracy: 0.965 
+training batch:    60, loss: 5.57423, precision: 0.686 recall: 0.565 f1: 0.619 accuracy: 0.946 
+training batch:    80, loss: 3.37820, precision: 0.593 recall: 0.640 f1: 0.615 accuracy: 0.973 
+training batch:   100, loss: 4.94984, precision: 0.684 recall: 0.578 f1: 0.627 accuracy: 0.950 
+training batch:   120, loss: 3.01908, precision: 0.639 recall: 0.622 f1: 0.630 accuracy: 0.971 
+training batch:   140, loss: 3.35615, precision: 0.743 recall: 0.684 f1: 0.712 accuracy: 0.974 
+training batch:   160, loss: 3.75910, precision: 0.636 recall: 0.568 f1: 0.600 accuracy: 0.968 
+training batch:   180, loss: 4.58729, precision: 0.600 recall: 0.568 f1: 0.583 accuracy: 0.949 
+training batch:   200, loss: 7.75666, precision: 0.545 recall: 0.414 f1: 0.471 accuracy: 0.918 
+training batch:   220, loss: 6.32845, precision: 0.707 recall: 0.716 f1: 0.711 accuracy: 0.952 
+training batch:   240, loss: 5.93731, precision: 0.500 recall: 0.537 f1: 0.518 accuracy: 0.953 
+training batch:   260, loss: 2.23597, precision: 0.733 recall: 0.733 f1: 0.733 accuracy: 0.983 
+training batch:   280, loss: 3.26958, precision: 0.796 recall: 0.709 f1: 0.750 accuracy: 0.975 
+training batch:   300, loss: 4.43732, precision: 0.735 recall: 0.632 f1: 0.679 accuracy: 0.963 
+training batch:   320, loss: 4.06477, precision: 0.712 recall: 0.725 f1: 0.718 accuracy: 0.965 
+training batch:   340, loss: 2.56680, precision: 0.774 recall: 0.750 f1: 0.762 accuracy: 0.976 
+training batch:   360, loss: 2.90323, precision: 0.650 recall: 0.650 f1: 0.650 accuracy: 0.967 
+training batch:   380, loss: 3.13953, precision: 0.784 recall: 0.744 f1: 0.763 accuracy: 0.979 
+training batch:   400, loss: 4.48778, precision: 0.667 recall: 0.679 f1: 0.673 accuracy: 0.954 
+training batch:   420, loss: 3.36680, precision: 0.605 recall: 0.639 f1: 0.622 accuracy: 0.961 
+training batch:   440, loss: 5.57769, precision: 0.714 recall: 0.610 f1: 0.658 accuracy: 0.949 
+training batch:   460, loss: 5.88889, precision: 0.692 recall: 0.716 f1: 0.704 accuracy: 0.951 
+training batch:   480, loss: 3.80036, precision: 0.711 recall: 0.600 f1: 0.651 accuracy: 0.965 
+training batch:   500, loss: 6.40470, precision: 0.763 recall: 0.644 f1: 0.699 accuracy: 0.939 
+training batch:   520, loss: 3.59987, precision: 0.778 recall: 0.714 f1: 0.745 accuracy: 0.970 
+training batch:   540, loss: 3.69781, precision: 0.639 recall: 0.676 f1: 0.657 accuracy: 0.971 
+training batch:   560, loss: 3.80843, precision: 0.794 recall: 0.725 f1: 0.758 accuracy: 0.967 
+training batch:   580, loss: 2.89399, precision: 0.735 recall: 0.643 f1: 0.686 accuracy: 0.972 
+training batch:   600, loss: 3.36399, precision: 0.723 recall: 0.739 f1: 0.731 accuracy: 0.963 
+training batch:   620, loss: 4.48353, precision: 0.652 recall: 0.566 f1: 0.606 accuracy: 0.940 
+training batch:   640, loss: 3.75004, precision: 0.661 recall: 0.617 f1: 0.638 accuracy: 0.957 
+start evaluate engines...
+label: ORG, precision: 0.593 recall: 0.614 f1: 0.597 accuracy: 0.000 
+label: PER, precision: 0.803 recall: 0.752 f1: 0.771 accuracy: 0.000 
+label: LOC, precision: 0.769 recall: 0.684 f1: 0.721 accuracy: 0.000 
+time consumption:6.61(min), precision: 0.744 recall: 0.699 f1: 0.720 accuracy: 0.966 
+saved the new best model with f1: 0.720
+epoch:3/300
+training batch:     0, loss: 2.18032, precision: 0.805 recall: 0.767 f1: 0.786 accuracy: 0.971 
+training batch:    20, loss: 2.56737, precision: 0.853 recall: 0.725 f1: 0.784 accuracy: 0.972 
+training batch:    40, loss: 2.80030, precision: 0.873 recall: 0.821 f1: 0.846 accuracy: 0.972 
+training batch:    60, loss: 3.00999, precision: 0.737 recall: 0.737 f1: 0.737 accuracy: 0.955 
+training batch:    80, loss: 1.95180, precision: 0.815 recall: 0.733 f1: 0.772 accuracy: 0.980 
+training batch:   100, loss: 5.04112, precision: 0.795 recall: 0.686 f1: 0.737 accuracy: 0.946 
+training batch:   120, loss: 4.11749, precision: 0.740 recall: 0.698 f1: 0.718 accuracy: 0.964 
+training batch:   140, loss: 2.00296, precision: 0.841 recall: 0.755 f1: 0.796 accuracy: 0.987 
+training batch:   160, loss: 2.23231, precision: 0.714 recall: 0.682 f1: 0.698 accuracy: 0.979 
+training batch:   180, loss: 3.96235, precision: 0.741 recall: 0.690 f1: 0.714 accuracy: 0.962 
+training batch:   200, loss: 3.64435, precision: 0.779 recall: 0.791 f1: 0.785 accuracy: 0.967 
+training batch:   220, loss: 2.57752, precision: 0.780 recall: 0.727 f1: 0.753 accuracy: 0.973 
+training batch:   240, loss: 2.14325, precision: 0.878 recall: 0.754 f1: 0.811 accuracy: 0.980 
+training batch:   260, loss: 2.95933, precision: 0.780 recall: 0.722 f1: 0.750 accuracy: 0.966 
+training batch:   280, loss: 2.28320, precision: 0.759 recall: 0.667 f1: 0.710 accuracy: 0.976 
+training batch:   300, loss: 2.22008, precision: 0.702 recall: 0.717 f1: 0.710 accuracy: 0.980 
+training batch:   320, loss: 2.67814, precision: 0.841 recall: 0.841 f1: 0.841 accuracy: 0.975 
+training batch:   340, loss: 2.01264, precision: 0.839 recall: 0.788 f1: 0.812 accuracy: 0.976 
+training batch:   360, loss: 2.48665, precision: 0.756 recall: 0.723 f1: 0.739 accuracy: 0.968 
+training batch:   380, loss: 2.71784, precision: 0.891 recall: 0.803 f1: 0.845 accuracy: 0.966 
+training batch:   400, loss: 2.20273, precision: 0.875 recall: 0.814 f1: 0.843 accuracy: 0.971 
+training batch:   420, loss: 2.35058, precision: 0.822 recall: 0.755 f1: 0.787 accuracy: 0.973 
+training batch:   440, loss: 1.56441, precision: 0.894 recall: 0.855 f1: 0.874 accuracy: 0.987 
+training batch:   460, loss: 2.07488, precision: 0.667 recall: 0.750 f1: 0.706 accuracy: 0.980 
+training batch:   480, loss: 2.64329, precision: 0.706 recall: 0.615 f1: 0.658 accuracy: 0.968 
+training batch:   500, loss: 2.40971, precision: 0.737 recall: 0.700 f1: 0.718 accuracy: 0.979 
+training batch:   520, loss: 3.14317, precision: 0.792 recall: 0.731 f1: 0.760 accuracy: 0.977 
+training batch:   540, loss: 1.89977, precision: 0.686 recall: 0.686 f1: 0.686 accuracy: 0.970 
+training batch:   560, loss: 3.29050, precision: 0.805 recall: 0.750 f1: 0.776 accuracy: 0.977 
+training batch:   580, loss: 2.54768, precision: 0.788 recall: 0.788 f1: 0.788 accuracy: 0.978 
+training batch:   600, loss: 1.78312, precision: 0.829 recall: 0.773 f1: 0.800 accuracy: 0.982 
+training batch:   620, loss: 2.22149, precision: 0.816 recall: 0.721 f1: 0.765 accuracy: 0.963 
+training batch:   640, loss: 1.86652, precision: 0.880 recall: 0.759 f1: 0.815 accuracy: 0.982 
+start evaluate engines...
+label: ORG, precision: 0.744 recall: 0.692 f1: 0.710 accuracy: 0.000 
+label: PER, precision: 0.849 recall: 0.830 f1: 0.834 accuracy: 0.000 
+label: LOC, precision: 0.819 recall: 0.777 f1: 0.794 accuracy: 0.000 
+time consumption:6.79(min), precision: 0.828 recall: 0.785 f1: 0.805 accuracy: 0.974 
+saved the new best model with f1: 0.805
+epoch:4/300
+training batch:     0, loss: 1.02232, precision: 0.877 recall: 0.877 f1: 0.877 accuracy: 0.993 
+training batch:    20, loss: 1.47713, precision: 0.750 recall: 0.875 f1: 0.808 accuracy: 0.987 
+training batch:    40, loss: 1.72537, precision: 0.864 recall: 0.655 f1: 0.745 accuracy: 0.980 
+training batch:    60, loss: 1.98935, precision: 0.867 recall: 0.765 f1: 0.812 accuracy: 0.974 
+training batch:    80, loss: 2.09448, precision: 0.792 recall: 0.792 f1: 0.792 accuracy: 0.978 
+training batch:   100, loss: 3.16105, precision: 0.750 recall: 0.750 f1: 0.750 accuracy: 0.957 
+training batch:   120, loss: 2.10866, precision: 0.870 recall: 0.816 f1: 0.842 accuracy: 0.986 
+training batch:   140, loss: 2.60296, precision: 0.667 recall: 0.636 f1: 0.651 accuracy: 0.965 
+training batch:   160, loss: 3.33294, precision: 0.814 recall: 0.729 f1: 0.769 accuracy: 0.952 
+training batch:   180, loss: 2.69863, precision: 0.831 recall: 0.875 f1: 0.852 accuracy: 0.959 
+training batch:   200, loss: 2.49457, precision: 0.867 recall: 0.796 f1: 0.830 accuracy: 0.970 
+training batch:   220, loss: 2.72914, precision: 0.724 recall: 0.724 f1: 0.724 accuracy: 0.965 
+training batch:   240, loss: 0.84085, precision: 0.946 recall: 0.897 f1: 0.921 accuracy: 0.995 
+training batch:   260, loss: 2.22410, precision: 0.833 recall: 0.814 f1: 0.824 accuracy: 0.974 
+training batch:   280, loss: 1.29023, precision: 0.906 recall: 0.829 f1: 0.866 accuracy: 0.989 
+training batch:   300, loss: 2.00230, precision: 0.840 recall: 0.840 f1: 0.840 accuracy: 0.977 
+training batch:   320, loss: 1.75651, precision: 0.697 recall: 0.697 f1: 0.697 accuracy: 0.968 
+training batch:   340, loss: 2.63189, precision: 0.883 recall: 0.815 f1: 0.848 accuracy: 0.966 
+training batch:   360, loss: 1.73601, precision: 0.846 recall: 0.786 f1: 0.815 accuracy: 0.986 
+training batch:   380, loss: 2.81069, precision: 0.850 recall: 0.739 f1: 0.791 accuracy: 0.975 
+training batch:   400, loss: 2.45099, precision: 0.900 recall: 0.837 f1: 0.867 accuracy: 0.978 
+training batch:   420, loss: 3.44802, precision: 0.804 recall: 0.719 f1: 0.759 accuracy: 0.970 
+training batch:   440, loss: 2.09323, precision: 0.844 recall: 0.771 f1: 0.806 accuracy: 0.973 
+training batch:   460, loss: 1.49207, precision: 0.933 recall: 0.903 f1: 0.918 accuracy: 0.992 
+training batch:   480, loss: 3.24364, precision: 0.780 recall: 0.667 f1: 0.719 accuracy: 0.971 
+training batch:   500, loss: 1.81615, precision: 0.825 recall: 0.786 f1: 0.805 accuracy: 0.986 
+training batch:   520, loss: 1.70031, precision: 0.855 recall: 0.855 f1: 0.855 accuracy: 0.983 
+training batch:   540, loss: 1.62558, precision: 0.885 recall: 0.868 f1: 0.876 accuracy: 0.988 
+training batch:   560, loss: 2.06399, precision: 0.829 recall: 0.756 f1: 0.791 accuracy: 0.980 
+training batch:   580, loss: 1.08286, precision: 0.826 recall: 0.704 f1: 0.760 accuracy: 0.986 
+training batch:   600, loss: 1.76550, precision: 0.903 recall: 0.890 f1: 0.897 accuracy: 0.989 
+training batch:   620, loss: 2.14143, precision: 0.788 recall: 0.820 f1: 0.804 accuracy: 0.972 
+training batch:   640, loss: 2.49455, precision: 0.827 recall: 0.741 f1: 0.782 accuracy: 0.968 
+start evaluate engines...
+label: ORG, precision: 0.807 recall: 0.705 f1: 0.744 accuracy: 0.000 
+label: PER, precision: 0.877 recall: 0.852 f1: 0.861 accuracy: 0.000 
+label: LOC, precision: 0.834 recall: 0.815 f1: 0.822 accuracy: 0.000 
+time consumption:6.85(min), precision: 0.860 recall: 0.812 f1: 0.834 accuracy: 0.976 
+saved the new best model with f1: 0.834
+epoch:5/300
+training batch:     0, loss: 2.55017, precision: 0.776 recall: 0.667 f1: 0.717 accuracy: 0.960 
+training batch:    20, loss: 1.57282, precision: 0.875 recall: 0.792 f1: 0.832 accuracy: 0.983 
+training batch:    40, loss: 1.23083, precision: 0.921 recall: 0.854 f1: 0.886 accuracy: 0.991 
+training batch:    60, loss: 1.57025, precision: 0.730 recall: 0.818 f1: 0.771 accuracy: 0.978 
+training batch:    80, loss: 1.77911, precision: 0.824 recall: 0.800 f1: 0.812 accuracy: 0.965 
+training batch:   100, loss: 0.83563, precision: 0.921 recall: 0.875 f1: 0.897 accuracy: 0.993 
+training batch:   120, loss: 2.37826, precision: 0.954 recall: 0.899 f1: 0.925 accuracy: 0.980 
+training batch:   140, loss: 1.58885, precision: 0.892 recall: 0.717 f1: 0.795 accuracy: 0.975 
+training batch:   160, loss: 1.79129, precision: 0.881 recall: 0.804 f1: 0.841 accuracy: 0.974 
+training batch:   180, loss: 1.71939, precision: 0.707 recall: 0.725 f1: 0.716 accuracy: 0.971 
+training batch:   200, loss: 1.76877, precision: 0.865 recall: 0.842 f1: 0.853 accuracy: 0.983 
+training batch:   220, loss: 1.43198, precision: 0.915 recall: 0.915 f1: 0.915 accuracy: 0.988 
+training batch:   240, loss: 1.27898, precision: 0.825 recall: 0.786 f1: 0.805 accuracy: 0.986 
+training batch:   260, loss: 1.94090, precision: 0.732 recall: 0.682 f1: 0.706 accuracy: 0.974 
+training batch:   280, loss: 1.88683, precision: 0.849 recall: 0.818 f1: 0.833 accuracy: 0.981 
+training batch:   300, loss: 1.34338, precision: 0.944 recall: 0.944 f1: 0.944 accuracy: 0.989 
+training batch:   320, loss: 2.61410, precision: 0.887 recall: 0.887 f1: 0.887 accuracy: 0.975 
+training batch:   340, loss: 1.42264, precision: 0.864 recall: 0.879 f1: 0.872 accuracy: 0.983 
+training batch:   360, loss: 1.00923, precision: 0.868 recall: 0.868 f1: 0.868 accuracy: 0.989 
+training batch:   380, loss: 1.50969, precision: 0.826 recall: 0.792 f1: 0.809 accuracy: 0.981 
+training batch:   400, loss: 1.76824, precision: 0.932 recall: 0.965 f1: 0.948 accuracy: 0.971 
+training batch:   420, loss: 1.49013, precision: 0.780 recall: 0.830 f1: 0.804 accuracy: 0.972 
+training batch:   440, loss: 1.46948, precision: 0.881 recall: 0.841 f1: 0.860 accuracy: 0.980 
+training batch:   460, loss: 0.92018, precision: 0.897 recall: 0.833 f1: 0.864 accuracy: 0.985 
+training batch:   480, loss: 0.97245, precision: 0.917 recall: 0.936 f1: 0.926 accuracy: 0.989 
+training batch:   500, loss: 0.92724, precision: 0.964 recall: 0.871 f1: 0.915 accuracy: 0.990 
+training batch:   520, loss: 1.57898, precision: 0.889 recall: 0.918 f1: 0.903 accuracy: 0.977 
+training batch:   540, loss: 1.69214, precision: 0.756 recall: 0.850 f1: 0.800 accuracy: 0.978 
+training batch:   560, loss: 1.47748, precision: 0.908 recall: 0.852 f1: 0.879 accuracy: 0.982 
+training batch:   580, loss: 0.77813, precision: 0.906 recall: 0.853 f1: 0.879 accuracy: 0.992 
+training batch:   600, loss: 3.63435, precision: 0.913 recall: 0.829 f1: 0.869 accuracy: 0.966 
+training batch:   620, loss: 1.47326, precision: 0.898 recall: 0.815 f1: 0.854 accuracy: 0.981 
+training batch:   640, loss: 1.74768, precision: 0.952 recall: 0.800 f1: 0.870 accuracy: 0.977 
+start evaluate engines...
+label: ORG, precision: 0.762 recall: 0.751 f1: 0.750 accuracy: 0.000 
+label: PER, precision: 0.894 recall: 0.862 f1: 0.874 accuracy: 0.000 
+label: LOC, precision: 0.855 recall: 0.809 f1: 0.828 accuracy: 0.000 
+time consumption:6.97(min), precision: 0.858 recall: 0.826 f1: 0.840 accuracy: 0.976 
+saved the new best model with f1: 0.840
+epoch:6/300
+training batch:     0, loss: 0.97704, precision: 0.872 recall: 0.810 f1: 0.840 accuracy: 0.981 
+training batch:    20, loss: 1.28457, precision: 0.878 recall: 0.837 f1: 0.857 accuracy: 0.988 
+training batch:    40, loss: 1.03553, precision: 0.951 recall: 0.848 f1: 0.897 accuracy: 0.993 
+training batch:    60, loss: 1.04560, precision: 0.864 recall: 0.844 f1: 0.854 accuracy: 0.986 
+training batch:    80, loss: 1.38337, precision: 0.854 recall: 0.778 f1: 0.814 accuracy: 0.980 
+training batch:   100, loss: 0.80434, precision: 1.000 recall: 0.976 f1: 0.988 accuracy: 0.999 
+training batch:   120, loss: 1.56570, precision: 0.870 recall: 0.769 f1: 0.816 accuracy: 0.978 
+training batch:   140, loss: 1.20143, precision: 0.811 recall: 0.833 f1: 0.822 accuracy: 0.981 
+training batch:   160, loss: 0.54206, precision: 0.962 recall: 0.909 f1: 0.935 accuracy: 0.989 
+training batch:   180, loss: 1.00497, precision: 0.822 recall: 0.771 f1: 0.796 accuracy: 0.978 
+training batch:   200, loss: 0.76008, precision: 0.964 recall: 0.946 f1: 0.955 accuracy: 0.993 
+training batch:   220, loss: 0.76523, precision: 0.857 recall: 0.882 f1: 0.870 accuracy: 0.990 
+training batch:   240, loss: 0.94112, precision: 0.927 recall: 0.927 f1: 0.927 accuracy: 0.988 
+training batch:   260, loss: 1.71056, precision: 0.857 recall: 0.789 f1: 0.822 accuracy: 0.991 
+training batch:   280, loss: 0.99346, precision: 0.844 recall: 0.900 f1: 0.871 accuracy: 0.985 
+training batch:   300, loss: 1.48320, precision: 0.932 recall: 0.859 f1: 0.894 accuracy: 0.988 
+training batch:   320, loss: 1.52257, precision: 0.884 recall: 0.792 f1: 0.835 accuracy: 0.982 
+training batch:   340, loss: 2.96124, precision: 0.841 recall: 0.841 f1: 0.841 accuracy: 0.974 
+training batch:   360, loss: 0.90931, precision: 0.925 recall: 0.942 f1: 0.933 accuracy: 0.992 
+training batch:   380, loss: 1.07376, precision: 0.864 recall: 0.826 f1: 0.844 accuracy: 0.984 
+training batch:   400, loss: 1.17177, precision: 0.947 recall: 0.923 f1: 0.935 accuracy: 0.985 
+training batch:   420, loss: 0.71789, precision: 0.931 recall: 0.931 f1: 0.931 accuracy: 0.995 
+training batch:   440, loss: 1.31107, precision: 0.920 recall: 0.902 f1: 0.911 accuracy: 0.986 
+training batch:   460, loss: 1.74334, precision: 0.879 recall: 0.836 f1: 0.857 accuracy: 0.975 
+training batch:   480, loss: 1.54849, precision: 0.956 recall: 0.811 f1: 0.878 accuracy: 0.985 
+training batch:   500, loss: 1.04361, precision: 0.898 recall: 0.863 f1: 0.880 accuracy: 0.979 
+training batch:   520, loss: 1.84717, precision: 0.836 recall: 0.868 f1: 0.852 accuracy: 0.979 
+training batch:   540, loss: 1.30972, precision: 0.909 recall: 0.870 f1: 0.889 accuracy: 0.982 
+training batch:   560, loss: 1.66517, precision: 0.873 recall: 0.873 f1: 0.873 accuracy: 0.979 
+training batch:   580, loss: 1.19198, precision: 0.881 recall: 0.822 f1: 0.851 accuracy: 0.984 
+training batch:   600, loss: 0.96189, precision: 0.933 recall: 0.894 f1: 0.913 accuracy: 0.985 
+training batch:   620, loss: 0.85211, precision: 0.944 recall: 0.850 f1: 0.895 accuracy: 0.992 
+training batch:   640, loss: 1.36095, precision: 0.878 recall: 0.878 f1: 0.878 accuracy: 0.985 
+start evaluate engines...
+label: ORG, precision: 0.780 recall: 0.782 f1: 0.774 accuracy: 0.000 
+label: PER, precision: 0.907 recall: 0.867 f1: 0.883 accuracy: 0.000 
+label: LOC, precision: 0.871 recall: 0.821 f1: 0.842 accuracy: 0.000 
+time consumption:6.98(min), precision: 0.876 recall: 0.841 f1: 0.857 accuracy: 0.979 
+saved the new best model with f1: 0.857
+epoch:7/300
+training batch:     0, loss: 0.93357, precision: 0.870 recall: 0.825 f1: 0.847 accuracy: 0.979 
+training batch:    20, loss: 1.03720, precision: 0.950 recall: 0.864 f1: 0.905 accuracy: 0.992 
+training batch:    40, loss: 0.58966, precision: 0.973 recall: 0.947 f1: 0.960 accuracy: 0.996 
+training batch:    60, loss: 0.96513, precision: 0.889 recall: 0.930 f1: 0.909 accuracy: 0.990 
+training batch:    80, loss: 1.15211, precision: 0.786 recall: 0.767 f1: 0.776 accuracy: 0.982 
+training batch:   100, loss: 0.73036, precision: 0.960 recall: 0.828 f1: 0.889 accuracy: 0.989 
+training batch:   120, loss: 1.76179, precision: 0.745 recall: 0.686 f1: 0.714 accuracy: 0.973 
+training batch:   140, loss: 0.45844, precision: 0.975 recall: 0.975 f1: 0.975 accuracy: 0.994 
+training batch:   160, loss: 0.70430, precision: 0.969 recall: 0.969 f1: 0.969 accuracy: 0.993 
+training batch:   180, loss: 0.94259, precision: 0.878 recall: 0.878 f1: 0.878 accuracy: 0.989 
+training batch:   200, loss: 0.74669, precision: 0.929 recall: 0.929 f1: 0.929 accuracy: 0.994 
+training batch:   220, loss: 1.17880, precision: 0.913 recall: 0.913 f1: 0.913 accuracy: 0.985 
+training batch:   240, loss: 0.51593, precision: 0.895 recall: 0.919 f1: 0.907 accuracy: 0.991 
+training batch:   260, loss: 0.84518, precision: 0.962 recall: 0.895 f1: 0.927 accuracy: 0.993 
+training batch:   280, loss: 1.65746, precision: 0.930 recall: 0.828 f1: 0.876 accuracy: 0.981 
+training batch:   300, loss: 0.48940, precision: 0.938 recall: 0.909 f1: 0.923 accuracy: 0.991 
+training batch:   320, loss: 0.38376, precision: 1.000 recall: 0.959 f1: 0.979 accuracy: 0.996 
+training batch:   340, loss: 0.86331, precision: 0.909 recall: 0.909 f1: 0.909 accuracy: 0.994 
+training batch:   360, loss: 0.54241, precision: 0.939 recall: 0.861 f1: 0.899 accuracy: 0.992 
+training batch:   380, loss: 0.64038, precision: 0.964 recall: 0.871 f1: 0.915 accuracy: 0.994 
+training batch:   400, loss: 1.26506, precision: 0.955 recall: 0.894 f1: 0.923 accuracy: 0.981 
+training batch:   420, loss: 0.64989, precision: 0.907 recall: 0.867 f1: 0.886 accuracy: 0.993 
+training batch:   440, loss: 0.76018, precision: 0.848 recall: 0.848 f1: 0.848 accuracy: 0.983 
+training batch:   460, loss: 1.14728, precision: 0.925 recall: 0.822 f1: 0.871 accuracy: 0.985 
+training batch:   480, loss: 0.54050, precision: 0.913 recall: 0.875 f1: 0.894 accuracy: 0.993 
+training batch:   500, loss: 1.75017, precision: 0.897 recall: 0.722 f1: 0.800 accuracy: 0.970 
+training batch:   520, loss: 0.74247, precision: 0.941 recall: 0.906 f1: 0.923 accuracy: 0.995 
+training batch:   540, loss: 0.95860, precision: 0.875 recall: 0.897 f1: 0.886 accuracy: 0.987 
+training batch:   560, loss: 1.94809, precision: 0.945 recall: 0.852 f1: 0.897 accuracy: 0.985 
+training batch:   580, loss: 1.86612, precision: 0.776 recall: 0.792 f1: 0.784 accuracy: 0.973 
+training batch:   600, loss: 2.30445, precision: 0.926 recall: 0.806 f1: 0.862 accuracy: 0.983 
+training batch:   620, loss: 1.13017, precision: 0.907 recall: 0.848 f1: 0.876 accuracy: 0.990 
+training batch:   640, loss: 1.26277, precision: 0.922 recall: 0.870 f1: 0.895 accuracy: 0.983 
+start evaluate engines...
+label: ORG, precision: 0.799 recall: 0.789 f1: 0.785 accuracy: 0.000 
+label: PER, precision: 0.898 recall: 0.889 f1: 0.890 accuracy: 0.000 
+label: LOC, precision: 0.872 recall: 0.830 f1: 0.847 accuracy: 0.000 
+time consumption:6.59(min), precision: 0.880 recall: 0.852 f1: 0.865 accuracy: 0.979 
+saved the new best model with f1: 0.865
+epoch:8/300
+training batch:     0, loss: 0.52580, precision: 1.000 recall: 0.919 f1: 0.958 accuracy: 0.994 
+training batch:    20, loss: 0.78446, precision: 0.889 recall: 0.889 f1: 0.889 accuracy: 0.989 
+training batch:    40, loss: 0.70732, precision: 0.941 recall: 0.928 f1: 0.934 accuracy: 0.988 
+training batch:    60, loss: 0.61823, precision: 0.881 recall: 0.881 f1: 0.881 accuracy: 0.987 
+training batch:    80, loss: 0.86328, precision: 0.822 recall: 0.860 f1: 0.841 accuracy: 0.983 
+training batch:   100, loss: 1.02304, precision: 0.930 recall: 0.930 f1: 0.930 accuracy: 0.982 
+training batch:   120, loss: 2.36781, precision: 0.921 recall: 0.866 f1: 0.892 accuracy: 0.981 
+training batch:   140, loss: 0.88031, precision: 0.897 recall: 0.897 f1: 0.897 accuracy: 0.988 
+training batch:   160, loss: 0.47702, precision: 0.917 recall: 0.957 f1: 0.936 accuracy: 0.992 
+training batch:   180, loss: 1.44063, precision: 0.914 recall: 0.930 f1: 0.922 accuracy: 0.987 
+training batch:   200, loss: 0.76482, precision: 0.900 recall: 0.973 f1: 0.935 accuracy: 0.993 
+training batch:   220, loss: 1.33438, precision: 0.868 recall: 0.805 f1: 0.835 accuracy: 0.984 
+training batch:   240, loss: 0.30458, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   260, loss: 0.90920, precision: 0.921 recall: 0.875 f1: 0.897 accuracy: 0.990 
+training batch:   280, loss: 0.95005, precision: 0.928 recall: 0.928 f1: 0.928 accuracy: 0.989 
+training batch:   300, loss: 1.01133, precision: 0.878 recall: 0.900 f1: 0.889 accuracy: 0.984 
+training batch:   320, loss: 0.40719, precision: 0.977 recall: 1.000 f1: 0.989 accuracy: 0.998 
+training batch:   340, loss: 0.47849, precision: 0.974 recall: 0.927 f1: 0.950 accuracy: 0.996 
+training batch:   360, loss: 0.61991, precision: 0.923 recall: 0.960 f1: 0.941 accuracy: 0.992 
+training batch:   380, loss: 0.65882, precision: 0.921 recall: 0.921 f1: 0.921 accuracy: 0.988 
+training batch:   400, loss: 0.51696, precision: 0.930 recall: 0.952 f1: 0.941 accuracy: 0.990 
+training batch:   420, loss: 1.19570, precision: 0.891 recall: 0.854 f1: 0.872 accuracy: 0.969 
+training batch:   440, loss: 0.61831, precision: 0.952 recall: 0.984 f1: 0.968 accuracy: 0.991 
+training batch:   460, loss: 0.77479, precision: 0.867 recall: 0.867 f1: 0.867 accuracy: 0.989 
+training batch:   480, loss: 1.20543, precision: 0.875 recall: 0.875 f1: 0.875 accuracy: 0.989 
+training batch:   500, loss: 1.01732, precision: 0.969 recall: 0.863 f1: 0.913 accuracy: 0.987 
+training batch:   520, loss: 0.81866, precision: 0.821 recall: 0.865 f1: 0.842 accuracy: 0.982 
+training batch:   540, loss: 0.86563, precision: 0.855 recall: 0.883 f1: 0.869 accuracy: 0.987 
+training batch:   560, loss: 0.94691, precision: 0.932 recall: 0.872 f1: 0.901 accuracy: 0.988 
+training batch:   580, loss: 1.07728, precision: 0.860 recall: 0.843 f1: 0.851 accuracy: 0.986 
+training batch:   600, loss: 0.44186, precision: 0.932 recall: 0.891 f1: 0.911 accuracy: 0.994 
+training batch:   620, loss: 0.32195, precision: 0.969 recall: 0.912 f1: 0.939 accuracy: 0.998 
+training batch:   640, loss: 1.02220, precision: 0.839 recall: 0.855 f1: 0.847 accuracy: 0.985 
+start evaluate engines...
+label: ORG, precision: 0.799 recall: 0.787 f1: 0.785 accuracy: 0.000 
+label: PER, precision: 0.918 recall: 0.878 f1: 0.894 accuracy: 0.000 
+label: LOC, precision: 0.872 recall: 0.821 f1: 0.843 accuracy: 0.000 
+time consumption:6.79(min), precision: 0.883 recall: 0.843 f1: 0.861 accuracy: 0.979 
+epoch:9/300
+training batch:     0, loss: 0.36753, precision: 0.929 recall: 0.929 f1: 0.929 accuracy: 0.993 
+training batch:    20, loss: 0.68581, precision: 0.925 recall: 0.954 f1: 0.939 accuracy: 0.992 
+training batch:    40, loss: 0.63544, precision: 0.983 recall: 0.952 f1: 0.967 accuracy: 0.990 
+training batch:    60, loss: 0.48936, precision: 0.893 recall: 0.893 f1: 0.893 accuracy: 0.994 
+training batch:    80, loss: 0.68656, precision: 0.891 recall: 0.872 f1: 0.882 accuracy: 0.980 
+training batch:   100, loss: 0.78883, precision: 0.906 recall: 0.829 f1: 0.866 accuracy: 0.993 
+training batch:   120, loss: 0.80590, precision: 0.912 recall: 0.881 f1: 0.897 accuracy: 0.987 
+training batch:   140, loss: 0.78800, precision: 0.902 recall: 0.902 f1: 0.902 accuracy: 0.990 
+training batch:   160, loss: 0.73404, precision: 0.892 recall: 0.917 f1: 0.904 accuracy: 0.989 
+training batch:   180, loss: 0.62094, precision: 0.945 recall: 0.929 f1: 0.937 accuracy: 0.991 
+training batch:   200, loss: 0.34175, precision: 1.000 recall: 0.973 f1: 0.986 accuracy: 0.999 
+training batch:   220, loss: 1.13361, precision: 0.895 recall: 0.829 f1: 0.861 accuracy: 0.982 
+training batch:   240, loss: 0.45548, precision: 0.933 recall: 0.913 f1: 0.923 accuracy: 0.992 
+training batch:   260, loss: 0.31518, precision: 0.969 recall: 0.939 f1: 0.954 accuracy: 0.997 
+training batch:   280, loss: 0.63708, precision: 0.953 recall: 0.891 f1: 0.921 accuracy: 0.989 
+training batch:   300, loss: 0.58283, precision: 0.906 recall: 0.967 f1: 0.935 accuracy: 0.996 
+training batch:   320, loss: 0.32178, precision: 0.980 recall: 0.961 f1: 0.970 accuracy: 0.997 
+training batch:   340, loss: 0.94393, precision: 0.933 recall: 0.913 f1: 0.923 accuracy: 0.977 
+training batch:   360, loss: 1.18824, precision: 0.923 recall: 0.889 f1: 0.906 accuracy: 0.987 
+training batch:   380, loss: 0.41598, precision: 0.936 recall: 0.957 f1: 0.946 accuracy: 0.997 
+training batch:   400, loss: 0.86728, precision: 0.870 recall: 0.870 f1: 0.870 accuracy: 0.988 
+training batch:   420, loss: 0.54243, precision: 0.949 recall: 0.902 f1: 0.925 accuracy: 0.992 
+training batch:   440, loss: 0.55749, precision: 0.933 recall: 0.933 f1: 0.933 accuracy: 0.991 
+training batch:   460, loss: 0.93551, precision: 0.889 recall: 0.865 f1: 0.877 accuracy: 0.986 
+training batch:   480, loss: 1.13130, precision: 0.854 recall: 0.833 f1: 0.843 accuracy: 0.988 
+training batch:   500, loss: 1.35411, precision: 0.913 recall: 0.808 f1: 0.857 accuracy: 0.982 
+training batch:   520, loss: 1.04403, precision: 0.870 recall: 0.922 f1: 0.895 accuracy: 0.985 
+training batch:   540, loss: 0.61597, precision: 0.979 recall: 0.979 f1: 0.979 accuracy: 0.996 
+training batch:   560, loss: 0.73461, precision: 1.000 recall: 0.953 f1: 0.976 accuracy: 0.992 
+training batch:   580, loss: 0.60823, precision: 0.962 recall: 1.000 f1: 0.981 accuracy: 0.994 
+training batch:   600, loss: 0.52909, precision: 0.875 recall: 0.814 f1: 0.843 accuracy: 0.991 
+training batch:   620, loss: 0.88212, precision: 0.971 recall: 0.846 f1: 0.904 accuracy: 0.981 
+training batch:   640, loss: 0.73970, precision: 0.980 recall: 0.925 f1: 0.951 accuracy: 0.993 
+start evaluate engines...
+label: ORG, precision: 0.827 recall: 0.795 f1: 0.807 accuracy: 0.000 
+label: PER, precision: 0.895 recall: 0.875 f1: 0.880 accuracy: 0.000 
+label: LOC, precision: 0.849 recall: 0.872 f1: 0.858 accuracy: 0.000 
+time consumption:6.44(min), precision: 0.873 recall: 0.867 f1: 0.869 accuracy: 0.980 
+saved the new best model with f1: 0.869
+epoch:10/300
+training batch:     0, loss: 0.59261, precision: 0.857 recall: 0.938 f1: 0.896 accuracy: 0.991 
+training batch:    20, loss: 0.24444, precision: 1.000 recall: 0.974 f1: 0.987 accuracy: 0.998 
+training batch:    40, loss: 0.57913, precision: 0.957 recall: 0.936 f1: 0.946 accuracy: 0.991 
+training batch:    60, loss: 0.78083, precision: 0.944 recall: 0.905 f1: 0.924 accuracy: 0.990 
+training batch:    80, loss: 0.35122, precision: 0.975 recall: 0.975 f1: 0.975 accuracy: 0.997 
+training batch:   100, loss: 0.58420, precision: 0.922 recall: 0.908 f1: 0.915 accuracy: 0.986 
+training batch:   120, loss: 0.79494, precision: 0.935 recall: 0.951 f1: 0.943 accuracy: 0.991 
+training batch:   140, loss: 0.72637, precision: 0.886 recall: 0.886 f1: 0.886 accuracy: 0.992 
+training batch:   160, loss: 0.62003, precision: 0.978 recall: 0.938 f1: 0.957 accuracy: 0.994 
+training batch:   180, loss: 0.72790, precision: 0.922 recall: 0.870 f1: 0.895 accuracy: 0.986 
+training batch:   200, loss: 0.64919, precision: 0.980 recall: 0.960 f1: 0.970 accuracy: 0.990 
+training batch:   220, loss: 0.70368, precision: 0.963 recall: 1.000 f1: 0.981 accuracy: 0.987 
+training batch:   240, loss: 0.55648, precision: 0.878 recall: 0.935 f1: 0.905 accuracy: 0.983 
+training batch:   260, loss: 0.29013, precision: 0.968 recall: 0.968 f1: 0.968 accuracy: 0.996 
+training batch:   280, loss: 0.46795, precision: 0.984 recall: 0.969 f1: 0.976 accuracy: 0.998 
+training batch:   300, loss: 0.41612, precision: 0.939 recall: 0.969 f1: 0.954 accuracy: 0.989 
+training batch:   320, loss: 0.50411, precision: 0.927 recall: 0.905 f1: 0.916 accuracy: 0.995 
+training batch:   340, loss: 0.89685, precision: 0.909 recall: 0.893 f1: 0.901 accuracy: 0.987 
+training batch:   360, loss: 0.57418, precision: 0.936 recall: 0.936 f1: 0.936 accuracy: 0.992 
+training batch:   380, loss: 0.76733, precision: 0.895 recall: 0.911 f1: 0.903 accuracy: 0.988 
+training batch:   400, loss: 0.63864, precision: 0.950 recall: 0.950 f1: 0.950 accuracy: 0.988 
+training batch:   420, loss: 0.61446, precision: 0.958 recall: 0.920 f1: 0.939 accuracy: 0.990 
+training batch:   440, loss: 0.93118, precision: 0.957 recall: 0.918 f1: 0.938 accuracy: 0.987 
+training batch:   460, loss: 0.87949, precision: 0.896 recall: 0.860 f1: 0.878 accuracy: 0.988 
+training batch:   480, loss: 1.34000, precision: 0.909 recall: 0.893 f1: 0.901 accuracy: 0.983 
+training batch:   500, loss: 0.99647, precision: 0.857 recall: 0.889 f1: 0.873 accuracy: 0.984 
+training batch:   520, loss: 1.71988, precision: 0.882 recall: 0.849 f1: 0.865 accuracy: 0.970 
+training batch:   540, loss: 0.68648, precision: 0.934 recall: 0.966 f1: 0.950 accuracy: 0.992 
+training batch:   560, loss: 0.65982, precision: 0.897 recall: 0.897 f1: 0.897 accuracy: 0.988 
+training batch:   580, loss: 0.99663, precision: 0.886 recall: 0.830 f1: 0.857 accuracy: 0.990 
+training batch:   600, loss: 0.63456, precision: 0.860 recall: 0.881 f1: 0.871 accuracy: 0.994 
+training batch:   620, loss: 0.68151, precision: 1.000 recall: 0.938 f1: 0.968 accuracy: 0.994 
+training batch:   640, loss: 0.38240, precision: 0.968 recall: 0.968 f1: 0.968 accuracy: 0.989 
+start evaluate engines...
+label: ORG, precision: 0.773 recall: 0.823 f1: 0.792 accuracy: 0.000 
+label: PER, precision: 0.907 recall: 0.878 f1: 0.888 accuracy: 0.000 
+label: LOC, precision: 0.884 recall: 0.837 f1: 0.858 accuracy: 0.000 
+time consumption:6.38(min), precision: 0.874 recall: 0.859 f1: 0.865 accuracy: 0.981 
+epoch:11/300
+training batch:     0, loss: 0.42800, precision: 0.929 recall: 0.867 f1: 0.897 accuracy: 0.996 
+training batch:    20, loss: 0.37576, precision: 0.974 recall: 0.905 f1: 0.938 accuracy: 0.998 
+training batch:    40, loss: 0.67684, precision: 0.848 recall: 0.875 f1: 0.862 accuracy: 0.988 
+training batch:    60, loss: 0.44423, precision: 0.919 recall: 0.872 f1: 0.895 accuracy: 0.992 
+training batch:    80, loss: 0.30029, precision: 0.981 recall: 0.946 f1: 0.964 accuracy: 0.996 
+training batch:   100, loss: 0.24426, precision: 0.974 recall: 0.949 f1: 0.961 accuracy: 0.996 
+training batch:   120, loss: 0.15778, precision: 0.970 recall: 0.941 f1: 0.955 accuracy: 0.999 
+training batch:   140, loss: 0.43498, precision: 0.976 recall: 0.976 f1: 0.976 accuracy: 0.998 
+training batch:   160, loss: 0.51990, precision: 0.927 recall: 0.911 f1: 0.919 accuracy: 0.991 
+training batch:   180, loss: 0.25525, precision: 0.974 recall: 0.925 f1: 0.949 accuracy: 0.997 
+training batch:   200, loss: 0.40023, precision: 0.921 recall: 0.875 f1: 0.897 accuracy: 0.988 
+training batch:   220, loss: 0.28665, precision: 0.976 recall: 0.976 f1: 0.976 accuracy: 0.998 
+training batch:   240, loss: 0.59236, precision: 0.954 recall: 0.954 f1: 0.954 accuracy: 0.992 
+training batch:   260, loss: 0.17051, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.998 
+training batch:   280, loss: 1.12068, precision: 0.904 recall: 0.839 f1: 0.870 accuracy: 0.983 
+training batch:   300, loss: 0.55224, precision: 0.949 recall: 0.966 f1: 0.957 accuracy: 0.992 
+training batch:   320, loss: 0.59675, precision: 0.957 recall: 0.957 f1: 0.957 accuracy: 0.994 
+training batch:   340, loss: 0.68875, precision: 0.971 recall: 0.944 f1: 0.957 accuracy: 0.987 
+training batch:   360, loss: 0.60948, precision: 0.906 recall: 0.906 f1: 0.906 accuracy: 0.994 
+training batch:   380, loss: 0.36984, precision: 0.923 recall: 0.889 f1: 0.906 accuracy: 0.994 
+training batch:   400, loss: 0.32313, precision: 0.972 recall: 0.921 f1: 0.946 accuracy: 0.995 
+training batch:   420, loss: 0.79042, precision: 0.884 recall: 0.864 f1: 0.874 accuracy: 0.991 
+training batch:   440, loss: 0.33492, precision: 0.872 recall: 0.895 f1: 0.883 accuracy: 0.997 
+training batch:   460, loss: 0.57536, precision: 0.879 recall: 0.921 f1: 0.899 accuracy: 0.994 
+training batch:   480, loss: 0.23861, precision: 0.960 recall: 0.960 f1: 0.960 accuracy: 0.997 
+training batch:   500, loss: 0.17055, precision: 0.967 recall: 0.935 f1: 0.951 accuracy: 0.999 
+training batch:   520, loss: 0.47476, precision: 1.000 recall: 0.986 f1: 0.993 accuracy: 0.998 
+training batch:   540, loss: 0.47093, precision: 0.929 recall: 0.907 f1: 0.918 accuracy: 0.990 
+training batch:   560, loss: 0.17358, precision: 1.000 recall: 0.947 f1: 0.973 accuracy: 0.996 
+training batch:   580, loss: 0.68037, precision: 0.864 recall: 0.851 f1: 0.857 accuracy: 0.979 
+training batch:   600, loss: 0.52191, precision: 0.914 recall: 0.914 f1: 0.914 accuracy: 0.997 
+training batch:   620, loss: 0.42691, precision: 0.980 recall: 0.926 f1: 0.952 accuracy: 0.996 
+training batch:   640, loss: 0.62104, precision: 0.900 recall: 0.923 f1: 0.911 accuracy: 0.994 
+start evaluate engines...
+label: ORG, precision: 0.814 recall: 0.802 f1: 0.804 accuracy: 0.000 
+label: PER, precision: 0.903 recall: 0.880 f1: 0.889 accuracy: 0.000 
+label: LOC, precision: 0.863 recall: 0.852 f1: 0.856 accuracy: 0.000 
+time consumption:6.44(min), precision: 0.876 recall: 0.859 f1: 0.867 accuracy: 0.981 
+epoch:12/300
+training batch:     0, loss: 0.12904, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.999 
+training batch:    20, loss: 0.30991, precision: 0.919 recall: 0.944 f1: 0.932 accuracy: 0.986 
+training batch:    40, loss: 0.28068, precision: 0.925 recall: 0.925 f1: 0.925 accuracy: 0.996 
+training batch:    60, loss: 0.16620, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    80, loss: 0.43350, precision: 0.966 recall: 0.949 f1: 0.957 accuracy: 0.991 
+training batch:   100, loss: 0.27803, precision: 0.938 recall: 0.978 f1: 0.957 accuracy: 0.995 
+training batch:   120, loss: 0.21892, precision: 0.961 recall: 1.000 f1: 0.980 accuracy: 0.997 
+training batch:   140, loss: 0.19706, precision: 0.960 recall: 0.960 f1: 0.960 accuracy: 0.995 
+training batch:   160, loss: 0.53916, precision: 0.868 recall: 0.868 f1: 0.868 accuracy: 0.990 
+training batch:   180, loss: 0.08053, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   200, loss: 0.24052, precision: 0.977 recall: 0.977 f1: 0.977 accuracy: 0.998 
+training batch:   220, loss: 0.46304, precision: 0.907 recall: 0.951 f1: 0.929 accuracy: 0.993 
+training batch:   240, loss: 0.64272, precision: 0.961 recall: 0.912 f1: 0.936 accuracy: 0.988 
+training batch:   260, loss: 0.28305, precision: 0.946 recall: 0.921 f1: 0.933 accuracy: 0.990 
+training batch:   280, loss: 0.54966, precision: 0.947 recall: 0.947 f1: 0.947 accuracy: 0.996 
+training batch:   300, loss: 0.47903, precision: 0.982 recall: 0.931 f1: 0.956 accuracy: 0.994 
+training batch:   320, loss: 0.54627, precision: 0.981 recall: 0.946 f1: 0.964 accuracy: 0.992 
+training batch:   340, loss: 0.79911, precision: 0.981 recall: 0.897 f1: 0.937 accuracy: 0.988 
+training batch:   360, loss: 0.16421, precision: 0.955 recall: 1.000 f1: 0.977 accuracy: 0.999 
+training batch:   380, loss: 0.35955, precision: 0.929 recall: 0.951 f1: 0.940 accuracy: 0.993 
+training batch:   400, loss: 0.13208, precision: 1.000 recall: 0.974 f1: 0.987 accuracy: 0.998 
+training batch:   420, loss: 0.81994, precision: 0.983 recall: 0.967 f1: 0.975 accuracy: 0.988 
+training batch:   440, loss: 0.57374, precision: 0.973 recall: 0.947 f1: 0.960 accuracy: 0.991 
+training batch:   460, loss: 0.33143, precision: 0.902 recall: 0.949 f1: 0.925 accuracy: 0.994 
+training batch:   480, loss: 0.36115, precision: 0.951 recall: 0.951 f1: 0.951 accuracy: 0.993 
+training batch:   500, loss: 1.31660, precision: 0.902 recall: 0.939 f1: 0.920 accuracy: 0.983 
+training batch:   520, loss: 0.37412, precision: 0.933 recall: 0.875 f1: 0.903 accuracy: 0.995 
+training batch:   540, loss: 0.37488, precision: 1.000 recall: 0.957 f1: 0.978 accuracy: 0.997 
+training batch:   560, loss: 0.31999, precision: 0.902 recall: 0.925 f1: 0.914 accuracy: 0.998 
+training batch:   580, loss: 0.62519, precision: 0.950 recall: 0.950 f1: 0.950 accuracy: 0.989 
+training batch:   600, loss: 0.58856, precision: 0.909 recall: 0.833 f1: 0.870 accuracy: 0.991 
+training batch:   620, loss: 0.20720, precision: 0.974 recall: 0.974 f1: 0.974 accuracy: 0.998 
+training batch:   640, loss: 0.40760, precision: 0.977 recall: 0.955 f1: 0.966 accuracy: 0.997 
+start evaluate engines...
+label: ORG, precision: 0.806 recall: 0.833 f1: 0.815 accuracy: 0.000 
+label: PER, precision: 0.898 recall: 0.885 f1: 0.888 accuracy: 0.000 
+label: LOC, precision: 0.855 recall: 0.870 f1: 0.860 accuracy: 0.000 
+time consumption:6.37(min), precision: 0.867 recall: 0.876 f1: 0.871 accuracy: 0.981 
+saved the new best model with f1: 0.871
+epoch:13/300
+training batch:     0, loss: 0.48144, precision: 0.911 recall: 0.976 f1: 0.943 accuracy: 0.990 
+training batch:    20, loss: 0.39741, precision: 0.979 recall: 0.940 f1: 0.959 accuracy: 0.993 
+training batch:    40, loss: 0.18057, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.51241, precision: 0.892 recall: 0.917 f1: 0.904 accuracy: 0.992 
+training batch:    80, loss: 0.26853, precision: 0.909 recall: 0.882 f1: 0.896 accuracy: 0.994 
+training batch:   100, loss: 0.31929, precision: 0.967 recall: 0.951 f1: 0.959 accuracy: 0.997 
+training batch:   120, loss: 0.32880, precision: 0.956 recall: 0.970 f1: 0.963 accuracy: 0.997 
+training batch:   140, loss: 0.28005, precision: 0.950 recall: 0.950 f1: 0.950 accuracy: 0.996 
+training batch:   160, loss: 0.54861, precision: 0.947 recall: 0.973 f1: 0.960 accuracy: 0.997 
+training batch:   180, loss: 0.33247, precision: 0.936 recall: 0.917 f1: 0.926 accuracy: 0.992 
+training batch:   200, loss: 0.22198, precision: 0.979 recall: 0.958 f1: 0.968 accuracy: 0.999 
+training batch:   220, loss: 0.21827, precision: 0.944 recall: 0.962 f1: 0.953 accuracy: 0.997 
+training batch:   240, loss: 0.45892, precision: 0.935 recall: 0.935 f1: 0.935 accuracy: 0.992 
+training batch:   260, loss: 0.38467, precision: 0.979 recall: 0.958 f1: 0.968 accuracy: 0.996 
+training batch:   280, loss: 0.26348, precision: 0.976 recall: 0.952 f1: 0.964 accuracy: 0.992 
+training batch:   300, loss: 0.68340, precision: 0.923 recall: 0.947 f1: 0.935 accuracy: 0.987 
+training batch:   320, loss: 0.19229, precision: 0.977 recall: 0.977 f1: 0.977 accuracy: 0.999 
+training batch:   340, loss: 0.41101, precision: 0.927 recall: 0.974 f1: 0.950 accuracy: 0.992 
+training batch:   360, loss: 0.49839, precision: 0.943 recall: 0.943 f1: 0.943 accuracy: 0.993 
+training batch:   380, loss: 0.22100, precision: 0.964 recall: 1.000 f1: 0.982 accuracy: 0.998 
+training batch:   400, loss: 0.30440, precision: 0.941 recall: 0.923 f1: 0.932 accuracy: 0.994 
+training batch:   420, loss: 0.38309, precision: 1.000 recall: 0.982 f1: 0.991 accuracy: 0.996 
+training batch:   440, loss: 0.70878, precision: 0.975 recall: 0.907 f1: 0.940 accuracy: 0.994 
+training batch:   460, loss: 0.20124, precision: 1.000 recall: 0.974 f1: 0.987 accuracy: 0.998 
+training batch:   480, loss: 0.38010, precision: 0.903 recall: 0.903 f1: 0.903 accuracy: 0.991 
+training batch:   500, loss: 0.32793, precision: 1.000 recall: 0.980 f1: 0.990 accuracy: 0.997 
+training batch:   520, loss: 0.43408, precision: 0.852 recall: 0.920 f1: 0.885 accuracy: 0.990 
+training batch:   540, loss: 0.78981, precision: 0.960 recall: 0.923 f1: 0.941 accuracy: 0.987 
+training batch:   560, loss: 0.68077, precision: 0.962 recall: 0.927 f1: 0.944 accuracy: 0.991 
+training batch:   580, loss: 0.56538, precision: 0.914 recall: 0.914 f1: 0.914 accuracy: 0.983 
+training batch:   600, loss: 0.64505, precision: 0.941 recall: 0.941 f1: 0.941 accuracy: 0.989 
+training batch:   620, loss: 0.75686, precision: 0.920 recall: 0.902 f1: 0.911 accuracy: 0.989 
+training batch:   640, loss: 0.25191, precision: 0.961 recall: 0.961 f1: 0.961 accuracy: 0.995 
+start evaluate engines...
+label: ORG, precision: 0.783 recall: 0.837 f1: 0.803 accuracy: 0.000 
+label: PER, precision: 0.842 recall: 0.900 f1: 0.867 accuracy: 0.000 
+label: LOC, precision: 0.849 recall: 0.871 f1: 0.858 accuracy: 0.000 
+time consumption:6.62(min), precision: 0.843 recall: 0.882 f1: 0.861 accuracy: 0.980 
+epoch:14/300
+training batch:     0, loss: 0.25091, precision: 0.946 recall: 1.000 f1: 0.972 accuracy: 0.997 
+training batch:    20, loss: 0.32404, precision: 0.917 recall: 0.868 f1: 0.892 accuracy: 0.995 
+training batch:    40, loss: 0.18719, precision: 0.978 recall: 0.978 f1: 0.978 accuracy: 0.999 
+training batch:    60, loss: 0.31602, precision: 0.956 recall: 0.970 f1: 0.963 accuracy: 0.998 
+training batch:    80, loss: 0.15359, precision: 1.000 recall: 0.962 f1: 0.980 accuracy: 0.999 
+training batch:   100, loss: 0.14241, precision: 1.000 recall: 0.978 f1: 0.989 accuracy: 0.999 
+training batch:   120, loss: 0.51096, precision: 0.979 recall: 0.887 f1: 0.931 accuracy: 0.986 
+training batch:   140, loss: 0.35201, precision: 1.000 recall: 0.944 f1: 0.971 accuracy: 0.996 
+training batch:   160, loss: 0.40894, precision: 0.974 recall: 0.950 f1: 0.962 accuracy: 0.994 
+training batch:   180, loss: 0.46893, precision: 0.961 recall: 0.942 f1: 0.951 accuracy: 0.995 
+training batch:   200, loss: 0.13116, precision: 1.000 recall: 0.968 f1: 0.984 accuracy: 0.997 
+training batch:   220, loss: 0.32658, precision: 0.912 recall: 0.969 f1: 0.939 accuracy: 0.984 
+training batch:   240, loss: 0.36836, precision: 1.000 recall: 0.880 f1: 0.936 accuracy: 0.991 
+training batch:   260, loss: 0.50643, precision: 0.982 recall: 0.966 f1: 0.974 accuracy: 0.992 
+training batch:   280, loss: 0.27410, precision: 0.969 recall: 0.969 f1: 0.969 accuracy: 0.997 
+training batch:   300, loss: 0.31285, precision: 0.938 recall: 0.938 f1: 0.938 accuracy: 0.997 
+training batch:   320, loss: 0.32641, precision: 0.964 recall: 0.982 f1: 0.973 accuracy: 0.992 
+training batch:   340, loss: 0.20409, precision: 0.942 recall: 0.942 f1: 0.942 accuracy: 0.998 
+training batch:   360, loss: 0.15829, precision: 1.000 recall: 0.978 f1: 0.989 accuracy: 0.996 
+training batch:   380, loss: 0.44107, precision: 0.964 recall: 0.964 f1: 0.964 accuracy: 0.993 
+training batch:   400, loss: 0.38653, precision: 0.946 recall: 0.933 f1: 0.940 accuracy: 0.993 
+training batch:   420, loss: 0.15251, precision: 0.973 recall: 0.973 f1: 0.973 accuracy: 0.998 
+training batch:   440, loss: 0.35522, precision: 0.986 recall: 0.986 f1: 0.986 accuracy: 0.994 
+training batch:   460, loss: 0.30292, precision: 0.962 recall: 0.981 f1: 0.971 accuracy: 0.995 
+training batch:   480, loss: 0.27903, precision: 0.951 recall: 0.886 f1: 0.918 accuracy: 0.993 
+training batch:   500, loss: 0.32877, precision: 0.967 recall: 0.967 f1: 0.967 accuracy: 0.996 
+training batch:   520, loss: 0.67048, precision: 0.882 recall: 0.811 f1: 0.845 accuracy: 0.991 
+training batch:   540, loss: 0.32747, precision: 0.913 recall: 0.955 f1: 0.933 accuracy: 0.996 
+training batch:   560, loss: 0.65056, precision: 0.936 recall: 0.936 f1: 0.936 accuracy: 0.990 
+training batch:   580, loss: 0.65268, precision: 0.964 recall: 0.898 f1: 0.930 accuracy: 0.991 
+training batch:   600, loss: 0.73411, precision: 0.917 recall: 0.943 f1: 0.930 accuracy: 0.988 
+training batch:   620, loss: 0.20694, precision: 0.950 recall: 0.974 f1: 0.962 accuracy: 0.998 
+training batch:   640, loss: 0.32958, precision: 1.000 recall: 0.985 f1: 0.992 accuracy: 0.998 
+start evaluate engines...
+label: ORG, precision: 0.786 recall: 0.842 f1: 0.807 accuracy: 0.000 
+label: PER, precision: 0.910 recall: 0.891 f1: 0.896 accuracy: 0.000 
+label: LOC, precision: 0.863 recall: 0.859 f1: 0.859 accuracy: 0.000 
+time consumption:6.72(min), precision: 0.866 recall: 0.874 f1: 0.869 accuracy: 0.980 
+epoch:15/300
+training batch:     0, loss: 0.52313, precision: 0.968 recall: 0.968 f1: 0.968 accuracy: 0.995 
+training batch:    20, loss: 0.23797, precision: 0.933 recall: 0.933 f1: 0.933 accuracy: 0.997 
+training batch:    40, loss: 0.55172, precision: 0.966 recall: 0.933 f1: 0.949 accuracy: 0.991 
+training batch:    60, loss: 0.11445, precision: 0.973 recall: 0.973 f1: 0.973 accuracy: 0.999 
+training batch:    80, loss: 0.29149, precision: 0.959 recall: 0.959 f1: 0.959 accuracy: 0.992 
+training batch:   100, loss: 0.13400, precision: 0.979 recall: 1.000 f1: 0.989 accuracy: 0.998 
+training batch:   120, loss: 0.32194, precision: 0.960 recall: 0.980 f1: 0.970 accuracy: 0.995 
+training batch:   140, loss: 0.17478, precision: 0.931 recall: 0.964 f1: 0.947 accuracy: 0.998 
+training batch:   160, loss: 0.26990, precision: 0.977 recall: 0.933 f1: 0.955 accuracy: 0.996 
+training batch:   180, loss: 0.35134, precision: 0.930 recall: 0.964 f1: 0.946 accuracy: 0.996 
+training batch:   200, loss: 0.14075, precision: 0.985 recall: 1.000 f1: 0.992 accuracy: 0.998 
+training batch:   220, loss: 0.29085, precision: 0.936 recall: 0.917 f1: 0.926 accuracy: 0.996 
+training batch:   240, loss: 0.27904, precision: 0.944 recall: 0.872 f1: 0.907 accuracy: 0.992 
+training batch:   260, loss: 0.21791, precision: 1.000 recall: 0.968 f1: 0.984 accuracy: 0.997 
+training batch:   280, loss: 0.28832, precision: 0.959 recall: 0.959 f1: 0.959 accuracy: 0.996 
+training batch:   300, loss: 0.13279, precision: 0.972 recall: 1.000 f1: 0.986 accuracy: 0.999 
+training batch:   320, loss: 0.15832, precision: 0.969 recall: 0.969 f1: 0.969 accuracy: 0.999 
+training batch:   340, loss: 0.38815, precision: 0.953 recall: 0.953 f1: 0.953 accuracy: 0.995 
+training batch:   360, loss: 0.67924, precision: 0.919 recall: 0.934 f1: 0.927 accuracy: 0.991 
+training batch:   380, loss: 0.48996, precision: 0.974 recall: 0.927 f1: 0.950 accuracy: 0.990 
+training batch:   400, loss: 0.25798, precision: 0.946 recall: 0.946 f1: 0.946 accuracy: 0.999 
+training batch:   420, loss: 0.09212, precision: 0.975 recall: 0.975 f1: 0.975 accuracy: 0.999 
+training batch:   440, loss: 0.24913, precision: 0.978 recall: 0.978 f1: 0.978 accuracy: 0.998 
+training batch:   460, loss: 0.50211, precision: 0.918 recall: 0.900 f1: 0.909 accuracy: 0.984 
+training batch:   480, loss: 0.23146, precision: 0.935 recall: 0.935 f1: 0.935 accuracy: 0.994 
+training batch:   500, loss: 0.34619, precision: 0.929 recall: 0.975 f1: 0.951 accuracy: 0.993 
+training batch:   520, loss: 0.32567, precision: 0.900 recall: 0.900 f1: 0.900 accuracy: 0.994 
+training batch:   540, loss: 0.16400, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.999 
+training batch:   560, loss: 0.40149, precision: 0.917 recall: 0.917 f1: 0.917 accuracy: 0.994 
+training batch:   580, loss: 0.13685, precision: 1.000 recall: 0.978 f1: 0.989 accuracy: 0.994 
+training batch:   600, loss: 0.16109, precision: 0.978 recall: 1.000 f1: 0.989 accuracy: 0.999 
+training batch:   620, loss: 0.15503, precision: 1.000 recall: 0.964 f1: 0.982 accuracy: 0.999 
+training batch:   640, loss: 0.49173, precision: 0.958 recall: 0.902 f1: 0.929 accuracy: 0.990 
+start evaluate engines...
+label: ORG, precision: 0.810 recall: 0.816 f1: 0.807 accuracy: 0.000 
+label: PER, precision: 0.910 recall: 0.880 f1: 0.891 accuracy: 0.000 
+label: LOC, precision: 0.880 recall: 0.854 f1: 0.865 accuracy: 0.000 
+time consumption:6.89(min), precision: 0.882 recall: 0.860 f1: 0.870 accuracy: 0.981 
+epoch:16/300
+training batch:     0, loss: 0.22533, precision: 0.966 recall: 0.966 f1: 0.966 accuracy: 0.997 
+training batch:    20, loss: 0.21872, precision: 0.981 recall: 1.000 f1: 0.991 accuracy: 0.997 
+training batch:    40, loss: 0.31412, precision: 1.000 recall: 0.952 f1: 0.976 accuracy: 0.998 
+training batch:    60, loss: 0.21348, precision: 0.947 recall: 0.964 f1: 0.956 accuracy: 0.998 
+training batch:    80, loss: 0.10257, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.22132, precision: 0.933 recall: 0.977 f1: 0.955 accuracy: 0.994 
+training batch:   120, loss: 0.05087, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   140, loss: 0.18319, precision: 0.959 recall: 0.979 f1: 0.969 accuracy: 0.998 
+training batch:   160, loss: 0.15468, precision: 0.985 recall: 1.000 f1: 0.992 accuracy: 0.998 
+training batch:   180, loss: 0.13913, precision: 0.953 recall: 0.976 f1: 0.965 accuracy: 0.998 
+training batch:   200, loss: 0.05670, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   220, loss: 0.16569, precision: 0.978 recall: 0.957 f1: 0.968 accuracy: 0.996 
+training batch:   240, loss: 0.16491, precision: 0.982 recall: 0.964 f1: 0.973 accuracy: 0.998 
+training batch:   260, loss: 0.12445, precision: 0.931 recall: 0.964 f1: 0.947 accuracy: 0.998 
+training batch:   280, loss: 0.41094, precision: 0.951 recall: 0.907 f1: 0.929 accuracy: 0.995 
+training batch:   300, loss: 0.14437, precision: 0.947 recall: 1.000 f1: 0.973 accuracy: 0.995 
+training batch:   320, loss: 0.17012, precision: 0.981 recall: 0.981 f1: 0.981 accuracy: 0.999 
+training batch:   340, loss: 0.24129, precision: 0.969 recall: 0.939 f1: 0.954 accuracy: 0.999 
+training batch:   360, loss: 0.05705, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   380, loss: 0.09955, precision: 1.000 recall: 0.978 f1: 0.989 accuracy: 0.999 
+training batch:   400, loss: 0.15957, precision: 0.981 recall: 1.000 f1: 0.990 accuracy: 0.999 
+training batch:   420, loss: 0.33960, precision: 0.979 recall: 1.000 f1: 0.989 accuracy: 0.997 
+training batch:   440, loss: 0.25958, precision: 0.977 recall: 0.955 f1: 0.966 accuracy: 0.994 
+training batch:   460, loss: 0.38614, precision: 0.959 recall: 0.922 f1: 0.940 accuracy: 0.993 
+training batch:   480, loss: 0.18327, precision: 0.947 recall: 0.947 f1: 0.947 accuracy: 0.997 
+training batch:   500, loss: 0.18080, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.998 
+training batch:   520, loss: 0.18949, precision: 0.979 recall: 0.959 f1: 0.969 accuracy: 0.996 
+training batch:   540, loss: 0.16072, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.999 
+training batch:   560, loss: 0.15411, precision: 1.000 recall: 0.953 f1: 0.976 accuracy: 0.998 
+training batch:   580, loss: 0.20122, precision: 0.981 recall: 1.000 f1: 0.991 accuracy: 0.996 
+training batch:   600, loss: 0.10053, precision: 0.976 recall: 0.976 f1: 0.976 accuracy: 0.997 
+training batch:   620, loss: 0.30280, precision: 0.950 recall: 0.974 f1: 0.962 accuracy: 0.996 
+training batch:   640, loss: 0.09137, precision: 1.000 recall: 0.982 f1: 0.991 accuracy: 0.999 
+start evaluate engines...
+label: ORG, precision: 0.797 recall: 0.836 f1: 0.811 accuracy: 0.000 
+label: PER, precision: 0.909 recall: 0.870 f1: 0.885 accuracy: 0.000 
+label: LOC, precision: 0.868 recall: 0.855 f1: 0.859 accuracy: 0.000 
+time consumption:6.51(min), precision: 0.871 recall: 0.865 f1: 0.867 accuracy: 0.980 
+epoch:17/300
+training batch:     0, loss: 0.10273, precision: 1.000 recall: 0.968 f1: 0.984 accuracy: 0.999 
+training batch:    20, loss: 0.06871, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    40, loss: 0.25160, precision: 0.973 recall: 0.923 f1: 0.947 accuracy: 0.993 
+training batch:    60, loss: 0.19456, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.993 
+training batch:    80, loss: 0.09604, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.29581, precision: 0.982 recall: 0.966 f1: 0.974 accuracy: 0.995 
+training batch:   120, loss: 0.22288, precision: 0.975 recall: 0.975 f1: 0.975 accuracy: 0.994 
+training batch:   140, loss: 0.06349, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   160, loss: 0.11756, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   180, loss: 0.14459, precision: 0.975 recall: 0.929 f1: 0.951 accuracy: 0.998 
+training batch:   200, loss: 0.15104, precision: 0.985 recall: 1.000 f1: 0.992 accuracy: 0.999 
+training batch:   220, loss: 0.12412, precision: 1.000 recall: 0.978 f1: 0.989 accuracy: 0.999 
+training batch:   240, loss: 0.06099, precision: 0.974 recall: 0.974 f1: 0.974 accuracy: 0.998 
+training batch:   260, loss: 0.10140, precision: 0.981 recall: 1.000 f1: 0.990 accuracy: 0.999 
+training batch:   280, loss: 0.52258, precision: 0.971 recall: 0.971 f1: 0.971 accuracy: 0.990 
+training batch:   300, loss: 0.27249, precision: 0.944 recall: 0.944 f1: 0.944 accuracy: 0.995 
+training batch:   320, loss: 0.50851, precision: 1.000 recall: 0.951 f1: 0.975 accuracy: 0.996 
+training batch:   340, loss: 0.12124, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   360, loss: 0.15024, precision: 0.970 recall: 0.970 f1: 0.970 accuracy: 0.998 
+training batch:   380, loss: 0.07434, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   400, loss: 0.22361, precision: 0.955 recall: 0.977 f1: 0.966 accuracy: 0.995 
+training batch:   420, loss: 0.10702, precision: 0.962 recall: 1.000 f1: 0.980 accuracy: 0.998 
+training batch:   440, loss: 0.05353, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   460, loss: 0.05068, precision: 0.957 recall: 0.978 f1: 0.968 accuracy: 0.998 
+training batch:   480, loss: 0.28834, precision: 0.954 recall: 1.000 f1: 0.976 accuracy: 0.995 
+training batch:   500, loss: 0.19236, precision: 0.944 recall: 0.971 f1: 0.958 accuracy: 0.998 
+training batch:   520, loss: 0.16659, precision: 0.923 recall: 0.923 f1: 0.923 accuracy: 0.995 
+training batch:   540, loss: 0.34090, precision: 0.932 recall: 0.911 f1: 0.921 accuracy: 0.992 
+training batch:   560, loss: 0.23409, precision: 0.976 recall: 0.930 f1: 0.952 accuracy: 0.998 
+training batch:   580, loss: 0.09043, precision: 0.981 recall: 0.981 f1: 0.981 accuracy: 0.998 
+training batch:   600, loss: 0.03800, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   620, loss: 0.30233, precision: 0.956 recall: 1.000 f1: 0.977 accuracy: 0.992 
+training batch:   640, loss: 0.19225, precision: 0.983 recall: 1.000 f1: 0.991 accuracy: 0.999 
+start evaluate engines...
+label: ORG, precision: 0.842 recall: 0.819 f1: 0.826 accuracy: 0.000 
+label: PER, precision: 0.895 recall: 0.894 f1: 0.891 accuracy: 0.000 
+label: LOC, precision: 0.870 recall: 0.871 f1: 0.869 accuracy: 0.000 
+time consumption:6.31(min), precision: 0.886 recall: 0.876 f1: 0.880 accuracy: 0.982 
+saved the new best model with f1: 0.880
+epoch:18/300
+training batch:     0, loss: 0.15835, precision: 0.980 recall: 1.000 f1: 0.990 accuracy: 0.999 
+training batch:    20, loss: 0.17588, precision: 0.980 recall: 0.961 f1: 0.970 accuracy: 0.998 
+training batch:    40, loss: 0.06123, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.24799, precision: 0.970 recall: 0.985 f1: 0.977 accuracy: 0.995 
+training batch:    80, loss: 0.34961, precision: 0.964 recall: 0.964 f1: 0.964 accuracy: 0.989 
+training batch:   100, loss: 0.19878, precision: 1.000 recall: 0.980 f1: 0.990 accuracy: 0.999 
+training batch:   120, loss: 0.26249, precision: 1.000 recall: 0.985 f1: 0.992 accuracy: 0.999 
+training batch:   140, loss: 0.22118, precision: 0.972 recall: 0.946 f1: 0.959 accuracy: 0.999 
+training batch:   160, loss: 0.18287, precision: 0.978 recall: 0.957 f1: 0.967 accuracy: 0.996 
+training batch:   180, loss: 0.11578, precision: 0.975 recall: 1.000 f1: 0.987 accuracy: 0.996 
+training batch:   200, loss: 0.45945, precision: 0.977 recall: 0.896 f1: 0.935 accuracy: 0.991 
+training batch:   220, loss: 0.08750, precision: 0.957 recall: 0.978 f1: 0.967 accuracy: 0.999 
+training batch:   240, loss: 0.13910, precision: 0.982 recall: 0.982 f1: 0.982 accuracy: 0.998 
+training batch:   260, loss: 0.30587, precision: 0.959 recall: 0.904 f1: 0.931 accuracy: 0.992 
+training batch:   280, loss: 0.13223, precision: 0.980 recall: 0.961 f1: 0.970 accuracy: 0.999 
+training batch:   300, loss: 0.39036, precision: 0.959 recall: 0.959 f1: 0.959 accuracy: 0.991 
+training batch:   320, loss: 0.17109, precision: 0.974 recall: 0.925 f1: 0.949 accuracy: 0.997 
+training batch:   340, loss: 0.31928, precision: 0.923 recall: 0.923 f1: 0.923 accuracy: 0.992 
+training batch:   360, loss: 0.17886, precision: 1.000 recall: 0.976 f1: 0.988 accuracy: 0.998 
+training batch:   380, loss: 0.14801, precision: 1.000 recall: 0.981 f1: 0.990 accuracy: 0.999 
+training batch:   400, loss: 0.07263, precision: 0.980 recall: 1.000 f1: 0.990 accuracy: 0.998 
+training batch:   420, loss: 0.45847, precision: 0.941 recall: 0.923 f1: 0.932 accuracy: 0.992 
+training batch:   440, loss: 0.57024, precision: 0.938 recall: 0.918 f1: 0.928 accuracy: 0.993 
+training batch:   460, loss: 0.20835, precision: 0.973 recall: 0.973 f1: 0.973 accuracy: 0.997 
+training batch:   480, loss: 0.27558, precision: 1.000 recall: 0.956 f1: 0.977 accuracy: 0.997 
+training batch:   500, loss: 0.21497, precision: 0.960 recall: 0.980 f1: 0.970 accuracy: 0.998 
+training batch:   520, loss: 0.13248, precision: 0.974 recall: 0.974 f1: 0.974 accuracy: 0.997 
+training batch:   540, loss: 0.04142, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   560, loss: 0.03864, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   580, loss: 0.31438, precision: 0.978 recall: 0.957 f1: 0.967 accuracy: 0.996 
+training batch:   600, loss: 0.21867, precision: 0.984 recall: 0.954 f1: 0.969 accuracy: 0.996 
+training batch:   620, loss: 0.40679, precision: 1.000 recall: 0.920 f1: 0.958 accuracy: 0.996 
+training batch:   640, loss: 0.31097, precision: 0.969 recall: 1.000 f1: 0.984 accuracy: 0.997 
+start evaluate engines...
+label: ORG, precision: 0.826 recall: 0.820 f1: 0.818 accuracy: 0.000 
+label: PER, precision: 0.878 recall: 0.895 f1: 0.884 accuracy: 0.000 
+label: LOC, precision: 0.874 recall: 0.873 f1: 0.871 accuracy: 0.000 
+time consumption:6.49(min), precision: 0.878 recall: 0.876 f1: 0.876 accuracy: 0.981 
+epoch:19/300
+training batch:     0, loss: 0.24086, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.997 
+training batch:    20, loss: 0.30613, precision: 1.000 recall: 0.980 f1: 0.990 accuracy: 0.999 
+training batch:    40, loss: 0.15562, precision: 0.973 recall: 0.947 f1: 0.960 accuracy: 0.997 
+training batch:    60, loss: 0.32367, precision: 0.967 recall: 0.967 f1: 0.967 accuracy: 0.996 
+training batch:    80, loss: 0.13039, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.996 
+training batch:   100, loss: 0.24001, precision: 0.966 recall: 0.950 f1: 0.958 accuracy: 0.997 
+training batch:   120, loss: 0.10551, precision: 0.975 recall: 0.975 f1: 0.975 accuracy: 0.996 
+training batch:   140, loss: 0.13020, precision: 1.000 recall: 0.957 f1: 0.978 accuracy: 0.997 
+training batch:   160, loss: 0.09102, precision: 0.981 recall: 0.981 f1: 0.981 accuracy: 0.995 
+training batch:   180, loss: 0.13645, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.997 
+training batch:   200, loss: 0.10313, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   220, loss: 0.04677, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   240, loss: 0.06775, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   260, loss: 0.06938, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   280, loss: 0.14741, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.999 
+training batch:   300, loss: 0.27007, precision: 0.963 recall: 0.963 f1: 0.963 accuracy: 0.998 
+training batch:   320, loss: 0.29779, precision: 0.978 recall: 0.978 f1: 0.978 accuracy: 0.997 
+training batch:   340, loss: 0.16358, precision: 0.944 recall: 0.944 f1: 0.944 accuracy: 0.997 
+training batch:   360, loss: 0.25076, precision: 0.936 recall: 0.936 f1: 0.936 accuracy: 0.994 
+training batch:   380, loss: 0.04757, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   400, loss: 0.09951, precision: 0.974 recall: 0.974 f1: 0.974 accuracy: 0.999 
+training batch:   420, loss: 0.20724, precision: 0.979 recall: 1.000 f1: 0.989 accuracy: 0.999 
+training batch:   440, loss: 0.16535, precision: 0.978 recall: 0.957 f1: 0.967 accuracy: 0.995 
+training batch:   460, loss: 0.07971, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   480, loss: 0.14733, precision: 1.000 recall: 0.979 f1: 0.989 accuracy: 0.999 
+training batch:   500, loss: 0.17590, precision: 0.971 recall: 0.919 f1: 0.944 accuracy: 0.994 
+training batch:   520, loss: 0.15837, precision: 1.000 recall: 0.980 f1: 0.990 accuracy: 0.997 
+training batch:   540, loss: 0.07420, precision: 0.975 recall: 0.975 f1: 0.975 accuracy: 0.999 
+training batch:   560, loss: 0.22424, precision: 0.983 recall: 0.952 f1: 0.967 accuracy: 0.983 
+training batch:   580, loss: 0.13271, precision: 0.969 recall: 0.969 f1: 0.969 accuracy: 0.998 
+training batch:   600, loss: 0.14876, precision: 0.980 recall: 1.000 f1: 0.990 accuracy: 0.997 
+training batch:   620, loss: 0.11735, precision: 0.977 recall: 1.000 f1: 0.988 accuracy: 0.998 
+training batch:   640, loss: 0.07759, precision: 0.962 recall: 1.000 f1: 0.980 accuracy: 0.998 
+start evaluate engines...
+label: ORG, precision: 0.858 recall: 0.796 f1: 0.821 accuracy: 0.000 
+label: PER, precision: 0.905 recall: 0.892 f1: 0.895 accuracy: 0.000 
+label: LOC, precision: 0.867 recall: 0.886 f1: 0.874 accuracy: 0.000 
+time consumption:6.48(min), precision: 0.892 recall: 0.875 f1: 0.882 accuracy: 0.982 
+saved the new best model with f1: 0.882
+epoch:20/300
+training batch:     0, loss: 0.08082, precision: 0.978 recall: 1.000 f1: 0.989 accuracy: 0.999 
+training batch:    20, loss: 0.07024, precision: 1.000 recall: 0.976 f1: 0.988 accuracy: 0.999 
+training batch:    40, loss: 0.16024, precision: 0.978 recall: 0.978 f1: 0.978 accuracy: 0.999 
+training batch:    60, loss: 0.17686, precision: 0.971 recall: 0.943 f1: 0.957 accuracy: 0.993 
+training batch:    80, loss: 0.24141, precision: 0.941 recall: 0.941 f1: 0.941 accuracy: 0.991 
+training batch:   100, loss: 0.18942, precision: 0.979 recall: 0.959 f1: 0.969 accuracy: 0.998 
+training batch:   120, loss: 0.08812, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   140, loss: 0.13312, precision: 0.980 recall: 0.980 f1: 0.980 accuracy: 0.999 
+training batch:   160, loss: 0.17395, precision: 0.983 recall: 0.983 f1: 0.983 accuracy: 0.999 
+training batch:   180, loss: 0.08330, precision: 1.000 recall: 0.977 f1: 0.989 accuracy: 0.999 
+training batch:   200, loss: 0.05854, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   220, loss: 0.12945, precision: 0.966 recall: 0.966 f1: 0.966 accuracy: 0.998 
+training batch:   240, loss: 0.14859, precision: 0.955 recall: 0.955 f1: 0.955 accuracy: 0.998 
+training batch:   260, loss: 0.28351, precision: 0.951 recall: 0.929 f1: 0.940 accuracy: 0.998 
+training batch:   280, loss: 0.17248, precision: 1.000 recall: 0.958 f1: 0.979 accuracy: 0.996 
+training batch:   300, loss: 0.08263, precision: 0.979 recall: 0.979 f1: 0.979 accuracy: 0.998 
+training batch:   320, loss: 0.17022, precision: 1.000 recall: 0.962 f1: 0.980 accuracy: 0.998 
+training batch:   340, loss: 0.27870, precision: 0.950 recall: 0.983 f1: 0.966 accuracy: 0.994 
+training batch:   360, loss: 0.07154, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   380, loss: 0.15323, precision: 0.977 recall: 0.956 f1: 0.966 accuracy: 0.999 
+training batch:   400, loss: 0.08039, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   420, loss: 0.08536, precision: 0.968 recall: 1.000 f1: 0.984 accuracy: 0.999 
+training batch:   440, loss: 0.04436, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   460, loss: 0.08557, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   480, loss: 0.12650, precision: 0.970 recall: 0.970 f1: 0.970 accuracy: 0.998 
+training batch:   500, loss: 0.12387, precision: 0.964 recall: 0.982 f1: 0.973 accuracy: 0.998 
+training batch:   520, loss: 0.05304, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   540, loss: 0.02886, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   560, loss: 0.11285, precision: 0.981 recall: 0.981 f1: 0.981 accuracy: 0.999 
+training batch:   580, loss: 0.07520, precision: 1.000 recall: 0.976 f1: 0.988 accuracy: 0.998 
+training batch:   600, loss: 0.24787, precision: 0.957 recall: 0.957 f1: 0.957 accuracy: 0.993 
+training batch:   620, loss: 0.10362, precision: 1.000 recall: 0.976 f1: 0.988 accuracy: 0.998 
+training batch:   640, loss: 0.09374, precision: 0.980 recall: 0.980 f1: 0.980 accuracy: 0.999 
+start evaluate engines...
+label: ORG, precision: 0.812 recall: 0.825 f1: 0.814 accuracy: 0.000 
+label: PER, precision: 0.924 recall: 0.881 f1: 0.898 accuracy: 0.000 
+label: LOC, precision: 0.881 recall: 0.874 f1: 0.876 accuracy: 0.000 
+time consumption:6.66(min), precision: 0.887 recall: 0.875 f1: 0.880 accuracy: 0.982 
+epoch:21/300
+training batch:     0, loss: 0.05551, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    20, loss: 0.27467, precision: 1.000 recall: 0.940 f1: 0.969 accuracy: 0.990 
+training batch:    40, loss: 0.06934, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.04937, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    80, loss: 0.10123, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.13532, precision: 0.982 recall: 0.966 f1: 0.974 accuracy: 0.996 
+training batch:   120, loss: 0.06978, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   140, loss: 0.02646, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   160, loss: 0.11812, precision: 1.000 recall: 0.984 f1: 0.992 accuracy: 0.999 
+training batch:   180, loss: 0.08902, precision: 1.000 recall: 0.980 f1: 0.990 accuracy: 0.999 
+training batch:   200, loss: 0.05081, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   220, loss: 0.06779, precision: 0.976 recall: 0.976 f1: 0.976 accuracy: 0.996 
+training batch:   240, loss: 0.32730, precision: 0.968 recall: 0.909 f1: 0.937 accuracy: 0.996 
+training batch:   260, loss: 0.04437, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   280, loss: 0.20988, precision: 0.967 recall: 0.967 f1: 0.967 accuracy: 0.997 
+training batch:   300, loss: 0.03419, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   320, loss: 0.04191, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   340, loss: 0.07994, precision: 0.979 recall: 1.000 f1: 0.989 accuracy: 0.999 
+training batch:   360, loss: 0.17667, precision: 1.000 recall: 0.975 f1: 0.987 accuracy: 0.998 
+training batch:   380, loss: 0.14509, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.998 
+training batch:   400, loss: 0.18834, precision: 1.000 recall: 0.982 f1: 0.991 accuracy: 0.999 
+training batch:   420, loss: 0.02685, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   440, loss: 0.07902, precision: 0.973 recall: 0.973 f1: 0.973 accuracy: 0.999 
+training batch:   460, loss: 0.04067, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   480, loss: 0.17336, precision: 0.945 recall: 0.981 f1: 0.963 accuracy: 0.997 
+training batch:   500, loss: 0.11955, precision: 0.976 recall: 0.952 f1: 0.964 accuracy: 0.999 
+training batch:   520, loss: 0.19943, precision: 0.951 recall: 0.975 f1: 0.963 accuracy: 0.993 
+training batch:   540, loss: 0.17433, precision: 0.980 recall: 0.962 f1: 0.971 accuracy: 0.994 
+training batch:   560, loss: 0.13099, precision: 0.972 recall: 0.946 f1: 0.959 accuracy: 0.997 
+training batch:   580, loss: 0.07525, precision: 1.000 recall: 0.982 f1: 0.991 accuracy: 0.999 
+training batch:   600, loss: 0.20874, precision: 0.973 recall: 0.947 f1: 0.960 accuracy: 0.994 
+training batch:   620, loss: 0.06618, precision: 0.976 recall: 1.000 f1: 0.988 accuracy: 0.999 
+training batch:   640, loss: 0.08836, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+start evaluate engines...
+label: ORG, precision: 0.816 recall: 0.827 f1: 0.817 accuracy: 0.000 
+label: PER, precision: 0.916 recall: 0.894 f1: 0.901 accuracy: 0.000 
+label: LOC, precision: 0.886 recall: 0.871 f1: 0.877 accuracy: 0.000 
+time consumption:6.57(min), precision: 0.889 recall: 0.877 f1: 0.882 accuracy: 0.982 
+epoch:22/300
+training batch:     0, loss: 0.05052, precision: 1.000 recall: 0.979 f1: 0.989 accuracy: 0.999 
+training batch:    20, loss: 0.09395, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    40, loss: 0.05977, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.04571, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    80, loss: 0.05819, precision: 0.983 recall: 1.000 f1: 0.992 accuracy: 1.000 
+training batch:   100, loss: 0.17439, precision: 1.000 recall: 0.968 f1: 0.984 accuracy: 0.996 
+training batch:   120, loss: 0.10452, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.998 
+training batch:   140, loss: 0.01473, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   160, loss: 0.05970, precision: 0.973 recall: 0.973 f1: 0.973 accuracy: 0.999 
+training batch:   180, loss: 0.22087, precision: 0.979 recall: 0.979 f1: 0.979 accuracy: 0.994 
+training batch:   200, loss: 0.17942, precision: 1.000 recall: 0.958 f1: 0.979 accuracy: 0.998 
+training batch:   220, loss: 0.09141, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.996 
+training batch:   240, loss: 0.13097, precision: 0.977 recall: 0.977 f1: 0.977 accuracy: 0.996 
+training batch:   260, loss: 0.15541, precision: 0.975 recall: 1.000 f1: 0.987 accuracy: 0.999 
+training batch:   280, loss: 0.03402, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   300, loss: 0.19224, precision: 0.951 recall: 0.951 f1: 0.951 accuracy: 0.997 
+training batch:   320, loss: 0.04388, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   340, loss: 0.19218, precision: 0.982 recall: 0.982 f1: 0.982 accuracy: 0.997 
+training batch:   360, loss: 0.03781, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   380, loss: 0.19454, precision: 0.946 recall: 1.000 f1: 0.972 accuracy: 0.996 
+training batch:   400, loss: 0.02128, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   420, loss: 0.06037, precision: 0.976 recall: 0.976 f1: 0.976 accuracy: 0.996 
+training batch:   440, loss: 0.17483, precision: 0.978 recall: 1.000 f1: 0.989 accuracy: 0.996 
+training batch:   460, loss: 0.07807, precision: 0.980 recall: 1.000 f1: 0.990 accuracy: 0.997 
+training batch:   480, loss: 0.02754, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   500, loss: 0.23836, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.997 
+training batch:   520, loss: 0.23912, precision: 0.897 recall: 0.929 f1: 0.912 accuracy: 0.996 
+training batch:   540, loss: 0.17233, precision: 0.984 recall: 0.984 f1: 0.984 accuracy: 0.998 
+training batch:   560, loss: 0.02992, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   580, loss: 0.08603, precision: 1.000 recall: 0.974 f1: 0.987 accuracy: 0.998 
+training batch:   600, loss: 0.05435, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   620, loss: 0.08309, precision: 0.939 recall: 0.969 f1: 0.954 accuracy: 0.995 
+training batch:   640, loss: 0.03929, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+start evaluate engines...
+label: ORG, precision: 0.826 recall: 0.824 f1: 0.819 accuracy: 0.000 
+label: PER, precision: 0.896 recall: 0.884 f1: 0.886 accuracy: 0.000 
+label: LOC, precision: 0.880 recall: 0.884 f1: 0.879 accuracy: 0.000 
+time consumption:6.56(min), precision: 0.885 recall: 0.878 f1: 0.880 accuracy: 0.982 
+epoch:23/300
+training batch:     0, loss: 0.05306, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    20, loss: 0.01833, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    40, loss: 0.08987, precision: 0.984 recall: 1.000 f1: 0.992 accuracy: 0.997 
+training batch:    60, loss: 0.06451, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    80, loss: 0.04280, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.05819, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   120, loss: 0.09236, precision: 0.981 recall: 0.981 f1: 0.981 accuracy: 0.999 
+training batch:   140, loss: 0.14479, precision: 0.976 recall: 1.000 f1: 0.988 accuracy: 0.997 
+training batch:   160, loss: 0.19221, precision: 0.963 recall: 0.963 f1: 0.963 accuracy: 0.996 
+training batch:   180, loss: 0.10364, precision: 0.947 recall: 0.947 f1: 0.947 accuracy: 0.998 
+training batch:   200, loss: 0.01979, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   220, loss: 0.07226, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   240, loss: 0.03392, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   260, loss: 0.02437, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   280, loss: 0.08617, precision: 0.962 recall: 0.980 f1: 0.971 accuracy: 0.997 
+training batch:   300, loss: 0.02003, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   320, loss: 0.05841, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   340, loss: 0.17928, precision: 0.982 recall: 1.000 f1: 0.991 accuracy: 0.990 
+training batch:   360, loss: 0.05439, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   380, loss: 0.03207, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   400, loss: 0.07685, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   420, loss: 0.35639, precision: 0.963 recall: 0.981 f1: 0.972 accuracy: 0.995 
+training batch:   440, loss: 0.06542, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   460, loss: 0.08406, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.998 
+training batch:   480, loss: 0.10530, precision: 1.000 recall: 0.967 f1: 0.983 accuracy: 0.997 
+training batch:   500, loss: 0.05888, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   520, loss: 0.02888, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   540, loss: 0.25992, precision: 0.979 recall: 1.000 f1: 0.989 accuracy: 0.997 
+training batch:   560, loss: 0.06191, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   580, loss: 0.05110, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.998 
+training batch:   600, loss: 0.02160, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   620, loss: 0.10435, precision: 0.963 recall: 0.963 f1: 0.963 accuracy: 0.998 
+training batch:   640, loss: 0.15129, precision: 1.000 recall: 0.981 f1: 0.991 accuracy: 0.997 
+start evaluate engines...
+label: ORG, precision: 0.813 recall: 0.843 f1: 0.823 accuracy: 0.000 
+label: PER, precision: 0.886 recall: 0.897 f1: 0.888 accuracy: 0.000 
+label: LOC, precision: 0.876 recall: 0.865 f1: 0.869 accuracy: 0.000 
+time consumption:6.60(min), precision: 0.876 recall: 0.880 f1: 0.877 accuracy: 0.981 
+epoch:24/300
+training batch:     0, loss: 0.09991, precision: 0.981 recall: 1.000 f1: 0.990 accuracy: 0.999 
+training batch:    20, loss: 0.15109, precision: 0.962 recall: 0.962 f1: 0.962 accuracy: 0.996 
+training batch:    40, loss: 0.02221, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.06756, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    80, loss: 0.08770, precision: 0.941 recall: 0.970 f1: 0.955 accuracy: 0.996 
+training batch:   100, loss: 0.04162, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   120, loss: 0.14595, precision: 0.985 recall: 0.985 f1: 0.985 accuracy: 0.999 
+training batch:   140, loss: 0.19420, precision: 0.968 recall: 0.938 f1: 0.952 accuracy: 0.992 
+training batch:   160, loss: 0.05779, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   180, loss: 0.02908, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   200, loss: 0.08406, precision: 0.983 recall: 1.000 f1: 0.992 accuracy: 0.999 
+training batch:   220, loss: 0.00914, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   240, loss: 0.09964, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   260, loss: 0.03513, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   280, loss: 0.04872, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   300, loss: 0.05317, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.999 
+training batch:   320, loss: 0.11979, precision: 0.981 recall: 0.981 f1: 0.981 accuracy: 0.998 
+training batch:   340, loss: 0.08656, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.998 
+training batch:   360, loss: 0.02770, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   380, loss: 0.04598, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   400, loss: 0.12523, precision: 0.985 recall: 0.985 f1: 0.985 accuracy: 0.995 
+training batch:   420, loss: 0.00983, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   440, loss: 0.06160, precision: 1.000 recall: 0.976 f1: 0.988 accuracy: 0.997 
+training batch:   460, loss: 0.03223, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   480, loss: 0.32258, precision: 0.962 recall: 0.943 f1: 0.952 accuracy: 0.989 
+training batch:   500, loss: 0.05217, precision: 1.000 recall: 0.952 f1: 0.976 accuracy: 0.997 
+training batch:   520, loss: 0.12664, precision: 0.946 recall: 1.000 f1: 0.972 accuracy: 0.998 
+training batch:   540, loss: 0.04307, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   560, loss: 0.07477, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   580, loss: 0.10296, precision: 0.984 recall: 1.000 f1: 0.992 accuracy: 0.999 
+training batch:   600, loss: 0.08162, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.999 
+training batch:   620, loss: 0.26138, precision: 0.960 recall: 1.000 f1: 0.980 accuracy: 0.993 
+training batch:   640, loss: 0.01207, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+start evaluate engines...
+label: ORG, precision: 0.803 recall: 0.830 f1: 0.810 accuracy: 0.000 
+label: PER, precision: 0.893 recall: 0.903 f1: 0.895 accuracy: 0.000 
+label: LOC, precision: 0.862 recall: 0.864 f1: 0.861 accuracy: 0.000 
+time consumption:6.59(min), precision: 0.873 recall: 0.882 f1: 0.877 accuracy: 0.982 
+epoch:25/300
+training batch:     0, loss: 0.05504, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    20, loss: 0.01543, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    40, loss: 0.03958, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.04244, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    80, loss: 0.05489, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.11924, precision: 0.980 recall: 0.962 f1: 0.971 accuracy: 0.999 
+training batch:   120, loss: 0.22694, precision: 1.000 recall: 0.983 f1: 0.991 accuracy: 0.998 
+training batch:   140, loss: 0.03162, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   160, loss: 0.12796, precision: 0.958 recall: 0.958 f1: 0.958 accuracy: 0.996 
+training batch:   180, loss: 0.07971, precision: 0.950 recall: 1.000 f1: 0.974 accuracy: 0.990 
+training batch:   200, loss: 0.02480, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   220, loss: 0.05253, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   240, loss: 0.11058, precision: 1.000 recall: 0.981 f1: 0.991 accuracy: 0.999 
+training batch:   260, loss: 0.24574, precision: 0.951 recall: 0.951 f1: 0.951 accuracy: 0.995 
+training batch:   280, loss: 0.02098, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   300, loss: 0.10896, precision: 1.000 recall: 0.986 f1: 0.993 accuracy: 0.999 
+training batch:   320, loss: 0.05257, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   340, loss: 0.03028, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   360, loss: 0.03634, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   380, loss: 0.24142, precision: 0.971 recall: 1.000 f1: 0.985 accuracy: 0.995 
+training batch:   400, loss: 0.12800, precision: 0.970 recall: 1.000 f1: 0.985 accuracy: 0.997 
+training batch:   420, loss: 0.05221, precision: 0.978 recall: 0.978 f1: 0.978 accuracy: 0.999 
+training batch:   440, loss: 0.10412, precision: 1.000 recall: 0.980 f1: 0.990 accuracy: 0.994 
+training batch:   460, loss: 0.11796, precision: 0.978 recall: 1.000 f1: 0.989 accuracy: 0.996 
+training batch:   480, loss: 0.07756, precision: 1.000 recall: 0.981 f1: 0.990 accuracy: 0.999 
+training batch:   500, loss: 0.05703, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   520, loss: 0.10751, precision: 1.000 recall: 0.958 f1: 0.979 accuracy: 0.999 
+training batch:   540, loss: 0.14320, precision: 0.949 recall: 0.982 f1: 0.966 accuracy: 0.998 
+training batch:   560, loss: 0.12334, precision: 0.980 recall: 1.000 f1: 0.990 accuracy: 0.999 
+training batch:   580, loss: 0.03238, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   600, loss: 0.04003, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   620, loss: 0.12177, precision: 0.957 recall: 0.978 f1: 0.967 accuracy: 0.992 
+training batch:   640, loss: 0.05034, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+start evaluate engines...
+label: ORG, precision: 0.839 recall: 0.832 f1: 0.830 accuracy: 0.000 
+label: PER, precision: 0.901 recall: 0.894 f1: 0.895 accuracy: 0.000 
+label: LOC, precision: 0.883 recall: 0.878 f1: 0.878 accuracy: 0.000 
+time consumption:6.65(min), precision: 0.893 recall: 0.882 f1: 0.887 accuracy: 0.983 
+saved the new best model with f1: 0.887
+epoch:26/300
+training batch:     0, loss: 0.02183, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    20, loss: 0.03979, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    40, loss: 0.05101, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.01745, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    80, loss: 0.04136, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.10239, precision: 0.975 recall: 1.000 f1: 0.987 accuracy: 0.997 
+training batch:   120, loss: 0.04452, precision: 1.000 recall: 0.976 f1: 0.988 accuracy: 0.999 
+training batch:   140, loss: 0.13377, precision: 0.967 recall: 1.000 f1: 0.983 accuracy: 0.996 
+training batch:   160, loss: 0.03429, precision: 0.974 recall: 1.000 f1: 0.987 accuracy: 1.000 
+training batch:   180, loss: 0.01319, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   200, loss: 0.09226, precision: 1.000 recall: 0.982 f1: 0.991 accuracy: 0.999 
+training batch:   220, loss: 0.02515, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   240, loss: 0.36161, precision: 0.966 recall: 0.966 f1: 0.966 accuracy: 0.996 
+training batch:   260, loss: 0.11139, precision: 0.971 recall: 0.971 f1: 0.971 accuracy: 0.998 
+training batch:   280, loss: 0.06252, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   300, loss: 0.14909, precision: 0.956 recall: 0.977 f1: 0.966 accuracy: 0.999 
+training batch:   320, loss: 0.18224, precision: 0.975 recall: 0.951 f1: 0.963 accuracy: 0.995 
+training batch:   340, loss: 0.25997, precision: 1.000 recall: 0.950 f1: 0.974 accuracy: 0.997 
+training batch:   360, loss: 0.11705, precision: 0.956 recall: 0.977 f1: 0.966 accuracy: 0.997 
+training batch:   380, loss: 0.03219, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   400, loss: 0.01397, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   420, loss: 0.03944, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   440, loss: 0.01969, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   460, loss: 0.04820, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   480, loss: 0.11503, precision: 0.966 recall: 1.000 f1: 0.983 accuracy: 0.998 
+training batch:   500, loss: 0.06431, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   520, loss: 0.02468, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   540, loss: 0.19144, precision: 1.000 recall: 0.984 f1: 0.992 accuracy: 0.997 
+training batch:   560, loss: 0.04096, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   580, loss: 0.09114, precision: 0.982 recall: 1.000 f1: 0.991 accuracy: 0.994 
+training batch:   600, loss: 0.16748, precision: 0.962 recall: 1.000 f1: 0.981 accuracy: 0.997 
+training batch:   620, loss: 0.05998, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   640, loss: 0.09929, precision: 0.980 recall: 1.000 f1: 0.990 accuracy: 0.999 
+start evaluate engines...
+label: ORG, precision: 0.871 recall: 0.794 f1: 0.823 accuracy: 0.000 
+label: PER, precision: 0.920 recall: 0.882 f1: 0.897 accuracy: 0.000 
+label: LOC, precision: 0.894 recall: 0.873 f1: 0.881 accuracy: 0.000 
+time consumption:6.71(min), precision: 0.909 recall: 0.862 f1: 0.884 accuracy: 0.981 
+epoch:27/300
+training batch:     0, loss: 0.25096, precision: 1.000 recall: 0.952 f1: 0.976 accuracy: 0.995 
+training batch:    20, loss: 0.10259, precision: 0.976 recall: 1.000 f1: 0.988 accuracy: 0.997 
+training batch:    40, loss: 0.06095, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.12582, precision: 0.983 recall: 1.000 f1: 0.991 accuracy: 0.999 
+training batch:    80, loss: 0.03499, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.14914, precision: 1.000 recall: 0.986 f1: 0.993 accuracy: 0.999 
+training batch:   120, loss: 0.11563, precision: 0.972 recall: 0.972 f1: 0.972 accuracy: 0.997 
+training batch:   140, loss: 0.03202, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   160, loss: 0.04220, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   180, loss: 0.07655, precision: 1.000 recall: 0.978 f1: 0.989 accuracy: 0.999 
+training batch:   200, loss: 0.02077, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   220, loss: 0.14080, precision: 0.968 recall: 0.984 f1: 0.976 accuracy: 0.994 
+training batch:   240, loss: 0.09416, precision: 1.000 recall: 0.977 f1: 0.988 accuracy: 0.997 
+training batch:   260, loss: 0.00491, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   280, loss: 0.08460, precision: 0.985 recall: 1.000 f1: 0.993 accuracy: 0.999 
+training batch:   300, loss: 0.04940, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   320, loss: 0.05262, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   340, loss: 0.03726, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   360, loss: 0.11300, precision: 0.979 recall: 0.979 f1: 0.979 accuracy: 0.997 
+training batch:   380, loss: 0.10287, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.998 
+training batch:   400, loss: 0.04339, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   420, loss: 0.16858, precision: 0.986 recall: 1.000 f1: 0.993 accuracy: 0.999 
+training batch:   440, loss: 0.11781, precision: 0.977 recall: 0.956 f1: 0.966 accuracy: 0.997 
+training batch:   460, loss: 0.08659, precision: 0.983 recall: 1.000 f1: 0.991 accuracy: 1.000 
+training batch:   480, loss: 0.06876, precision: 1.000 recall: 0.974 f1: 0.987 accuracy: 0.998 
+training batch:   500, loss: 0.07251, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   520, loss: 0.04485, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   540, loss: 0.07534, precision: 0.975 recall: 1.000 f1: 0.987 accuracy: 0.998 
+training batch:   560, loss: 0.09755, precision: 0.971 recall: 1.000 f1: 0.986 accuracy: 0.997 
+training batch:   580, loss: 0.07990, precision: 0.986 recall: 0.986 f1: 0.986 accuracy: 0.999 
+training batch:   600, loss: 0.04868, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   620, loss: 0.07264, precision: 0.969 recall: 0.969 f1: 0.969 accuracy: 0.999 
+training batch:   640, loss: 0.08389, precision: 0.982 recall: 0.982 f1: 0.982 accuracy: 0.999 
+start evaluate engines...
+label: ORG, precision: 0.826 recall: 0.838 f1: 0.827 accuracy: 0.000 
+label: PER, precision: 0.902 recall: 0.896 f1: 0.895 accuracy: 0.000 
+label: LOC, precision: 0.888 recall: 0.860 f1: 0.872 accuracy: 0.000 
+time consumption:6.47(min), precision: 0.892 recall: 0.877 f1: 0.884 accuracy: 0.983 
+epoch:28/300
+training batch:     0, loss: 0.06993, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    20, loss: 0.01294, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    40, loss: 0.02236, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.16246, precision: 0.980 recall: 0.960 f1: 0.970 accuracy: 0.998 
+training batch:    80, loss: 0.01934, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.01497, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   120, loss: 0.09684, precision: 0.968 recall: 0.952 f1: 0.960 accuracy: 0.999 
+training batch:   140, loss: 0.20716, precision: 0.948 recall: 0.986 f1: 0.967 accuracy: 0.994 
+training batch:   160, loss: 0.04707, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   180, loss: 0.02020, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   200, loss: 0.17147, precision: 0.984 recall: 0.984 f1: 0.984 accuracy: 0.997 
+training batch:   220, loss: 0.16982, precision: 0.986 recall: 0.973 f1: 0.980 accuracy: 0.998 
+training batch:   240, loss: 0.08049, precision: 0.949 recall: 0.974 f1: 0.961 accuracy: 0.998 
+training batch:   260, loss: 0.03365, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   280, loss: 0.06832, precision: 0.975 recall: 0.975 f1: 0.975 accuracy: 0.999 
+training batch:   300, loss: 0.27112, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.998 
+training batch:   320, loss: 0.08144, precision: 0.983 recall: 1.000 f1: 0.991 accuracy: 0.999 
+training batch:   340, loss: 0.09568, precision: 0.983 recall: 0.983 f1: 0.983 accuracy: 0.995 
+training batch:   360, loss: 0.01882, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   380, loss: 0.01230, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   400, loss: 0.14996, precision: 1.000 recall: 0.980 f1: 0.990 accuracy: 0.999 
+training batch:   420, loss: 0.02538, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   440, loss: 0.02827, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   460, loss: 0.06704, precision: 0.983 recall: 0.983 f1: 0.983 accuracy: 0.999 
+training batch:   480, loss: 0.13865, precision: 0.974 recall: 0.950 f1: 0.962 accuracy: 0.996 
+training batch:   500, loss: 0.05465, precision: 0.981 recall: 1.000 f1: 0.990 accuracy: 0.999 
+training batch:   520, loss: 0.19439, precision: 0.982 recall: 0.964 f1: 0.973 accuracy: 0.996 
+training batch:   540, loss: 0.24735, precision: 0.983 recall: 0.950 f1: 0.966 accuracy: 0.996 
+training batch:   560, loss: 0.05302, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   580, loss: 0.04075, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   600, loss: 0.10768, precision: 1.000 recall: 0.980 f1: 0.990 accuracy: 0.999 
+training batch:   620, loss: 0.16768, precision: 0.939 recall: 0.939 f1: 0.939 accuracy: 0.991 
+training batch:   640, loss: 0.04754, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+start evaluate engines...
+label: ORG, precision: 0.871 recall: 0.770 f1: 0.810 accuracy: 0.000 
+label: PER, precision: 0.916 recall: 0.888 f1: 0.898 accuracy: 0.000 
+label: LOC, precision: 0.871 recall: 0.887 f1: 0.877 accuracy: 0.000 
+time consumption:6.27(min), precision: 0.899 recall: 0.866 f1: 0.881 accuracy: 0.981 
+epoch:29/300
+training batch:     0, loss: 0.05042, precision: 0.977 recall: 0.977 f1: 0.977 accuracy: 0.999 
+training batch:    20, loss: 0.07293, precision: 0.974 recall: 1.000 f1: 0.987 accuracy: 0.998 
+training batch:    40, loss: 0.07635, precision: 1.000 recall: 0.981 f1: 0.990 accuracy: 0.998 
+training batch:    60, loss: 0.16482, precision: 0.977 recall: 0.977 f1: 0.977 accuracy: 0.999 
+training batch:    80, loss: 0.04291, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.07889, precision: 0.981 recall: 1.000 f1: 0.991 accuracy: 0.998 
+training batch:   120, loss: 0.17039, precision: 0.921 recall: 0.921 f1: 0.921 accuracy: 0.994 
+training batch:   140, loss: 0.09553, precision: 1.000 recall: 0.984 f1: 0.992 accuracy: 0.994 
+training batch:   160, loss: 0.02750, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   180, loss: 0.03801, precision: 0.978 recall: 0.978 f1: 0.978 accuracy: 0.995 
+training batch:   200, loss: 0.21542, precision: 0.867 recall: 0.897 f1: 0.881 accuracy: 0.995 
+training batch:   220, loss: 0.02769, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   240, loss: 0.17885, precision: 1.000 recall: 0.968 f1: 0.984 accuracy: 0.998 
+training batch:   260, loss: 0.12704, precision: 1.000 recall: 0.951 f1: 0.975 accuracy: 0.994 
+training batch:   280, loss: 0.01945, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   300, loss: 0.00616, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   320, loss: 0.31826, precision: 0.930 recall: 0.946 f1: 0.938 accuracy: 0.992 
+training batch:   340, loss: 0.02521, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   360, loss: 0.06949, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   380, loss: 0.15861, precision: 0.955 recall: 0.955 f1: 0.955 accuracy: 0.997 
+training batch:   400, loss: 0.09074, precision: 1.000 recall: 0.976 f1: 0.988 accuracy: 0.999 
+training batch:   420, loss: 0.03552, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   440, loss: 0.05521, precision: 0.972 recall: 0.972 f1: 0.972 accuracy: 0.999 
+training batch:   460, loss: 0.05139, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   480, loss: 0.04154, precision: 0.969 recall: 0.969 f1: 0.969 accuracy: 0.998 
+training batch:   500, loss: 0.13049, precision: 0.953 recall: 0.953 f1: 0.953 accuracy: 0.997 
+training batch:   520, loss: 0.08936, precision: 0.959 recall: 0.979 f1: 0.969 accuracy: 0.998 
+training batch:   540, loss: 0.03167, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   560, loss: 0.14840, precision: 0.932 recall: 0.932 f1: 0.932 accuracy: 0.996 
+training batch:   580, loss: 0.03564, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   600, loss: 0.15166, precision: 1.000 recall: 0.979 f1: 0.989 accuracy: 0.998 
+training batch:   620, loss: 0.02825, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   640, loss: 0.04642, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+start evaluate engines...
+label: ORG, precision: 0.814 recall: 0.824 f1: 0.813 accuracy: 0.000 
+label: PER, precision: 0.917 recall: 0.879 f1: 0.893 accuracy: 0.000 
+label: LOC, precision: 0.890 recall: 0.862 f1: 0.873 accuracy: 0.000 
+time consumption:6.40(min), precision: 0.895 recall: 0.874 f1: 0.883 accuracy: 0.982 
+epoch:30/300
+training batch:     0, loss: 0.27796, precision: 0.952 recall: 0.937 f1: 0.944 accuracy: 0.995 
+training batch:    20, loss: 0.01684, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    40, loss: 0.03415, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.00605, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    80, loss: 0.03279, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.03124, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   120, loss: 0.06118, precision: 0.977 recall: 1.000 f1: 0.988 accuracy: 0.998 
+training batch:   140, loss: 0.09207, precision: 0.977 recall: 0.933 f1: 0.955 accuracy: 0.999 
+training batch:   160, loss: 0.06858, precision: 0.976 recall: 1.000 f1: 0.988 accuracy: 0.998 
+training batch:   180, loss: 0.03397, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   200, loss: 0.03597, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   220, loss: 0.03582, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   240, loss: 0.07252, precision: 0.975 recall: 0.975 f1: 0.975 accuracy: 0.995 
+training batch:   260, loss: 0.04876, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   280, loss: 0.14415, precision: 0.968 recall: 0.968 f1: 0.968 accuracy: 0.996 
+training batch:   300, loss: 0.05642, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   320, loss: 0.11119, precision: 0.979 recall: 0.979 f1: 0.979 accuracy: 0.997 
+training batch:   340, loss: 0.13975, precision: 0.976 recall: 0.988 f1: 0.982 accuracy: 0.998 
+training batch:   360, loss: 0.03746, precision: 0.978 recall: 0.978 f1: 0.978 accuracy: 0.998 
+training batch:   380, loss: 0.08415, precision: 0.962 recall: 1.000 f1: 0.980 accuracy: 0.999 
+training batch:   400, loss: 0.01277, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   420, loss: 0.06090, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   440, loss: 0.03473, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.997 
+training batch:   460, loss: 0.09915, precision: 0.980 recall: 1.000 f1: 0.990 accuracy: 0.998 
+training batch:   480, loss: 0.02205, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   500, loss: 0.55706, precision: 0.984 recall: 0.984 f1: 0.984 accuracy: 0.989 
+training batch:   520, loss: 0.10534, precision: 0.979 recall: 1.000 f1: 0.989 accuracy: 0.999 
+training batch:   540, loss: 0.09045, precision: 0.970 recall: 0.941 f1: 0.955 accuracy: 0.998 
+training batch:   560, loss: 0.01439, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   580, loss: 0.09232, precision: 1.000 recall: 0.979 f1: 0.989 accuracy: 0.998 
+training batch:   600, loss: 0.02569, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   620, loss: 0.09446, precision: 0.953 recall: 0.976 f1: 0.965 accuracy: 0.999 
+training batch:   640, loss: 0.06388, precision: 0.982 recall: 1.000 f1: 0.991 accuracy: 0.999 
+start evaluate engines...
+label: ORG, precision: 0.825 recall: 0.832 f1: 0.822 accuracy: 0.000 
+label: PER, precision: 0.917 recall: 0.890 f1: 0.899 accuracy: 0.000 
+label: LOC, precision: 0.887 recall: 0.870 f1: 0.876 accuracy: 0.000 
+time consumption:6.26(min), precision: 0.893 recall: 0.877 f1: 0.884 accuracy: 0.982 
+epoch:31/300
+training batch:     0, loss: 0.05256, precision: 0.980 recall: 0.980 f1: 0.980 accuracy: 0.999 
+training batch:    20, loss: 0.03946, precision: 1.000 recall: 0.977 f1: 0.989 accuracy: 0.997 
+training batch:    40, loss: 0.02166, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.01269, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    80, loss: 0.02149, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.05686, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.996 
+training batch:   120, loss: 0.07565, precision: 0.978 recall: 0.978 f1: 0.978 accuracy: 0.999 
+training batch:   140, loss: 0.02081, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   160, loss: 0.03838, precision: 0.985 recall: 1.000 f1: 0.992 accuracy: 0.997 
+training batch:   180, loss: 0.01310, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   200, loss: 0.01592, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   220, loss: 0.17407, precision: 1.000 recall: 0.984 f1: 0.992 accuracy: 0.993 
+training batch:   240, loss: 0.01982, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   260, loss: 0.04982, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   280, loss: 0.07696, precision: 0.981 recall: 0.962 f1: 0.971 accuracy: 0.999 
+training batch:   300, loss: 0.12503, precision: 0.976 recall: 1.000 f1: 0.988 accuracy: 0.998 
+training batch:   320, loss: 0.07674, precision: 0.984 recall: 1.000 f1: 0.992 accuracy: 0.998 
+training batch:   340, loss: 0.09885, precision: 0.969 recall: 0.939 f1: 0.954 accuracy: 0.999 
+training batch:   360, loss: 0.01368, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   380, loss: 0.10247, precision: 0.974 recall: 1.000 f1: 0.987 accuracy: 0.999 
+training batch:   400, loss: 0.03825, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   420, loss: 0.01840, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   440, loss: 0.08325, precision: 0.977 recall: 0.977 f1: 0.977 accuracy: 0.998 
+training batch:   460, loss: 0.02421, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   480, loss: 0.02289, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   500, loss: 0.11183, precision: 0.978 recall: 0.978 f1: 0.978 accuracy: 0.997 
+training batch:   520, loss: 0.02451, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   540, loss: 0.02218, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   560, loss: 0.06250, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   580, loss: 0.01305, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   600, loss: 0.17789, precision: 0.968 recall: 0.968 f1: 0.968 accuracy: 0.992 
+training batch:   620, loss: 0.04530, precision: 0.966 recall: 0.982 f1: 0.974 accuracy: 0.999 
+training batch:   640, loss: 0.04369, precision: 0.979 recall: 1.000 f1: 0.989 accuracy: 0.997 
+start evaluate engines...
+label: ORG, precision: 0.833 recall: 0.829 f1: 0.825 accuracy: 0.000 
+label: PER, precision: 0.918 recall: 0.891 f1: 0.901 accuracy: 0.000 
+label: LOC, precision: 0.884 recall: 0.877 f1: 0.879 accuracy: 0.000 
+time consumption:6.27(min), precision: 0.892 recall: 0.877 f1: 0.884 accuracy: 0.982 
+epoch:32/300
+training batch:     0, loss: 0.01524, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    20, loss: 0.18457, precision: 0.941 recall: 0.941 f1: 0.941 accuracy: 0.996 
+training batch:    40, loss: 0.02943, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.10248, precision: 0.981 recall: 1.000 f1: 0.990 accuracy: 0.998 
+training batch:    80, loss: 0.08876, precision: 1.000 recall: 0.984 f1: 0.992 accuracy: 0.999 
+training batch:   100, loss: 0.42941, precision: 0.978 recall: 0.978 f1: 0.978 accuracy: 0.996 
+training batch:   120, loss: 0.01382, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   140, loss: 0.11773, precision: 0.982 recall: 1.000 f1: 0.991 accuracy: 0.998 
+training batch:   160, loss: 0.07309, precision: 1.000 recall: 0.979 f1: 0.989 accuracy: 0.999 
+training batch:   180, loss: 0.43947, precision: 0.987 recall: 0.974 f1: 0.980 accuracy: 0.996 
+training batch:   200, loss: 0.11806, precision: 1.000 recall: 0.960 f1: 0.980 accuracy: 0.998 
+training batch:   220, loss: 0.01405, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   240, loss: 0.11335, precision: 1.000 recall: 0.985 f1: 0.992 accuracy: 0.998 
+training batch:   260, loss: 0.09414, precision: 0.978 recall: 1.000 f1: 0.989 accuracy: 0.995 
+training batch:   280, loss: 0.05834, precision: 0.977 recall: 0.977 f1: 0.977 accuracy: 0.999 
+training batch:   300, loss: 0.07651, precision: 1.000 recall: 0.977 f1: 0.989 accuracy: 0.999 
+training batch:   320, loss: 0.01329, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   340, loss: 0.00687, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   360, loss: 0.01173, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   380, loss: 0.03793, precision: 0.985 recall: 1.000 f1: 0.992 accuracy: 0.999 
+training batch:   400, loss: 0.05082, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   420, loss: 0.15433, precision: 0.959 recall: 0.922 f1: 0.940 accuracy: 0.992 
+training batch:   440, loss: 0.26509, precision: 0.982 recall: 1.000 f1: 0.991 accuracy: 0.996 
+training batch:   460, loss: 0.23211, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.996 
+training batch:   480, loss: 0.00827, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   500, loss: 0.02882, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   520, loss: 0.04581, precision: 0.979 recall: 0.979 f1: 0.979 accuracy: 0.998 
+training batch:   540, loss: 0.07986, precision: 1.000 recall: 0.977 f1: 0.989 accuracy: 0.998 
+training batch:   560, loss: 0.01018, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   580, loss: 0.03705, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.998 
+training batch:   600, loss: 0.08526, precision: 0.982 recall: 0.982 f1: 0.982 accuracy: 0.996 
+training batch:   620, loss: 0.24812, precision: 0.976 recall: 0.976 f1: 0.976 accuracy: 0.996 
+training batch:   640, loss: 0.03353, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+start evaluate engines...
+label: ORG, precision: 0.867 recall: 0.838 f1: 0.847 accuracy: 0.000 
+label: PER, precision: 0.929 recall: 0.890 f1: 0.905 accuracy: 0.000 
+label: LOC, precision: 0.893 recall: 0.882 f1: 0.886 accuracy: 0.000 
+time consumption:6.35(min), precision: 0.909 recall: 0.883 f1: 0.895 accuracy: 0.984 
+saved the new best model with f1: 0.895
+epoch:33/300
+training batch:     0, loss: 0.02643, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    20, loss: 0.06362, precision: 0.977 recall: 0.977 f1: 0.977 accuracy: 0.999 
+training batch:    40, loss: 0.03886, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.09369, precision: 0.978 recall: 1.000 f1: 0.989 accuracy: 0.999 
+training batch:    80, loss: 0.01552, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.01914, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   120, loss: 0.01978, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   140, loss: 0.01288, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   160, loss: 0.01907, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   180, loss: 0.03992, precision: 0.974 recall: 0.974 f1: 0.974 accuracy: 0.998 
+training batch:   200, loss: 0.09572, precision: 0.971 recall: 0.971 f1: 0.971 accuracy: 0.998 
+training batch:   220, loss: 0.02569, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   240, loss: 0.01990, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   260, loss: 0.09183, precision: 1.000 recall: 0.969 f1: 0.984 accuracy: 0.999 
+training batch:   280, loss: 0.06304, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   300, loss: 0.02223, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   320, loss: 0.03552, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   340, loss: 0.13964, precision: 1.000 recall: 0.980 f1: 0.990 accuracy: 0.999 
+training batch:   360, loss: 0.33909, precision: 0.982 recall: 0.965 f1: 0.973 accuracy: 0.993 
+training batch:   380, loss: 0.01248, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   400, loss: 0.03481, precision: 0.966 recall: 1.000 f1: 0.982 accuracy: 0.998 
+training batch:   420, loss: 0.08277, precision: 1.000 recall: 0.973 f1: 0.986 accuracy: 0.998 
+training batch:   440, loss: 0.20276, precision: 0.957 recall: 0.957 f1: 0.957 accuracy: 0.994 
+training batch:   460, loss: 0.09125, precision: 1.000 recall: 0.982 f1: 0.991 accuracy: 0.999 
+training batch:   480, loss: 0.04802, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   500, loss: 0.09153, precision: 0.982 recall: 0.982 f1: 0.982 accuracy: 0.996 
+training batch:   520, loss: 0.10450, precision: 0.970 recall: 0.941 f1: 0.955 accuracy: 0.999 
+training batch:   540, loss: 0.07531, precision: 0.981 recall: 0.981 f1: 0.981 accuracy: 0.999 
+training batch:   560, loss: 0.24115, precision: 0.979 recall: 0.939 f1: 0.958 accuracy: 0.994 
+training batch:   580, loss: 0.04561, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   600, loss: 0.02145, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   620, loss: 0.00302, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   640, loss: 0.20910, precision: 0.956 recall: 1.000 f1: 0.977 accuracy: 0.994 
+start evaluate engines...
+label: ORG, precision: 0.847 recall: 0.814 f1: 0.825 accuracy: 0.000 
+label: PER, precision: 0.896 recall: 0.902 f1: 0.895 accuracy: 0.000 
+label: LOC, precision: 0.880 recall: 0.886 f1: 0.881 accuracy: 0.000 
+time consumption:6.28(min), precision: 0.887 recall: 0.879 f1: 0.882 accuracy: 0.983 
+epoch:34/300
+training batch:     0, loss: 0.00395, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    20, loss: 0.01708, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    40, loss: 0.03364, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.02203, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    80, loss: 0.04820, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.11456, precision: 0.974 recall: 0.949 f1: 0.961 accuracy: 0.997 
+training batch:   120, loss: 0.04349, precision: 0.979 recall: 1.000 f1: 0.989 accuracy: 0.999 
+training batch:   140, loss: 0.06658, precision: 0.983 recall: 0.966 f1: 0.974 accuracy: 0.998 
+training batch:   160, loss: 0.09816, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.999 
+training batch:   180, loss: 0.10636, precision: 0.978 recall: 0.968 f1: 0.973 accuracy: 0.997 
+training batch:   200, loss: 0.00482, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   220, loss: 0.11334, precision: 0.930 recall: 0.952 f1: 0.941 accuracy: 0.994 
+training batch:   240, loss: 0.19620, precision: 0.985 recall: 0.970 f1: 0.977 accuracy: 0.996 
+training batch:   260, loss: 0.04107, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   280, loss: 0.00651, precision: 0.974 recall: 1.000 f1: 0.987 accuracy: 1.000 
+training batch:   300, loss: 0.43541, precision: 0.940 recall: 0.926 f1: 0.933 accuracy: 0.992 
+training batch:   320, loss: 0.07841, precision: 0.968 recall: 0.968 f1: 0.968 accuracy: 0.999 
+training batch:   340, loss: 0.02278, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   360, loss: 0.07868, precision: 0.980 recall: 0.960 f1: 0.970 accuracy: 0.995 
+training batch:   380, loss: 0.11864, precision: 0.978 recall: 0.978 f1: 0.978 accuracy: 0.999 
+training batch:   400, loss: 0.02509, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   420, loss: 0.01154, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   440, loss: 0.08475, precision: 0.970 recall: 0.970 f1: 0.970 accuracy: 0.997 
+training batch:   460, loss: 0.06604, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   480, loss: 0.07770, precision: 0.974 recall: 1.000 f1: 0.987 accuracy: 0.999 
+training batch:   500, loss: 0.05132, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   520, loss: 0.04745, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   540, loss: 0.04529, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   560, loss: 0.18908, precision: 1.000 recall: 0.967 f1: 0.983 accuracy: 0.999 
+training batch:   580, loss: 0.09188, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.998 
+training batch:   600, loss: 0.07714, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.997 
+training batch:   620, loss: 0.07726, precision: 0.980 recall: 1.000 f1: 0.990 accuracy: 0.998 
+training batch:   640, loss: 0.03265, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+start evaluate engines...
+label: ORG, precision: 0.849 recall: 0.827 f1: 0.832 accuracy: 0.000 
+label: PER, precision: 0.894 recall: 0.893 f1: 0.890 accuracy: 0.000 
+label: LOC, precision: 0.881 recall: 0.880 f1: 0.879 accuracy: 0.000 
+time consumption:6.28(min), precision: 0.890 recall: 0.879 f1: 0.883 accuracy: 0.983 
+epoch:35/300
+training batch:     0, loss: 0.05167, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    20, loss: 0.27337, precision: 0.982 recall: 1.000 f1: 0.991 accuracy: 0.994 
+training batch:    40, loss: 0.02638, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.10958, precision: 0.979 recall: 0.979 f1: 0.979 accuracy: 0.999 
+training batch:    80, loss: 0.03217, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.00888, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   120, loss: 0.04071, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   140, loss: 0.01614, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   160, loss: 0.13018, precision: 0.935 recall: 0.977 f1: 0.956 accuracy: 0.992 
+training batch:   180, loss: 0.06678, precision: 0.985 recall: 0.985 f1: 0.985 accuracy: 0.999 
+training batch:   200, loss: 0.15136, precision: 1.000 recall: 0.970 f1: 0.985 accuracy: 0.996 
+training batch:   220, loss: 0.01668, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   240, loss: 0.04747, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   260, loss: 0.02124, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   280, loss: 0.03584, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   300, loss: 0.17612, precision: 0.963 recall: 0.981 f1: 0.972 accuracy: 0.998 
+training batch:   320, loss: 0.01789, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   340, loss: 0.19889, precision: 1.000 recall: 0.976 f1: 0.988 accuracy: 0.999 
+training batch:   360, loss: 0.09208, precision: 0.986 recall: 0.986 f1: 0.986 accuracy: 0.999 
+training batch:   380, loss: 0.06482, precision: 1.000 recall: 0.974 f1: 0.987 accuracy: 0.997 
+training batch:   400, loss: 0.05497, precision: 0.974 recall: 1.000 f1: 0.987 accuracy: 0.999 
+training batch:   420, loss: 0.19187, precision: 0.978 recall: 0.978 f1: 0.978 accuracy: 0.998 
+training batch:   440, loss: 0.01773, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   460, loss: 0.02401, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   480, loss: 0.01630, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   500, loss: 0.05007, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   520, loss: 0.05561, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.998 
+training batch:   540, loss: 0.06937, precision: 0.961 recall: 0.980 f1: 0.970 accuracy: 0.998 
+training batch:   560, loss: 0.09392, precision: 0.982 recall: 0.965 f1: 0.973 accuracy: 0.999 
+training batch:   580, loss: 0.01142, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   600, loss: 0.03655, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   620, loss: 0.06599, precision: 0.976 recall: 1.000 f1: 0.988 accuracy: 0.999 
+training batch:   640, loss: 0.07652, precision: 1.000 recall: 0.980 f1: 0.990 accuracy: 0.999 
+start evaluate engines...
+label: ORG, precision: 0.840 recall: 0.833 f1: 0.833 accuracy: 0.000 
+label: PER, precision: 0.885 recall: 0.900 f1: 0.889 accuracy: 0.000 
+label: LOC, precision: 0.884 recall: 0.878 f1: 0.879 accuracy: 0.000 
+time consumption:6.30(min), precision: 0.888 recall: 0.883 f1: 0.885 accuracy: 0.983 
+epoch:36/300
+training batch:     0, loss: 0.00306, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    20, loss: 0.03842, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    40, loss: 0.00995, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.05488, precision: 0.966 recall: 1.000 f1: 0.982 accuracy: 0.999 
+training batch:    80, loss: 0.02611, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.00686, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   120, loss: 0.14567, precision: 0.966 recall: 0.966 f1: 0.966 accuracy: 0.998 
+training batch:   140, loss: 0.02559, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   160, loss: 0.00819, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   180, loss: 0.02667, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   200, loss: 0.13141, precision: 1.000 recall: 0.977 f1: 0.988 accuracy: 0.998 
+training batch:   220, loss: 0.08052, precision: 1.000 recall: 0.966 f1: 0.982 accuracy: 0.998 
+training batch:   240, loss: 0.01151, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   260, loss: 0.12179, precision: 0.940 recall: 1.000 f1: 0.969 accuracy: 0.996 
+training batch:   280, loss: 0.03246, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   300, loss: 0.13293, precision: 0.960 recall: 0.960 f1: 0.960 accuracy: 0.994 
+training batch:   320, loss: 0.05465, precision: 1.000 recall: 0.981 f1: 0.990 accuracy: 0.999 
+training batch:   340, loss: 0.00851, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   360, loss: 0.20425, precision: 0.957 recall: 1.000 f1: 0.978 accuracy: 0.994 
+training batch:   380, loss: 0.01073, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   400, loss: 0.00853, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   420, loss: 0.01481, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   440, loss: 0.03501, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   460, loss: 0.06238, precision: 0.974 recall: 0.974 f1: 0.974 accuracy: 0.997 
+training batch:   480, loss: 0.08864, precision: 1.000 recall: 0.984 f1: 0.992 accuracy: 0.998 
+training batch:   500, loss: 0.07027, precision: 0.984 recall: 1.000 f1: 0.992 accuracy: 0.999 
+training batch:   520, loss: 0.05962, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   540, loss: 0.01693, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   560, loss: 0.01070, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   580, loss: 0.02429, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   600, loss: 0.10859, precision: 1.000 recall: 0.978 f1: 0.989 accuracy: 0.998 
+training batch:   620, loss: 0.13312, precision: 0.984 recall: 0.984 f1: 0.984 accuracy: 0.998 
+training batch:   640, loss: 0.10638, precision: 0.966 recall: 0.966 f1: 0.966 accuracy: 0.995 
+start evaluate engines...
+label: ORG, precision: 0.836 recall: 0.847 f1: 0.837 accuracy: 0.000 
+label: PER, precision: 0.884 recall: 0.902 f1: 0.890 accuracy: 0.000 
+label: LOC, precision: 0.878 recall: 0.874 f1: 0.874 accuracy: 0.000 
+time consumption:6.37(min), precision: 0.882 recall: 0.886 f1: 0.883 accuracy: 0.982 
+epoch:37/300
+training batch:     0, loss: 0.01164, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    20, loss: 0.06389, precision: 0.984 recall: 0.984 f1: 0.984 accuracy: 0.999 
+training batch:    40, loss: 0.01764, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.07594, precision: 0.953 recall: 0.953 f1: 0.953 accuracy: 0.995 
+training batch:    80, loss: 0.20053, precision: 0.941 recall: 0.941 f1: 0.941 accuracy: 0.994 
+training batch:   100, loss: 0.00370, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   120, loss: 0.01110, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   140, loss: 0.01629, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   160, loss: 0.03434, precision: 0.981 recall: 0.981 f1: 0.981 accuracy: 0.995 
+training batch:   180, loss: 0.02997, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   200, loss: 0.07518, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.997 
+training batch:   220, loss: 0.07335, precision: 0.975 recall: 0.975 f1: 0.975 accuracy: 0.999 
+training batch:   240, loss: 0.22511, precision: 0.944 recall: 0.944 f1: 0.944 accuracy: 0.990 
+training batch:   260, loss: 0.06508, precision: 0.980 recall: 1.000 f1: 0.990 accuracy: 0.999 
+training batch:   280, loss: 0.00816, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   300, loss: 0.00457, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   320, loss: 0.03946, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   340, loss: 0.01234, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   360, loss: 0.02724, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   380, loss: 0.04934, precision: 0.962 recall: 1.000 f1: 0.980 accuracy: 0.997 
+training batch:   400, loss: 0.00746, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   420, loss: 0.01964, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   440, loss: 0.16971, precision: 0.984 recall: 1.000 f1: 0.992 accuracy: 0.997 
+training batch:   460, loss: 0.23033, precision: 0.983 recall: 1.000 f1: 0.991 accuracy: 0.999 
+training batch:   480, loss: 0.07353, precision: 0.971 recall: 0.944 f1: 0.958 accuracy: 0.997 
+training batch:   500, loss: 0.03039, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   520, loss: 0.01787, precision: 0.971 recall: 1.000 f1: 0.986 accuracy: 1.000 
+training batch:   540, loss: 0.00663, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   560, loss: 0.06822, precision: 0.980 recall: 0.980 f1: 0.980 accuracy: 0.998 
+training batch:   580, loss: 0.05667, precision: 0.983 recall: 0.983 f1: 0.983 accuracy: 0.999 
+training batch:   600, loss: 0.01078, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   620, loss: 0.03761, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   640, loss: 0.03812, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+start evaluate engines...
+label: ORG, precision: 0.832 recall: 0.839 f1: 0.832 accuracy: 0.000 
+label: PER, precision: 0.915 recall: 0.901 f1: 0.905 accuracy: 0.000 
+label: LOC, precision: 0.894 recall: 0.866 f1: 0.877 accuracy: 0.000 
+time consumption:6.20(min), precision: 0.897 recall: 0.880 f1: 0.887 accuracy: 0.983 
+epoch:38/300
+training batch:     0, loss: 0.03044, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    20, loss: 0.00900, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    40, loss: 0.01953, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.01151, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    80, loss: 0.02765, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.05455, precision: 1.000 recall: 0.975 f1: 0.987 accuracy: 0.999 
+training batch:   120, loss: 0.11183, precision: 1.000 recall: 0.944 f1: 0.971 accuracy: 0.992 
+training batch:   140, loss: 0.00784, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   160, loss: 0.03214, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   180, loss: 0.01656, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   200, loss: 0.07638, precision: 0.977 recall: 0.977 f1: 0.977 accuracy: 0.999 
+training batch:   220, loss: 0.03924, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   240, loss: 0.02007, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   260, loss: 0.05936, precision: 0.983 recall: 0.983 f1: 0.983 accuracy: 0.998 
+training batch:   280, loss: 0.01036, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   300, loss: 0.11016, precision: 1.000 recall: 0.969 f1: 0.984 accuracy: 0.999 
+training batch:   320, loss: 0.00296, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   340, loss: 0.01285, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   360, loss: 0.01286, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   380, loss: 0.02213, precision: 0.987 recall: 1.000 f1: 0.994 accuracy: 1.000 
+training batch:   400, loss: 0.09749, precision: 1.000 recall: 0.986 f1: 0.993 accuracy: 0.998 
+training batch:   420, loss: 0.11102, precision: 1.000 recall: 0.976 f1: 0.988 accuracy: 0.999 
+training batch:   440, loss: 0.00965, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   460, loss: 0.01770, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   480, loss: 0.12080, precision: 0.976 recall: 0.976 f1: 0.976 accuracy: 0.997 
+training batch:   500, loss: 0.02227, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   520, loss: 0.04645, precision: 0.978 recall: 0.978 f1: 0.978 accuracy: 0.997 
+training batch:   540, loss: 0.07154, precision: 0.977 recall: 1.000 f1: 0.988 accuracy: 0.998 
+training batch:   560, loss: 0.01317, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   580, loss: 0.22123, precision: 1.000 recall: 0.983 f1: 0.992 accuracy: 0.998 
+training batch:   600, loss: 0.01647, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   620, loss: 0.20919, precision: 0.913 recall: 0.913 f1: 0.913 accuracy: 0.996 
+training batch:   640, loss: 0.17383, precision: 1.000 recall: 0.981 f1: 0.990 accuracy: 0.997 
+start evaluate engines...
+label: ORG, precision: 0.810 recall: 0.836 f1: 0.818 accuracy: 0.000 
+label: PER, precision: 0.884 recall: 0.893 f1: 0.884 accuracy: 0.000 
+label: LOC, precision: 0.894 recall: 0.868 f1: 0.879 accuracy: 0.000 
+time consumption:6.41(min), precision: 0.886 recall: 0.880 f1: 0.882 accuracy: 0.982 
+epoch:39/300
+training batch:     0, loss: 0.07327, precision: 1.000 recall: 0.983 f1: 0.992 accuracy: 0.997 
+training batch:    20, loss: 0.03413, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    40, loss: 0.00511, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.04481, precision: 0.976 recall: 1.000 f1: 0.988 accuracy: 0.997 
+training batch:    80, loss: 0.07925, precision: 0.979 recall: 0.958 f1: 0.968 accuracy: 0.999 
+training batch:   100, loss: 0.02754, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   120, loss: 0.04724, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   140, loss: 0.04605, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   160, loss: 0.00775, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   180, loss: 0.02206, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   200, loss: 0.05185, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   220, loss: 0.07666, precision: 0.938 recall: 0.938 f1: 0.938 accuracy: 0.998 
+training batch:   240, loss: 0.00789, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   260, loss: 0.01082, precision: 0.972 recall: 1.000 f1: 0.986 accuracy: 1.000 
+training batch:   280, loss: 0.01696, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   300, loss: 0.11615, precision: 0.983 recall: 0.983 f1: 0.983 accuracy: 0.997 
+training batch:   320, loss: 0.01311, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   340, loss: 0.13447, precision: 0.978 recall: 0.938 f1: 0.957 accuracy: 0.996 
+training batch:   360, loss: 0.01480, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   380, loss: 0.09217, precision: 0.976 recall: 0.976 f1: 0.976 accuracy: 0.998 
+training batch:   400, loss: 0.15864, precision: 0.981 recall: 0.930 f1: 0.955 accuracy: 0.995 
+training batch:   420, loss: 0.09731, precision: 0.972 recall: 0.972 f1: 0.972 accuracy: 0.999 
+training batch:   440, loss: 0.03483, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   460, loss: 0.08352, precision: 0.939 recall: 0.958 f1: 0.948 accuracy: 0.996 
+training batch:   480, loss: 0.00470, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   500, loss: 0.11684, precision: 1.000 recall: 0.981 f1: 0.990 accuracy: 0.999 
+training batch:   520, loss: 0.06892, precision: 0.979 recall: 1.000 f1: 0.989 accuracy: 0.998 
+training batch:   540, loss: 0.14789, precision: 0.980 recall: 0.980 f1: 0.980 accuracy: 0.997 
+training batch:   560, loss: 0.04410, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   580, loss: 0.09710, precision: 0.980 recall: 0.980 f1: 0.980 accuracy: 0.999 
+training batch:   600, loss: 0.02662, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   620, loss: 0.03850, precision: 0.976 recall: 1.000 f1: 0.988 accuracy: 0.999 
+training batch:   640, loss: 0.04155, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+start evaluate engines...
+label: ORG, precision: 0.826 recall: 0.848 f1: 0.832 accuracy: 0.000 
+label: PER, precision: 0.928 recall: 0.897 f1: 0.909 accuracy: 0.000 
+label: LOC, precision: 0.892 recall: 0.875 f1: 0.882 accuracy: 0.000 
+time consumption:6.28(min), precision: 0.896 recall: 0.885 f1: 0.890 accuracy: 0.983 
+epoch:40/300
+training batch:     0, loss: 0.01728, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    20, loss: 0.07058, precision: 0.964 recall: 0.964 f1: 0.964 accuracy: 0.995 
+training batch:    40, loss: 0.12365, precision: 0.977 recall: 0.977 f1: 0.977 accuracy: 0.999 
+training batch:    60, loss: 0.25529, precision: 0.952 recall: 0.976 f1: 0.964 accuracy: 0.994 
+training batch:    80, loss: 0.00551, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.03972, precision: 1.000 recall: 0.978 f1: 0.989 accuracy: 0.999 
+training batch:   120, loss: 0.09083, precision: 0.977 recall: 1.000 f1: 0.989 accuracy: 0.999 
+training batch:   140, loss: 0.05170, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.999 
+training batch:   160, loss: 0.00578, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   180, loss: 0.01316, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   200, loss: 0.01553, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   220, loss: 0.01972, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   240, loss: 0.09742, precision: 0.977 recall: 0.977 f1: 0.977 accuracy: 0.999 
+training batch:   260, loss: 0.19448, precision: 0.955 recall: 1.000 f1: 0.977 accuracy: 0.997 
+training batch:   280, loss: 0.08749, precision: 0.977 recall: 0.955 f1: 0.966 accuracy: 0.998 
+training batch:   300, loss: 0.07643, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   320, loss: 0.09142, precision: 1.000 recall: 0.983 f1: 0.991 accuracy: 0.999 
+training batch:   340, loss: 0.13100, precision: 0.943 recall: 0.917 f1: 0.930 accuracy: 0.994 
+training batch:   360, loss: 0.05195, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   380, loss: 0.02535, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   400, loss: 0.00866, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   420, loss: 0.10054, precision: 0.982 recall: 0.964 f1: 0.973 accuracy: 0.998 
+training batch:   440, loss: 0.06031, precision: 0.978 recall: 0.978 f1: 0.978 accuracy: 0.998 
+training batch:   460, loss: 0.01902, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   480, loss: 0.13664, precision: 0.938 recall: 0.968 f1: 0.952 accuracy: 0.994 
+training batch:   500, loss: 0.01114, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   520, loss: 0.05788, precision: 0.986 recall: 1.000 f1: 0.993 accuracy: 0.997 
+training batch:   540, loss: 0.00445, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   560, loss: 0.00966, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   580, loss: 0.01084, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   600, loss: 0.24250, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.999 
+training batch:   620, loss: 0.14867, precision: 0.958 recall: 0.979 f1: 0.968 accuracy: 0.998 
+training batch:   640, loss: 0.04922, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+start evaluate engines...
+label: ORG, precision: 0.815 recall: 0.854 f1: 0.828 accuracy: 0.000 
+label: PER, precision: 0.911 recall: 0.900 f1: 0.902 accuracy: 0.000 
+label: LOC, precision: 0.885 recall: 0.861 f1: 0.870 accuracy: 0.000 
+time consumption:6.24(min), precision: 0.885 recall: 0.882 f1: 0.882 accuracy: 0.982 
+epoch:41/300
+training batch:     0, loss: 0.00844, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    20, loss: 0.02026, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    40, loss: 0.00888, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    60, loss: 0.02359, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:    80, loss: 0.01299, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.06567, precision: 0.979 recall: 0.979 f1: 0.979 accuracy: 0.999 
+training batch:   120, loss: 0.16755, precision: 1.000 recall: 0.982 f1: 0.991 accuracy: 0.998 
+training batch:   140, loss: 0.16843, precision: 0.985 recall: 1.000 f1: 0.992 accuracy: 0.997 
+training batch:   160, loss: 0.07883, precision: 1.000 recall: 0.982 f1: 0.991 accuracy: 0.997 
+training batch:   180, loss: 0.02955, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   200, loss: 0.26078, precision: 0.962 recall: 0.962 f1: 0.962 accuracy: 0.996 
+training batch:   220, loss: 0.03726, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   240, loss: 0.01203, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   260, loss: 0.01054, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   280, loss: 0.08440, precision: 0.977 recall: 1.000 f1: 0.989 accuracy: 0.998 
+training batch:   300, loss: 0.01578, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   320, loss: 0.04502, precision: 1.000 recall: 0.978 f1: 0.989 accuracy: 0.998 
+training batch:   340, loss: 0.09004, precision: 0.959 recall: 0.979 f1: 0.969 accuracy: 0.995 
+training batch:   360, loss: 0.06334, precision: 1.000 recall: 0.979 f1: 0.989 accuracy: 0.999 
+training batch:   380, loss: 0.02543, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   400, loss: 0.07635, precision: 1.000 recall: 0.980 f1: 0.990 accuracy: 0.999 
+training batch:   420, loss: 0.11907, precision: 1.000 recall: 0.977 f1: 0.988 accuracy: 0.999 
+training batch:   440, loss: 0.08267, precision: 0.972 recall: 0.972 f1: 0.972 accuracy: 0.999 
+training batch:   460, loss: 0.07847, precision: 1.000 recall: 0.983 f1: 0.991 accuracy: 0.999 
+training batch:   480, loss: 0.03808, precision: 0.976 recall: 0.976 f1: 0.976 accuracy: 0.998 
+training batch:   500, loss: 0.26987, precision: 1.000 recall: 0.975 f1: 0.987 accuracy: 0.997 
+training batch:   520, loss: 0.13321, precision: 1.000 recall: 0.971 f1: 0.986 accuracy: 0.999 
+training batch:   540, loss: 0.14612, precision: 0.957 recall: 0.978 f1: 0.967 accuracy: 0.997 
+training batch:   560, loss: 0.06815, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.997 
+training batch:   580, loss: 0.01576, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   600, loss: 0.04065, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 0.997 
+training batch:   620, loss: 0.40871, precision: 0.957 recall: 0.971 f1: 0.964 accuracy: 0.994 
+training batch:   640, loss: 0.00868, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+start evaluate engines...
+label: ORG, precision: 0.856 recall: 0.833 f1: 0.839 accuracy: 0.000 
+label: PER, precision: 0.920 recall: 0.903 f1: 0.908 accuracy: 0.000 
+label: LOC, precision: 0.890 recall: 0.882 f1: 0.884 accuracy: 0.000 
+time consumption:6.25(min), precision: 0.901 recall: 0.884 f1: 0.892 accuracy: 0.984 
+epoch:42/300
+training batch:     0, loss: 0.09860, precision: 0.959 recall: 0.940 f1: 0.949 accuracy: 0.998 
+training batch:    20, loss: 0.06597, precision: 0.977 recall: 1.000 f1: 0.988 accuracy: 0.998 
+training batch:    40, loss: 0.17155, precision: 0.970 recall: 0.970 f1: 0.970 accuracy: 0.996 
+training batch:    60, loss: 0.05282, precision: 0.980 recall: 0.980 f1: 0.980 accuracy: 0.999 
+training batch:    80, loss: 0.02265, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   100, loss: 0.02072, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   120, loss: 0.00699, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   140, loss: 0.01293, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   160, loss: 0.02882, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   180, loss: 0.01448, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
+training batch:   200, loss: 0.00440, precision: 1.000 recall: 1.000 f1: 1.000 accuracy: 1.000 
