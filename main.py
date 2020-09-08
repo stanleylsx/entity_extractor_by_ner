@@ -6,7 +6,7 @@ from engines.train import train
 from engines.data import DataManager
 from engines.configure import Configure
 from engines.utils.logger import get_logger
-from engines.ModelPredict import Predictor
+from engines.predict import Predictor
 
 
 def set_env(configures):
@@ -65,18 +65,17 @@ if __name__ == '__main__':
     if mode == 'train':
         logger.info('mode: train')
         train(configs, dataManager, logger)
-    # elif mode == 'test':
-    #     logger.info('mode: test')
-    #     predictor = Predictor(configs, logger, dataManager)
-    #     predictor.test_batch_predict()
+    elif mode == 'test':
+        logger.info('mode: test')
+        predictor = Predictor(configs, dataManager, logger)
+        predictor.test_batch_predict()
     elif mode == 'interactive_predict':
         logger.info('mode: predict_one')
-        predictor = Predictor(configs, logger, dataManager)
+        predictor = Predictor(configs, dataManager, logger)
         while True:
             logger.info('please input a sentence (enter [exit] to exit.)')
             sentence = input()
             if sentence == 'exit':
                 break
-            logger.info(sentence)
             results = predictor.predict(sentence)
             print(results)
