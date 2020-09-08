@@ -29,13 +29,6 @@ class Configure:
         if the_item in config:
             self.delimiter = config[the_item]
 
-        the_item = 'use_pre_trained_embedding'
-        if the_item in config:
-            self.use_pre_trained_embedding = self.str2bool(config[the_item])
-        the_item = 'token_emb_dir'
-        if the_item in config:
-            self.token_emb_dir = config[the_item]
-
         the_item = 'vocabs_dir'
         if the_item in config:
             self.vocabs_dir = config[the_item]
@@ -72,17 +65,6 @@ class Configure:
         the_item = 'measuring_metrics'
         if the_item in config:
             self.measuring_metrics = config[the_item]
-
-        # ModelConfiguration
-        the_item = 'cell_type'
-        if the_item in config:
-            self.cell_type = config[the_item]
-        the_item = 'bidirectional'
-        if the_item in config:
-            self.bidirectional = self.str2bool(config[the_item])
-        the_item = 'encoder_layers'
-        if the_item in config:
-            self.encoder_layers = int(config[the_item])
 
         the_item = 'embedding_dim'
         if the_item in config:
@@ -194,8 +176,6 @@ class Configure:
         logger.info('     train            file: {}'.format(self.train_file))
         logger.info('     validation       file: {}'.format(self.dev_file))
         logger.info('     test             file: {}'.format(self.test_file))
-        logger.info('     pre-trained embedding: {}'.format(self.use_pre_trained_embedding))
-        logger.info('     embedding        file: {}'.format(self.token_emb_dir))
         logger.info('     vocab             dir: {}'.format(self.vocabs_dir))
         logger.info('     delimiter            : {}'.format(self.delimiter))
         logger.info('     checkpoints       dir: {}'.format(self.checkpoints_dir))
@@ -209,9 +189,6 @@ class Configure:
         logger.info('     measuring     metrics: {}'.format(self.measuring_metrics))
         logger.info(' ' + '++' * 20)
         logger.info('Model Configuration:')
-        logger.info('     cell             type: {}'.format(self.cell_type))
-        logger.info('     bidirectional        : {}'.format(self.bidirectional))
-        logger.info('     encoder        layers: {}'.format(self.encoder_layers))
         logger.info('     embedding         dim: {}'.format(self.embedding_dim))
         logger.info('     max  sequence  length: {}'.format(self.max_sequence_length))
         logger.info('     hidden            dim: {}'.format(self.hidden_dim))

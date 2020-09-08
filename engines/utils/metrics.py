@@ -1,4 +1,4 @@
-from engines.utils.ExtractEntity import extract_entity
+from engines.utils.extract_entity import extract_entity
 
 
 def metrics(X, y_true, y_pred, measuring_metrics, data_manager):
@@ -15,6 +15,8 @@ def metrics(X, y_true, y_pred, measuring_metrics, data_manager):
 
     label_num = {}
     label_metrics = {}
+    # tensor向量不能直接索引，需要转成numpy
+    y_pred = y_pred.numpy()
     for i in range(len(y_true)):
         x = [str(data_manager.id2token[val]) for val in X[i] if val != data_manager.token2id[data_manager.PADDING]]
         y = [str(data_manager.id2label[val]) for val in y_true[i] if val != data_manager.label2id[data_manager.PADDING]]

@@ -3,7 +3,7 @@ import os
 import jieba
 import re
 import numpy as np
-from engines.utils.IOFunctions import read_csv
+from engines.utils.io_functions import read_csv
 
 jieba.setLogLevel(logging.INFO)
 

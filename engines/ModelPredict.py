@@ -2,9 +2,9 @@ import tensorflow as tf
 import math
 import pandas as pd
 import numpy as np
-from engines.Model import Model
-from engines.utils.ExtractEntity import extract_entity
-from engines.utils.IOFunctions import save_csv
+from engines.model import BiLSTM_CRFModel
+from engines.utils.extract_entity import extract_entity
+from engines.utils.io_functions import save_csv
 
 
 class Predictor:

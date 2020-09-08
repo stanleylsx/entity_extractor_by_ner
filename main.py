@@ -2,10 +2,10 @@ import argparse
 import random
 import numpy as np
 import os
-from engines.ModelTrain import Train
-from engines.DataManager import DataManager
-from engines.Configure import Configure
-from engines.utils.Logger import get_logger
+from engines.train import train
+from engines.data import DataManager
+from engines.configure import Configure
+from engines.utils.logger import get_logger
 from engines.ModelPredict import Predictor
 
 
@@ -60,14 +60,15 @@ if __name__ == '__main__':
     set_env(configs)
     mode = configs.mode.lower()
     dataManager = DataManager(configs, logger)
+    print(dataManager.batch_size)
+
     if mode == 'train':
         logger.info('mode: train')
-        trainer = Train(configs, logger, dataManager)
-        trainer.train()
-    elif mode == 'test':
-        logger.info('mode: test')
-        predictor = Predictor(configs, logger, dataManager)
-        predictor.test_batch_predict()
+        train(configs, dataManager, logger)
+    # elif mode == 'test':
+    #     logger.info('mode: test')
+    #     predictor = Predictor(configs, logger, dataManager)
+    #     predictor.test_batch_predict()
     elif mode == 'interactive_predict':
         logger.info('mode: predict_one')
         predictor = Predictor(configs, logger, dataManager)
