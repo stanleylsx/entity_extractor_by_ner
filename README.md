@@ -1,4 +1,4 @@
-# Sequence-Labeling
+# 实体识别
 此仓库是基于Tensorflow的NER任务项目，使用BiLSTM+Crf模型，支持使用Bert做Embedding，提供可配置文档，配置完可直接运行。
 ## Brief introduction
 将Embedding之后的向量输入到BiLSTM层中得到输出层的Softmax，将Softmax值放到条件随机场（CRF层）求解出最大可能的转移模式序列。  
