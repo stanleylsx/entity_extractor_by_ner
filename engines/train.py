@@ -40,7 +40,7 @@ def train(configs, data_manager, logger):
     else:
         optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
 
-    checkpoint = tf.train.Checkpoint(optimizer=optimizer, model=bilstm_crf_model)
+    checkpoint = tf.train.Checkpoint(model=bilstm_crf_model)
     checkpoint_manager = tf.train.CheckpointManager(
         checkpoint, directory=checkpoints_dir, checkpoint_name=checkpoint_name, max_to_keep=max_to_keep)
     X_train, y_train, X_val, y_val = data_manager.get_training_set()
