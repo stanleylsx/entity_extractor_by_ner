@@ -66,7 +66,6 @@ if __name__ == '__main__':
     set_env(configs)
     mode = configs.mode.lower()
     dataManager = DataManager(configs, logger)
-    print(dataManager.batch_size)
 
     if mode == 'train':
         logger.info('mode: train')
