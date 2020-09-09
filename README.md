@@ -3,10 +3,11 @@
 
 ## 环境
 * python 3.6.7
-* tensorflow==2.3.0
+* **CPU:** tensorflow==2.3.0
+* **GPU:** tensorflow-gpu==2.3.0
 * tensorflow-addons==0.11.2
 
-其他环境见requirements.txt
+集群下推荐GPU加速训练，其他环境见requirements.txt
 
 ## 原理 
  

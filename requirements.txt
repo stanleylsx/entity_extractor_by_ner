@@ -33,7 +33,7 @@ scipy==1.4.1
 six==1.15.0
 tensorboard==2.3.0
 tensorboard-plugin-wit==1.7.0
-tensorflow==2.3.0
+tensorflow-gpu==2.3.0
 tensorflow-addons==0.11.2
 tensorflow-estimator==2.3.0
 termcolor==1.1.0
