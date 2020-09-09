@@ -123,23 +123,6 @@ class DataManager:
             for idx in id2label:
                 outfile.write(id2label[idx] + '\t' + str(idx) + '\n')
 
-    def get_embedding(self, embed_file):
-        emb_matrix = np.random.normal(loc=0.0, scale=0.08, size=(len(self.token2id.keys()), self.embedding_dim))
-        emb_matrix[self.token2id[self.PADDING], :] = np.zeros(shape=self.embedding_dim)
-
-        with open(embed_file, 'r', encoding='utf-8') as infile:
-            for row in infile:
-                row = row.rstrip()
-                items = row.split()
-                token = items[0]
-                assert self.embedding_dim == len(
-                    items[1:]), 'embedding dim must be consistent with the one in `token_emb_dir`.'
-                emb_vec = np.array([float(val) for val in items[1:]])
-                if token in self.token2id.keys():
-                    emb_matrix[self.token2id[token], :] = emb_vec
-
-        return emb_matrix
-
     def next_batch(self, X, y, start_index):
         """
         下一次个训练批次
