@@ -25,6 +25,7 @@ CRF层需要使用viterbi译码法，知乎上[这个答案](https://www.zhihu.c
 2020-04-08|v1.1.0|重构项目代码，添加必要的注释
 2020-04-13|v1.2.0|分别打印出每一个实体类别的指标
 2020-09-09|v2.0.0|更新到tensorflow2.3版本
+2020-09-10|v2.1.0|取消批量测试方法，简化预测的逻辑
 
 ## 使用
 ### 训练
@@ -37,15 +38,6 @@ CRF层需要使用viterbi译码法，知乎上[这个答案](https://www.zhihu.c
 下图为日志记录训练完毕。 
  
 ![model](img/train.png)  
-
-### 批量测试
-外部模型需要配置好vocab_dir，checkpoints_dir，模型参数。本项目训练好的模型保持和训练时的参数不变即可。  
-在system.config的Model Configuration/Training Settings下配置测试输出的参数。  
-设定system.config的Status中的为test。  
-运行main.py开始对测试数据集的数据进行批量预测。    
-下图为测试数据集批量预测之后的结果。  
-
-![test](img/test.png) 
 
 ### 在线预测
 外部模型需要配置好vocab_dir，checkpoints_dir，模型参数。本项目训练好的模型保持和训练时的参数不变即可。  

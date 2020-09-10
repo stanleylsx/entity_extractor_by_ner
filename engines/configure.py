@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# @Time : 2020/9/9 6:14 下午
+# @Time : 2020/9/10 7:15 下午
 # @Author : lishouxian
 # @Email : gzlishouxian@gmail.com
 # @File : configure.py
@@ -28,16 +28,14 @@ class Configure:
             self.dev_file = config[the_item]
         else:
             self.dev_file = None
-        the_item = 'test_file'
-        if the_item in config:
-            self.test_file = config[the_item]
+
         the_item = 'delimiter'
         if the_item in config:
             self.delimiter = config[the_item]
 
         the_item = 'use_bert'
         if the_item in config:
-            self.use_bert = config[the_item]
+            self.use_bert = self.str2bool(config[the_item])
 
         the_item = 'vocabs_dir'
         if the_item in config:
@@ -133,17 +131,6 @@ class Configure:
         if the_item in config:
             self.print_per_batch = int(config[the_item])
 
-        # Testing Settings
-        the_item = 'output_test_file'
-        if the_item in config:
-            self.output_test_file = config[the_item]
-        the_item = 'is_output_sentence_entity'
-        if the_item in config:
-            self.is_output_sentence_entity = self.str2bool(config[the_item])
-        the_item = 'output_sentence_entity_file'
-        if the_item in config:
-            self.output_sentence_entity_file = config[the_item]
-
     @staticmethod
     def config_file_to_dict(input_file):
         config = {}
@@ -185,7 +172,6 @@ class Configure:
         logger.info('     datasets         fold: {}'.format(self.datasets_fold))
         logger.info('     train            file: {}'.format(self.train_file))
         logger.info('     validation       file: {}'.format(self.dev_file))
-        logger.info('     test             file: {}'.format(self.test_file))
         logger.info('     vocab             dir: {}'.format(self.vocabs_dir))
         logger.info('     delimiter            : {}'.format(self.delimiter))
         logger.info('     use              bert: {}'.format(self.use_bert))
@@ -217,10 +203,5 @@ class Configure:
         logger.info('     print       per_batch: {}'.format(self.print_per_batch))
         logger.info('     is     early     stop: {}'.format(self.is_early_stop))
         logger.info('     patient              : {}'.format(self.patient))
-        logger.info(' ' + '++' * 20)
-        logger.info(' Testing Settings:')
-        logger.info('     output    test   file: {}'.format(self.output_test_file))
-        logger.info('     output sent  and  ent: {}'.format(self.is_output_sentence_entity))
-        logger.info('     output  sen&ent  file: {}'.format(self.output_sentence_entity_file))
         logger.info('++' * 20 + 'CONFIGURATION SUMMARY END' + '++' * 20)
         sys.stdout.flush()

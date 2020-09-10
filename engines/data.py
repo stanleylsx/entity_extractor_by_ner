@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# @Time : 2020/9/9 6:14 下午
+# @Time : 2020/9/10 7:15 下午
 # @Author : lishouxian
 # @Email : gzlishouxian@gmail.com
 # @File : data.py
@@ -21,8 +21,8 @@ class DataManager:
         self.logger = logger
         self.hyphen = configs.hyphen
 
-        self.UNKNOWN = '<UNK>'
-        self.PADDING = '<PAD>'
+        self.UNKNOWN = '[UNK]'
+        self.PADDING = '[PAD]'
 
         self.train_file = configs.datasets_fold + '/' + configs.train_file
 
@@ -30,11 +30,6 @@ class DataManager:
             self.dev_file = configs.datasets_fold + '/' + configs.dev_file
         else:
             self.dev_file = None
-        self.test_file = configs.datasets_fold + '/' + configs.test_file
-
-        self.output_test_file = configs.datasets_fold + '/' + configs.output_test_file
-        self.is_output_sentence_entity = configs.is_output_sentence_entity
-        self.output_sentence_entity_file = configs.datasets_fold + '/' + configs.output_sentence_entity_file
 
         self.label_scheme = configs.label_scheme
         self.label_level = configs.label_level
@@ -98,30 +93,22 @@ class DataManager:
         label2id = dict(zip(labels, range(1, len(labels) + 1)))
         id2token = dict(zip(range(1, len(tokens) + 1), tokens))
         id2label = dict(zip(range(1, len(labels) + 1), labels))
-        # 向生成的词表和标签表中加入<PAD>
+        # 向生成的词表和标签表中加入[PAD]
         id2token[0] = self.PADDING
         id2label[0] = self.PADDING
         token2id[self.PADDING] = 0
         label2id[self.PADDING] = 0
-        # 向生成的词表中加入<UNK>
+        # 向生成的词表中加入[UNK]
         id2token[len(tokens) + 1] = self.UNKNOWN
         token2id[self.UNKNOWN] = len(tokens) + 1
-        self.save_vocab(id2token, id2label)
-        return token2id, id2token, label2id, id2label
-
-    def save_vocab(self, id2token, id2label):
-        """
-        保存词表及标签表
-        :param id2token:
-        :param id2label:
-        :return:
-        """
+        # 保存词表及标签表
         with open(self.token2id_file, 'w', encoding='utf-8') as outfile:
             for idx in id2token:
                 outfile.write(id2token[idx] + '\t' + str(idx) + '\n')
         with open(self.label2id_file, 'w', encoding='utf-8') as outfile:
             for idx in id2label:
                 outfile.write(id2label[idx] + '\t' + str(idx) + '\n')
+        return token2id, id2token, label2id, id2label
 
     def next_batch(self, X, y, start_index):
         """
@@ -155,21 +142,18 @@ class DataManager:
                 sample[i] += [self.token2id[self.PADDING] for _ in range(self.max_sequence_length - len(sample[i]))]
         return sample
 
-    def prepare(self, tokens, labels, is_padding=True, return_prepare_label=False):
+    def prepare(self, tokens, labels, is_padding=True):
         """
         输出X矩阵和y向量
         :param tokens:
         :param labels:
         :param is_padding:
-        :param return_prepare_label:
         :return:
         """
         X = []
         y = []
-        y_prepare = []
         tmp_x = []
         tmp_y = []
-        tmp_y_prepare = []
         for record in zip(tokens, labels):
             token = record[0]
             label = record[1]
@@ -177,25 +161,16 @@ class DataManager:
                 if len(tmp_x) <= self.max_sequence_length:
                     X.append(tmp_x)
                     y.append(tmp_y)
-                    if return_prepare_label:
-                        y_prepare.append(tmp_y_prepare)
                 tmp_x = []
                 tmp_y = []
-                if return_prepare_label:
-                    tmp_y_prepare = []
             else:
                 tmp_x.append(token)
                 tmp_y.append(label)
-                if return_prepare_label:
-                    tmp_y_prepare.append(self.label2id['O'])
         if is_padding:
             X = np.array(self.padding(X))
         else:
             X = np.array(X)
         y = np.array(self.padding(y))
-        if return_prepare_label:
-            y_psyduo = np.array(self.padding(y_prepare))
-            return X, y_psyduo
         return X, y
 
     def get_training_set(self, train_val_ratio=0.9):
@@ -230,22 +205,6 @@ class DataManager:
         self.logger.info('training set size: {}, validating set size: {}'.format(len(X_train), len(y_val)))
         return X_train, y_train, X_val, y_val
 
-    def get_testing_set(self):
-        df_test = read_csv(self.test_file, names=None, delimiter=self.configs.delimiter)
-
-        if len(list(df_test.columns)) == 2:
-            df_test.columns = ['token', 'label']
-            df_test = df_test[['token']]
-        elif len(list(df_test.columns)) == 1:
-            df_test.columns = ['token']
-
-        df_test['token_id'] = df_test.token.map(lambda x: self.map_func(x, self.token2id))
-        df_test['token'] = df_test.token.map(lambda x: -1 if str(x) == str(np.nan) else x)
-        X_test_id, y_test_psyduo_label = self.prepare(df_test['token_id'], df_test['token_id'], return_prepare_label=True)
-        X_test_token, _ = self.prepare(df_test['token'], df_test['token'])
-        self.logger.info('testing set size: {}'.format(len(X_test_id)))
-        return X_test_id, y_test_psyduo_label, X_test_token
-
     def get_valid_set(self):
         """
         获取验证集
@@ -279,30 +238,22 @@ class DataManager:
         elif self.labeling_level == 'char':
             sentence = list(sentence)
 
-        gap = self.batch_size - 1
         x = []
-        y = []
         for token in sentence:
             # noinspection PyBroadException
             try:
                 x.append(self.token2id[token])
             except Exception:
                 x.append(self.token2id[self.UNKNOWN])
-            y.append(self.label2id['O'])
 
         if len(x) < self.max_sequence_length:
-            sentence += ['x' for _ in range(self.max_sequence_length - len(sentence))]
+            sentence += ['[PAD]' for _ in range(self.max_sequence_length - len(sentence))]
             x += [self.token2id[self.PADDING] for _ in range(self.max_sequence_length - len(x))]
-            y += [self.label2id['O'] for _ in range(self.max_sequence_length - len(y))]
         elif len(x) > self.max_sequence_length:
             sentence = sentence[:self.max_sequence_length]
             x = x[:self.max_sequence_length]
-            y = y[:self.max_sequence_length]
-        X, Sentence, Y = [x], [sentence], [y]
-        X += [[0 for _ in range(self.max_sequence_length)] for _ in range(gap)]
-        Sentence += [['x' for _ in range(self.max_sequence_length)] for _ in range(gap)]
-        Y += [[self.label2id['O'] for _ in range(self.max_sequence_length)] for _ in range(gap)]
-        return np.array(X), np.array(Sentence), np.array(Y)
+        y = [self.label2id['O']] * self.max_sequence_length
+        return np.array([x]), np.array([y]), np.array([sentence])
 
     @staticmethod
     def check_contain_chinese(check_str):

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# @Time : 2020/9/9 6:14 下午
+# @Time : 2020/9/10 7:15 下午
 # @Author : lishouxian
 # @Email : gzlishouxian@gmail.com
 # @File : main.py
@@ -70,10 +70,6 @@ if __name__ == '__main__':
     if mode == 'train':
         logger.info('mode: train')
         train(configs, dataManager, logger)
-    elif mode == 'test':
-        logger.info('mode: test')
-        predictor = Predictor(configs, dataManager, logger)
-        predictor.test_batch_predict()
     elif mode == 'interactive_predict':
         logger.info('mode: predict_one')
         predictor = Predictor(configs, dataManager, logger)
@@ -82,5 +78,5 @@ if __name__ == '__main__':
             sentence = input()
             if sentence == 'exit':
                 break
-            results = predictor.predict(sentence)
+            results = predictor.predict_one(sentence)
             print(results)
