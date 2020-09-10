@@ -35,6 +35,10 @@ class Configure:
         if the_item in config:
             self.delimiter = config[the_item]
 
+        the_item = 'use_bert'
+        if the_item in config:
+            self.use_bert = config[the_item]
+
         the_item = 'vocabs_dir'
         if the_item in config:
             self.vocabs_dir = config[the_item]
@@ -184,6 +188,7 @@ class Configure:
         logger.info('     test             file: {}'.format(self.test_file))
         logger.info('     vocab             dir: {}'.format(self.vocabs_dir))
         logger.info('     delimiter            : {}'.format(self.delimiter))
+        logger.info('     use              bert: {}'.format(self.use_bert))
         logger.info('     checkpoints       dir: {}'.format(self.checkpoints_dir))
         logger.info('     log               dir: {}'.format(self.log_dir))
         logger.info(' ' + '++' * 20)

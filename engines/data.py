@@ -42,9 +42,9 @@ class DataManager:
         self.labeling_level = configs.labeling_level
 
         self.batch_size = configs.batch_size
+
         self.max_sequence_length = configs.max_sequence_length
         self.embedding_dim = configs.embedding_dim
-
         self.vocabs_dir = configs.vocabs_dir
         self.token2id_file = self.vocabs_dir + '/token2id'
         self.label2id_file = self.vocabs_dir + '/label2id'
