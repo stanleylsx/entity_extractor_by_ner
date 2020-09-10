@@ -171,9 +171,9 @@ class DataManager:
         tmp_y = []
         tmp_y_prepare = []
         for record in zip(tokens, labels):
-            taken = record[0]
+            token = record[0]
             label = record[1]
-            if taken == -1:  # empty line
+            if token == -1:  # empty line
                 if len(tmp_x) <= self.max_sequence_length:
                     X.append(tmp_x)
                     y.append(tmp_y)
@@ -184,7 +184,7 @@ class DataManager:
                 if return_prepare_label:
                     tmp_y_prepare = []
             else:
-                tmp_x.append(taken)
+                tmp_x.append(token)
                 tmp_y.append(label)
                 if return_prepare_label:
                     tmp_y_prepare.append(self.label2id['O'])

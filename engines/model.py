@@ -24,12 +24,12 @@ class BiLSTM_CRFModel(tf.keras.Model, ABC):
 
     @tf.function
     def call(self, inputs, targets, training=None):
-        inputs_length = tf.math.reduce_sum(tf.cast(tf.math.not_equal(inputs, 0), dtype=tf.int32), axis=-1)
         embedding_inputs = self.embedding(inputs)
         dropout_inputs = self.dropout(embedding_inputs, training)
         bilstm_outputs = self.bilstm(dropout_inputs)
         logits = self.dense(bilstm_outputs)
         tensor_targets = tf.convert_to_tensor(targets, dtype=tf.int64)
+        inputs_length = tf.math.reduce_sum(tf.cast(tf.math.not_equal(inputs, 0), dtype=tf.int32), axis=-1)
         log_likelihood, self.transition_params = crf_log_likelihood(
             logits, tensor_targets, inputs_length, transition_params=self.transition_params)
         return logits, inputs_length, log_likelihood, self.transition_params
