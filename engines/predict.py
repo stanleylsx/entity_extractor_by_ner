@@ -16,9 +16,6 @@ class Predictor:
         vocab_size = data_manager.max_token_number
         num_classes = data_manager.max_label_number
         self.configs = configs
-        self.output_test_file = configs.datasets_fold + '/' + configs.output_test_file
-        self.is_output_sentence_entity = configs.is_output_sentence_entity
-        self.output_sentence_entity_file = configs.datasets_fold + '/' + configs.output_sentence_entity_file
         self.logger = logger
         logger.info('loading model parameter')
         self.bilstm_crf_model = BiLSTM_CRFModel(configs, vocab_size, num_classes)
