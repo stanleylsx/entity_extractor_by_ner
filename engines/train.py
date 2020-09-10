@@ -27,7 +27,7 @@ def train(configs, data_manager, logger):
     very_start_time = time.time()
     epoch = configs.epoch
     batch_size = configs.batch_size
-    bilstm_crf_model = BiLSTM_CRFModel(configs=configs, vocab_size=vocab_size, num_classes=num_classes)
+
     # 优化器大致效果Adagrad>Adam>RMSprop>SGD
     if configs.optimizer == 'Adagrad':
         optimizer = tf.keras.optimizers.Adagrad(learning_rate=learning_rate)
@@ -40,6 +40,7 @@ def train(configs, data_manager, logger):
     else:
         optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
 
+    bilstm_crf_model = BiLSTM_CRFModel(configs=configs, vocab_size=vocab_size, num_classes=num_classes)
     checkpoint = tf.train.Checkpoint(model=bilstm_crf_model)
     checkpoint_manager = tf.train.CheckpointManager(
         checkpoint, directory=checkpoints_dir, checkpoint_name=checkpoint_name, max_to_keep=max_to_keep)
@@ -57,8 +58,8 @@ def train(configs, data_manager, logger):
         logger.info('epoch:{}/{}'.format(i + 1, epoch))
         for iteration in tqdm(range(num_iterations)):
             with tf.GradientTape() as tape:
-                X_train_batch, y_train_batch = data_manager.next_batch(X_train, y_train,
-                                                                       start_index=iteration * batch_size)
+                X_train_batch, y_train_batch = data_manager.next_batch(
+                    X_train, y_train, start_index=iteration * batch_size)
                 logits, inputs_length, log_likelihood, transition_params = bilstm_crf_model.call(
                     inputs=X_train_batch, targets=y_train_batch, training=1)
                 loss = -tf.reduce_mean(log_likelihood)

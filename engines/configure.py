@@ -76,11 +76,16 @@ class Configure:
 
         the_item = 'embedding_dim'
         if the_item in config:
-            self.embedding_dim = int(config[the_item])
+            if not self.use_bert:
+                self.embedding_dim = int(config[the_item])
+            else:
+                self.embedding_dim = 768
 
         the_item = 'max_sequence_length'
         if the_item in config:
             self.max_sequence_length = int(config[the_item])
+        if self.use_bert and self.max_sequence_length > 510:
+            raise Exception('the max sequence length over 510 in Bert mode')
 
         the_item = 'hidden_dim'
         if the_item in config:
