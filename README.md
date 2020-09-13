@@ -46,7 +46,7 @@ CRF层需要使用viterbi译码法，知乎上[这个答案](https://www.zhihu.c
 ```
 ################ Status ################
 mode=train
-# string: train/test/interactive_predict
+# string: train/interactive_predict
 ```
 
 是否使用Bert做embedding(选择True/False):
@@ -71,10 +71,16 @@ use_bert=False
 ### 在线预测
 仓库中已经训练好了两种模型在同一份数据集上的参数可直接进行试验，两者位于data/example_datasets目录下  
 * 使用Bilstm-CRF模型时使用system.config4bilstm-crf的配置
-* 使用Bert-Bilstm-CRF模型时使用system.config4bert-bilstm-crf的配置
+* 使用Bert-Bilstm-CRF模型时使用system.config4bert-bilstm-crf的配置   
+将对应的配置命名为system.config然后替换掉当前的配置。  
 
-将对应的配置命名为system.config然后替换掉当前的配置，设定system.config的Status中的为interactive_predict。  
-运行main.py开始在线预测。   
+如果重新训练，务必保留system.config文件，设定system.config的Status中的为interactive_predict。 
+```
+################ Status ################
+mode=interactive_predict
+# string: train/interactive_predict
+```
+最后，运行main.py开始在线预测。   
 下图为在线预测结果，你可以移植到自己项目里面做成对外接口。    
 
 ![online_predict](img/online_predict.png)  
