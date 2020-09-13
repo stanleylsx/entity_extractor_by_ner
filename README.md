@@ -52,7 +52,8 @@ CRF层需要使用viterbi译码法，知乎上[这个答案](https://www.zhihu.c
 
 ![bert-bilstm-crf-train](img/bert-bilstm-crf-train.png)  
 
-***注:这里使用的[transformers](https://github.com/huggingface/transformers)包加载Bert，初次使用的时候会自动下载Bert的模型***
+***注(1):这里使用的[transformers](https://github.com/huggingface/transformers)包加载Bert，初次使用的时候会自动下载Bert的模型***  
+***注(2):当重新训练的时候，Bert-Bilst-CRF和Bilstm-CRF各自自动生成自己vocabs/label2id文件，不能混用，如果需要共用，你可以手动的定义标签***
 
 ### 效果对比
 
@@ -63,9 +64,9 @@ CRF层需要使用viterbi译码法，知乎上[这个答案](https://www.zhihu.c
 
 将对应的配置命名为system.config然后替换掉当前的配置，设定system.config的Status中的为interactive_predict。  
 运行main.py开始在线预测。   
-下图为在线预测结果。  
+下图为在线预测结果，你可以移植到自己项目里面做成对外接口。    
 
-![test](img/online_predict.png)  
+![online_predict](img/online_predict.png)  
 
 ## 参考
 + NER相关的论文整理在[papers](papers)下
