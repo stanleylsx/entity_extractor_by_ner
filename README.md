@@ -41,7 +41,19 @@ CRF层需要使用viterbi译码法，知乎上[这个答案](https://www.zhihu.c
 在system.config的Datasets(Input/Output)下配置好数据集的路径、分隔符、模型保存地址等。  
 在system.config的Labeling Scheme配置标注模式。  
 在system.config的Model Configuration/Training Settings下配置模型参数和训练参数。  
-设定system.config的Status中的为train。  
+
+设定system.config的Status中的为train:
+```
+################ Status ################
+mode=train
+# string: train/test/interactive_predict
+```
+
+是否使用Bert做embedding(选择True/False):
+```
+use_bert=False
+```
+
 运行main.py开始训练。  
 
 * Bilstm-CRF模型下效果
@@ -53,9 +65,8 @@ CRF层需要使用viterbi译码法，知乎上[这个答案](https://www.zhihu.c
 ![bert-bilstm-crf-train](img/bert-bilstm-crf-train.png)  
 
 ***注(1):这里使用的[transformers](https://github.com/huggingface/transformers)包加载Bert，初次使用的时候会自动下载Bert的模型***  
-***注(2):当重新训练的时候，Bert-Bilst-CRF和Bilstm-CRF各自自动生成自己vocabs/label2id文件，不能混用，如果需要共用，你可以手动的定义标签***
-
-### 效果对比
+***注(2):当重新训练的时候，Bert-Bilst-CRF和Bilstm-CRF各自自动生成自己vocabs/label2id文件，不能混用，如果需要共用，你可以手动的定义标签***   
+***注(3):使用Bert-Bilst-CRF时候max_sequence_length不能超过512并且embedding_dim默认为768***
 
 ### 在线预测
 仓库中已经训练好了两种模型在同一份数据集上的参数可直接进行试验，两者位于data/example_datasets目录下  
