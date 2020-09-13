@@ -48,7 +48,8 @@ class Predictor:
         label_predicts = label_predicts.numpy()
         sentence = Sentence[0, 0:inputs_length[0]]
         y_pred = [str(self.dataManager.id2label[val]) for val in label_predicts[0][0:inputs_length[0]]]
-        # 去掉[CLS]和[SEP]对应的位置
-        y_pred = y_pred[1:-1]
+        if self.configs.use_bert:
+            # 去掉[CLS]和[SEP]对应的位置
+            y_pred = y_pred[1:-1]
         entities, suffixes, indices = extract_entity(sentence, y_pred, self.dataManager)
         return entities, suffixes, indices
