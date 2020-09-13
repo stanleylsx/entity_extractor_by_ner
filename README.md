@@ -26,9 +26,11 @@
 ## 原理 
 ### Bilstm-CRF
 
-![model](img/bilstm-crf-model.png) 
+![bilstm-crf-model](img/bilstm-crf-model.png) 
 
 ### Bert-Bilstm-CRF
+
+![bert-bilstm-crf-model](img/bert-bilstm-crf-model.png) 
  
 ### CRF层
 [最通俗易懂的BiLSTM-CRF模型中的CRF层介绍](https://zhuanlan.zhihu.com/p/44042528)  
