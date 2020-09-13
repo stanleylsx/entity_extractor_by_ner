@@ -67,7 +67,7 @@ use_bert=False
 ![bert-bilstm-crf-train](img/bert-bilstm-crf-train.png)  
 
 ***注(1):这里使用的[transformers](https://github.com/huggingface/transformers)包加载Bert，初次使用的时候会自动下载Bert的模型***  
-***注(2):当重新训练的时候，Bert-Bilst-CRF和Bilstm-CRF各自自动生成自己vocabs/label2id文件，不能混用，如果需要共用，你可以手动的定义标签***   
+***注(2):当重新训练的时候，Bert-Bilstm-CRF和Bilstm-CRF各自自动生成自己vocabs/label2id文件，不能混用，如果需要共用，你可以手动的定义标签***   
 ***注(3):使用Bert-Bilst-CRF时候max_sequence_length不能超过512并且embedding_dim默认为768***
 
 ### 在线预测
