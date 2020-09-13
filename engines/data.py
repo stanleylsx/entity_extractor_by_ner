@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-# @Time : 2020/9/10 7:15 下午
+# @Time : 2020/9/13 3:18 下午
 # @Author : lishouxian
 # @Email : gzlishouxian@gmail.com
 # @File : data.py
 # @Software: PyCharm
-import logging
 import os
 import numpy as np
 from engines.utils.io_functions import read_csv
