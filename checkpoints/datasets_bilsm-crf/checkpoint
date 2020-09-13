@@ -1,0 +1,8 @@
+model_checkpoint_path: "model-12"
+all_model_checkpoint_paths: "model-10"
+all_model_checkpoint_paths: "model-11"
+all_model_checkpoint_paths: "model-12"
+all_model_checkpoint_timestamps: 1599992543.2265813
+all_model_checkpoint_timestamps: 1599992944.2852416
+all_model_checkpoint_timestamps: 1599993349.664181
+last_preserved_timestamp: 1599988086.0915349
