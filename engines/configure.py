@@ -66,10 +66,6 @@ class Configure:
         if the_item in config:
             self.suffix = config[the_item]
 
-        the_item = 'labeling_level'
-        if the_item in config:
-            self.labeling_level = config[the_item]
-
         the_item = 'measuring_metrics'
         if the_item in config:
             self.measuring_metrics = config[the_item]
@@ -194,7 +190,6 @@ class Configure:
         logger.info('     label          scheme: {}'.format(self.label_scheme))
         logger.info('     label           level: {}'.format(self.label_level))
         logger.info('     suffixes             : {}'.format(self.suffix))
-        logger.info('     labeling_level       : {}'.format(self.labeling_level))
         logger.info('     measuring     metrics: {}'.format(self.measuring_metrics))
         logger.info(' ' + '++' * 20)
         logger.info('Model Configuration:')

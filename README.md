@@ -20,8 +20,12 @@
 
 集群下推荐GPU加速训练，其他环境见requirements.txt
 
+## 数据集
+人民日报语料
+
 ## 原理 
 ### Bilstm-CRF
+
 ![model](img/model.png) 
 
 ### Bert-Bilstm-CRF
@@ -32,9 +36,6 @@
 CRF层需要使用viterbi译码法，知乎上[这个答案](https://www.zhihu.com/question/20136144)比较容易理解    
 
 ## 使用
-### demo数据集
-人民日报Ner数据集
-
 ### 训练
 将已经标注好的数据切割好训练、验证集放入data目录下，如果只提供训练集将会有程序自己按照9:1切割训练集与验证集。  
 在system.config的Datasets(Input/Output)下配置好数据集的路径、分隔符、模型保存地址等。  
@@ -51,11 +52,16 @@ CRF层需要使用viterbi译码法，知乎上[这个答案](https://www.zhihu.c
 
 ![bert-bilstm-crf-train](img/bert-bilstm-crf-train.png)  
 
+***注:这里使用的[transformers](https://github.com/huggingface/transformers)包加载Bert，初次使用的时候会自动下载Bert的模型***
+
 ### 效果对比
 
 ### 在线预测
-外部模型需要配置好vocab_dir，checkpoints_dir，模型参数。本项目训练好的模型保持和训练时的参数不变即可。  
-设定system.config的Status中的为interactive_predict。  
+仓库中已经训练好了两种模型在同一份数据集上的参数可直接进行试验，两者位于data/example_datasets目录下  
+* 使用Bilstm-CRF模型时使用system.config4bilstm-crf的配置
+* 使用Bert-Bilstm-CRF模型时使用system.config4bert-bilstm-crf的配置
+
+将对应的配置命名为system.config然后替换掉当前的配置，设定system.config的Status中的为interactive_predict。  
 运行main.py开始在线预测。   
 下图为在线预测结果。  
 

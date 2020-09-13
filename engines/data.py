@@ -6,14 +6,10 @@
 # @Software: PyCharm
 import logging
 import os
-import jieba
-import re
 import numpy as np
 from engines.utils.io_functions import read_csv
 from transformers import BertTokenizer
 from tqdm import tqdm
-
-jieba.setLogLevel(logging.INFO)
 
 
 class DataManager:
@@ -39,7 +35,6 @@ class DataManager:
         self.label_scheme = configs.label_scheme
         self.label_level = configs.label_level
         self.suffix = configs.suffix
-        self.labeling_level = configs.labeling_level
 
         self.batch_size = configs.batch_size
 
@@ -53,8 +48,6 @@ class DataManager:
 
         self.max_token_number = len(self.token2id)
         self.max_label_number = len(self.label2id)
-
-        jieba.load_userdict(self.token2id.keys())
 
         self.logger.info('dataManager initialed...')
 
@@ -239,14 +232,7 @@ class DataManager:
         :param sentence:
         :return:
         """
-        if self.labeling_level == 'word':
-            if self.check_contain_chinese(sentence):
-                sentence = list(jieba.cut(sentence))
-            else:
-                sentence = list(sentence.split())
-        elif self.labeling_level == 'char':
-            sentence = list(sentence)
-
+        sentence = list(sentence)
         x = []
         for token in sentence:
             # noinspection PyBroadException
@@ -263,10 +249,6 @@ class DataManager:
             x = x[:self.max_sequence_length]
         y = [self.label2id['O']] * self.max_sequence_length
         return np.array([x]), np.array([y]), np.array([sentence])
-
-    @staticmethod
-    def check_contain_chinese(check_str):
-        return True if re.search(r'[\u4e00-\u9fff]', check_str) else False
 
 
 class BertDataManager:
@@ -289,7 +271,6 @@ class BertDataManager:
         self.label_scheme = configs.label_scheme
         self.label_level = configs.label_level
         self.suffix = configs.suffix
-        self.labeling_level = configs.labeling_level
         self.PADDING = '[PAD]'
 
         self.batch_size = configs.batch_size
