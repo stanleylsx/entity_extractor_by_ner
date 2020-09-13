@@ -8,6 +8,7 @@ import tensorflow as tf
 from engines.model import BiLSTM_CRFModel
 from engines.utils.extract_entity import extract_entity
 from tensorflow_addons.text.crf import crf_decode
+from transformers import TFBertModel
 
 
 class Predictor:
@@ -15,10 +16,14 @@ class Predictor:
         self.dataManager = data_manager
         vocab_size = data_manager.max_token_number
         num_classes = data_manager.max_label_number
-        self.configs = configs
         self.logger = logger
+        self.configs = configs
         logger.info('loading model parameter')
-        self.bilstm_crf_model = BiLSTM_CRFModel(configs, vocab_size, num_classes)
+        if self.configs.use_bert:
+            self.bert_model = TFBertModel.from_pretrained('bert-base-chinese')
+            self.bilstm_crf_model = BiLSTM_CRFModel(configs, vocab_size, num_classes, use_bert=True)
+        else:
+            self.bilstm_crf_model = BiLSTM_CRFModel(configs, vocab_size, num_classes)
         # 实例化Checkpoint，设置恢复对象为新建立的模型
         checkpoint = tf.train.Checkpoint(model=self.bilstm_crf_model)
         checkpoint.restore(tf.train.latest_checkpoint(configs.checkpoints_dir))  # 从文件恢复模型参数
@@ -30,12 +35,20 @@ class Predictor:
         :param sentence:
         :return:
         """
-        X, y, Sentence = self.dataManager.prepare_single_sentence(sentence)
-        logits, input_length, log_likelihood, transition_params = self.bilstm_crf_model.call(
-            inputs=X, targets=y)
-        label_predicts, _ = crf_decode(logits, transition_params, input_length)
+        if self.configs.use_bert:
+            X, y, att_mask, Sentence = self.dataManager.prepare_single_sentence(sentence)
+            model_inputs = self.bert_model(X, attention_mask=att_mask)[0]
+        else:
+            X, y, Sentence = self.dataManager.prepare_single_sentence(sentence)
+            model_inputs = X
+        inputs_length = tf.math.count_nonzero(X, 1)
+        logits, log_likelihood, transition_params = self.bilstm_crf_model.call(
+                inputs=model_inputs, inputs_length=inputs_length, targets=y)
+        label_predicts, _ = crf_decode(logits, transition_params, inputs_length)
         label_predicts = label_predicts.numpy()
-        sentence = Sentence[0, 0:input_length[0]]
-        y_pred = [str(self.dataManager.id2label[val]) for val in label_predicts[0][0:input_length[0]]]
+        sentence = Sentence[0, 0:inputs_length[0]]
+        y_pred = [str(self.dataManager.id2label[val]) for val in label_predicts[0][0:inputs_length[0]]]
+        # 去掉[CLS]和[SEP]对应的位置
+        y_pred = y_pred[1:-1]
         entities, suffixes, indices = extract_entity(sentence, y_pred, self.dataManager)
         return entities, suffixes, indices

@@ -5,9 +5,10 @@
 # @File : metrics.py
 # @Software: PyCharm
 from engines.utils.extract_entity import extract_entity
+import numpy as np
 
 
-def metrics(X, y_true, y_pred, measuring_metrics, data_manager):
+def metrics(X, y_true, y_pred, configs, data_manager, tokenizer):
     precision = -1.0
     recall = -1.0
     f1 = -1.0
@@ -21,10 +22,14 @@ def metrics(X, y_true, y_pred, measuring_metrics, data_manager):
 
     label_num = {}
     label_metrics = {}
+    measuring_metrics = configs.measuring_metrics
     # tensor向量不能直接索引，需要转成numpy
     y_pred = y_pred.numpy()
     for i in range(len(y_true)):
-        x = [str(data_manager.id2token[val]) for val in X[i] if val != data_manager.token2id[data_manager.PADDING]]
+        if configs.use_bert:
+            x = tokenizer.convert_ids_to_tokens(X[i].tolist(), skip_special_tokens=True)
+        else:
+            x = [str(data_manager.id2token[val]) for val in X[i] if val != data_manager.token2id[data_manager.PADDING]]
         y = [str(data_manager.id2label[val]) for val in y_true[i] if val != data_manager.label2id[data_manager.PADDING]]
         y_hat = [str(data_manager.id2label[val]) for val in y_pred[i] if
                  val != data_manager.label2id[data_manager.PADDING]]  # if val != 5

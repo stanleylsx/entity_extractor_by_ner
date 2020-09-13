@@ -23,9 +23,9 @@ class Configure:
         the_item = 'train_file'
         if the_item in config:
             self.train_file = config[the_item]
-            the_item = 'dev_file'
+        the_item = 'dev_file'
         if the_item in config:
-            self.dev_file = config[the_item]
+            self.dev_file = self.str2none(config[the_item])
         else:
             self.dev_file = None
 
@@ -84,8 +84,8 @@ class Configure:
         the_item = 'max_sequence_length'
         if the_item in config:
             self.max_sequence_length = int(config[the_item])
-        if self.use_bert and self.max_sequence_length > 510:
-            raise Exception('the max sequence length over 510 in Bert mode')
+        if self.use_bert and self.max_sequence_length > 512:
+            raise Exception('the max sequence length over 512 in Bert mode')
 
         the_item = 'hidden_dim'
         if the_item in config:
@@ -167,6 +167,13 @@ class Configure:
             return True
         else:
             return False
+
+    @staticmethod
+    def str2none(string):
+        if string == 'None' or string == 'none' or string == 'NONE':
+            return None
+        else:
+            return string
 
     def show_data_summary(self, logger):
         logger.info('++' * 20 + 'CONFIGURATION SUMMARY' + '++' * 20)

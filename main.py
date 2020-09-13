@@ -65,9 +65,10 @@ if __name__ == '__main__':
     configs.show_data_summary(logger)
     set_env(configs)
     mode = configs.mode.lower()
-    dataManager = DataManager(configs, logger)
-    # dataManager = BertDataManager(configs, logger)
-    dataManager.get_training_set()
+    if configs.use_bert:
+        dataManager = BertDataManager(configs, logger)
+    else:
+        dataManager = DataManager(configs, logger)
     if mode == 'train':
         logger.info('mode: train')
         train(configs, dataManager, logger)
