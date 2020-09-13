@@ -26,7 +26,7 @@
 ## 原理 
 ### Bilstm-CRF
 
-![model](img/model.png) 
+![model](img/bilstm-crf-model.png) 
 
 ### Bert-Bilstm-CRF
  
