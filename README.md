@@ -32,23 +32,31 @@
 CRF层需要使用viterbi译码法，知乎上[这个答案](https://www.zhihu.com/question/20136144)比较容易理解    
 
 ## 使用
+### demo数据集
+人民日报Ner数据集
+
 ### 训练
-将已经标注好的数据切割好训练、验证、测试集放入data目录下。  
+将已经标注好的数据切割好训练、验证集放入data目录下，如果只提供训练集将会有程序自己按照9:1切割训练集与验证集。  
 在system.config的Datasets(Input/Output)下配置好数据集的路径、分隔符、模型保存地址等。  
 在system.config的Labeling Scheme配置标注模式。  
 在system.config的Model Configuration/Training Settings下配置模型参数和训练参数。  
 设定system.config的Status中的为train。  
 运行main.py开始训练。  
-下图为日志记录训练完毕。 
- 
-![model](img/train.png)  
+
+* Bilstm-CRF模型下效果
+
+![bilstm-crf-train](img/bilstm-crf-train.png)  
+
+* Bert-Blism-CRF模型下效果
+
+![bert-bilstm-crf-train](img/bert-bilstm-crf-train.png)  
 
 ### 效果对比
 
 ### 在线预测
 外部模型需要配置好vocab_dir，checkpoints_dir，模型参数。本项目训练好的模型保持和训练时的参数不变即可。  
 设定system.config的Status中的为interactive_predict。  
-运行main.py开始在线预测。 
+运行main.py开始在线预测。   
 下图为在线预测结果。  
 
 ![test](img/online_predict.png)  
