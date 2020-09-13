@@ -26,11 +26,11 @@
 ## 原理 
 ### Bilstm-CRF
 
-![bilstm-crf-model](img/bilstm-crf-model.png) 
+![bilstm-crf-model](https://img-blog.csdnimg.cn/20200913195805943.png) 
 
 ### Bert-Bilstm-CRF
 
-![bert-bilstm-crf-model](img/bert-bilstm-crf-model.png) 
+![bert-bilstm-crf-model](https://img-blog.csdnimg.cn/20200913195805897.png) 
  
 ### CRF层
 [最通俗易懂的BiLSTM-CRF模型中的CRF层介绍](https://zhuanlan.zhihu.com/p/44042528)  
@@ -60,11 +60,11 @@ use_bert=False
 
 * Bilstm-CRF模型下效果
 
-![bilstm-crf-train](img/bilstm-crf-train.png)  
+![bilstm-crf-train](https://img-blog.csdnimg.cn/2020091319580672.png)  
 
 * Bert-Blism-CRF模型下效果
 
-![bert-bilstm-crf-train](img/bert-bilstm-crf-train.png)  
+![bert-bilstm-crf-train](https://img-blog.csdnimg.cn/20200913200450351.png)  
 
 ***注(1):这里使用的[transformers](https://github.com/huggingface/transformers)包加载Bert，初次使用的时候会自动下载Bert的模型***  
 ***注(2):当重新训练的时候，Bert-Bilstm-CRF和Bilstm-CRF各自自动生成自己vocabs/label2id文件，不能混用，如果需要共用，你可以手动的定义标签***   
@@ -85,7 +85,7 @@ mode=interactive_predict
 最后，运行main.py开始在线预测。   
 下图为在线预测结果，你可以移植到自己项目里面做成对外接口。    
 
-![online_predict](img/online_predict.png)  
+![online_predict](https://img-blog.csdnimg.cn/202009131958050.png)  
 
 ## 参考
 + NER相关的论文整理在[papers](papers)下
