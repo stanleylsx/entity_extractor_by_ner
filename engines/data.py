@@ -202,7 +202,7 @@ class DataManager:
             X_val = X[int(num_samples * train_val_ratio):]
             y_val = y[int(num_samples * train_val_ratio):]
             self.logger.info('validating set is not exist, built...')
-        self.logger.info('training set size: {}, validating set size: {}'.format(len(X_train), len(y_val)))
+        self.logger.info('training set size: {}, validating set size: {}'.format(len(X_train), len(X_val)))
         return X_train, y_train, X_val, y_val
 
     def get_valid_set(self):
@@ -417,7 +417,7 @@ class BertDataManager:
             y_val = y[int(num_samples * train_val_ratio):]
             att_mask_val = att_mask[int(num_samples * train_val_ratio):]
             self.logger.info('validating set is not exist, built...')
-        self.logger.info('training set size: {}, validating set size: {}'.format(len(X_train), len(y_val)))
+        self.logger.info('training set size: {}, validating set size: {}'.format(len(X_train), len(X_val)))
         return X_train, y_train, att_mask_train, X_val, y_val, att_mask_val
 
     def get_valid_set(self):
