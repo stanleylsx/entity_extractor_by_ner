@@ -17,7 +17,6 @@ class DataManager:
     """
     def __init__(self, configs, logger):
         self.configs = configs
-        self.train_file = configs.train_file
         self.logger = logger
         self.hyphen = configs.hyphen
 
@@ -256,7 +255,6 @@ class BertDataManager:
     """
     def __init__(self, configs, logger):
         self.configs = configs
-        self.train_file = configs.train_file
         self.logger = logger
         self.hyphen = configs.hyphen
 
