@@ -5,7 +5,6 @@
 # @File : metrics.py
 # @Software: PyCharm
 from engines.utils.extract_entity import extract_entity
-import numpy as np
 
 
 def metrics(X, y_true, y_pred, configs, data_manager, tokenizer):
