@@ -5,7 +5,6 @@ cachetools==4.1.1
 certifi==2020.6.20
 chardet==3.0.4
 click==7.1.2
-dataclasses==0.7
 filelock==3.0.12
 gast==0.3.3
 google-auth==1.21.1
