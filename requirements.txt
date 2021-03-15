@@ -43,7 +43,7 @@ tensorboard==2.3.0
 tensorboard-plugin-wit==1.7.0
 tensorflow-addons==0.11.2
 tensorflow-estimator==2.3.0
-tensorflow-gpu==2.3.0
+tensorflow-gpu==2.4.0
 termcolor==1.1.0
 tokenizers==0.8.1rc1
 tqdm==4.48.2
