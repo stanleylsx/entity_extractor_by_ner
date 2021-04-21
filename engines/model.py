@@ -31,7 +31,7 @@ class BiLSTM_CRFModel(tf.keras.Model, ABC):
         dropout_inputs = self.dropout(embedding_inputs, training)
         bilstm_outputs = self.bilstm(dropout_inputs)
         logits = self.dense(bilstm_outputs)
-        tensor_targets = tf.convert_to_tensor(targets, dtype=tf.int64)
+        tensor_targets = tf.convert_to_tensor(targets, dtype=tf.int32)
         log_likelihood, self.transition_params = crf_log_likelihood(
             logits, tensor_targets, inputs_length, transition_params=self.transition_params)
         return logits, log_likelihood, self.transition_params

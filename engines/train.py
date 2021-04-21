@@ -54,6 +54,11 @@ def train(configs, data_manager, logger):
     checkpoint = tf.train.Checkpoint(model=bilstm_crf_model)
     checkpoint_manager = tf.train.CheckpointManager(
         checkpoint, directory=checkpoints_dir, checkpoint_name=checkpoint_name, max_to_keep=max_to_keep)
+    checkpoint.restore(checkpoint_manager.latest_checkpoint)
+    if checkpoint_manager.latest_checkpoint:
+        print("Restored from {}".format(checkpoint_manager.latest_checkpoint))
+    else:
+        print("Initializing from scratch.")
 
     num_iterations = int(math.ceil(1.0 * len(X_train) / batch_size))
     num_val_iterations = int(math.ceil(1.0 * len(X_val) / batch_size))
@@ -83,7 +88,7 @@ def train(configs, data_manager, logger):
                 inputs_length = tf.math.count_nonzero(X_train_batch, 1)
                 model_inputs = X_train_batch
             with tf.GradientTape() as tape:
-                logits, log_likelihood, transition_params = bilstm_crf_model.call(
+                logits, log_likelihood, transition_params = bilstm_crf_model(
                     inputs=model_inputs, inputs_length=inputs_length, targets=y_train_batch, training=1)
                 loss = -tf.reduce_mean(log_likelihood)
             # 定义好参加梯度的参数
@@ -123,7 +128,7 @@ def train(configs, data_manager, logger):
                 X_val_batch, y_val_batch = data_manager.next_batch(X_val, y_val, iteration * batch_size)
                 inputs_length_val = tf.math.count_nonzero(X_val_batch, 1)
                 model_inputs = X_val_batch
-            logits_val, log_likelihood_val, transition_params_val = bilstm_crf_model.call(
+            logits_val, log_likelihood_val, transition_params_val = bilstm_crf_model(
                 inputs=model_inputs, inputs_length=inputs_length_val, targets=y_val_batch)
             val_loss = -tf.reduce_mean(log_likelihood_val)
             batch_pred_sequence_val, _ = crf_decode(logits_val, transition_params_val, inputs_length_val)

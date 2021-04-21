@@ -42,7 +42,7 @@ class Predictor:
             X, y, Sentence = self.dataManager.prepare_single_sentence(sentence)
             model_inputs = X
         inputs_length = tf.math.count_nonzero(X, 1)
-        logits, log_likelihood, transition_params = self.bilstm_crf_model.call(
+        logits, log_likelihood, transition_params = self.bilstm_crf_model(
                 inputs=model_inputs, inputs_length=inputs_length, targets=y)
         label_predicts, _ = crf_decode(logits, transition_params, inputs_length)
         label_predicts = label_predicts.numpy()

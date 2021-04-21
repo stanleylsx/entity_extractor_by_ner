@@ -49,6 +49,7 @@ max_sequence_length=300
 # this will be kept during training and inferring, text having length larger than this will be truncated.
 
 CUDA_VISIBLE_DEVICES=0
+# int, -1:CPU, [0,]:GPU
 # coincides with tf.CUDA_VISIBLE_DEVICES
 
 seed=42

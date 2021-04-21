@@ -18,6 +18,7 @@ from engines.predict import Predictor
 def set_env(configures):
     random.seed(configures.seed)
     np.random.seed(configures.seed)
+    os.environ['CUDA_VISIBLE_DEVICES'] = configures.CUDA_VISIBLE_DEVICES
 
 
 def fold_check(configures):
@@ -75,6 +76,7 @@ if __name__ == '__main__':
     elif mode == 'interactive_predict':
         logger.info('mode: predict_one')
         predictor = Predictor(configs, dataManager, logger)
+        predictor.predict_one('warm start')
         while True:
             logger.info('please input a sentence (enter [exit] to exit.)')
             sentence = input()
