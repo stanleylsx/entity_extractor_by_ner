@@ -24,6 +24,8 @@ def metrics(X, y_true, y_pred, configs, data_manager, tokenizer):
     measuring_metrics = configs.measuring_metrics
     # tensor向量不能直接索引，需要转成numpy
     y_pred = y_pred.numpy()
+    y_true = y_true.numpy()
+    X = X.numpy()
     for i in range(len(y_true)):
         if configs.use_bert:
             x = tokenizer.convert_ids_to_tokens(X[i].tolist(), skip_special_tokens=True)

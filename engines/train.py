@@ -44,11 +44,10 @@ def train(configs, data_manager, logger):
     if configs.use_bert:
         bert_model = TFBertModel.from_pretrained('bert-base-chinese')
         tokenizer = BertTokenizer.from_pretrained('bert-base-chinese')
-        X_train, y_train, att_mask_train, X_val, y_val, att_mask_val = data_manager.get_training_set()
     else:
-        X_train, y_train, X_val, y_val = data_manager.get_training_set()
-        att_mask_train, att_mask_val = np.array([]), np.array([])
         bert_model, tokenizer = None, None
+
+    train_dataset, val_dataset = data_manager.get_training_set()
 
     bilstm_crf_model = BiLSTM_CRFModel(configs, vocab_size, num_classes, configs.use_bert)
     checkpoint = tf.train.Checkpoint(model=bilstm_crf_model)
@@ -60,30 +59,20 @@ def train(configs, data_manager, logger):
     else:
         print("Initializing from scratch.")
 
-    num_iterations = int(math.ceil(1.0 * len(X_train) / batch_size))
-    num_val_iterations = int(math.ceil(1.0 * len(X_val) / batch_size))
+    num_val_iterations = int(math.ceil(1.0 * len(val_dataset) / batch_size))
     logger.info(('+' * 20) + 'training starting' + ('+' * 20))
     for i in range(epoch):
         start_time = time.time()
-        # shuffle train at each epoch
-        sh_index = np.arange(len(X_train))
-        np.random.shuffle(sh_index)
-        X_train = X_train[sh_index]
-        y_train = y_train[sh_index]
-        if configs.use_bert:
-            att_mask_train = att_mask_train[sh_index]
         logger.info('epoch:{}/{}'.format(i + 1, epoch))
-        for iteration in tqdm(range(num_iterations)):
+        for step, batch in tqdm(train_dataset.shuffle(len(train_dataset)).batch(batch_size).enumerate()):
             if configs.use_bert:
-                X_train_batch, y_train_batch, att_mask_batch = data_manager.next_batch(
-                    X_train, y_train, att_mask_train, start_index=iteration * batch_size)
+                X_train_batch, y_train_batch, att_mask_batch = batch
                 # 计算没有加入pad之前的句子的长度
                 inputs_length = tf.math.count_nonzero(X_train_batch, 1)
                 # 获得bert的模型输出
                 model_inputs = bert_model(X_train_batch, attention_mask=att_mask_batch)[0]
             else:
-                X_train_batch, y_train_batch = data_manager.next_batch(
-                    X_train, y_train, start_index=iteration * batch_size)
+                X_train_batch, y_train_batch = batch
                 # 计算没有加入pad之前的句子的长度
                 inputs_length = tf.math.count_nonzero(X_train_batch, 1)
                 model_inputs = X_train_batch
@@ -95,14 +84,14 @@ def train(configs, data_manager, logger):
             gradients = tape.gradient(loss, bilstm_crf_model.trainable_variables)
             # 反向传播，自动微分计算
             optimizer.apply_gradients(zip(gradients, bilstm_crf_model.trainable_variables))
-            if iteration % configs.print_per_batch == 0 and iteration != 0:
+            if step % configs.print_per_batch == 0 and step != 0:
                 batch_pred_sequence, _ = crf_decode(logits, transition_params, inputs_length)
                 measures, _ = metrics(
                     X_train_batch, y_train_batch, batch_pred_sequence, configs, data_manager, tokenizer)
                 res_str = ''
                 for k, v in measures.items():
                     res_str += (k + ': %.3f ' % v)
-                logger.info('training batch: %5d, loss: %.5f, %s' % (iteration, loss, res_str))
+                logger.info('training batch: %5d, loss: %.5f, %s' % (step, loss, res_str))
 
         # validation
         logger.info('start evaluate engines...')
@@ -117,15 +106,14 @@ def train(configs, data_manager, logger):
             for measure in configs.measuring_metrics:
                 val_labels_results[label][measure] = 0
 
-        for iteration in tqdm(range(num_val_iterations)):
+        for val_batch in tqdm(val_dataset.batch(batch_size)):
             if configs.use_bert:
-                X_val_batch, y_val_batch, att_mask_batch = data_manager.next_batch(
-                    X_val, y_val, att_mask_val, iteration * batch_size)
+                X_val_batch, y_val_batch, att_mask_batch = val_batch
                 inputs_length_val = tf.math.count_nonzero(X_val_batch, 1)
                 # 获得bert的模型输出
                 model_inputs = bert_model(X_val_batch, attention_mask=att_mask_batch)[0]
             else:
-                X_val_batch, y_val_batch = data_manager.next_batch(X_val, y_val, iteration * batch_size)
+                X_val_batch, y_val_batch = val_batch
                 inputs_length_val = tf.math.count_nonzero(X_val_batch, 1)
                 model_inputs = X_val_batch
             logits_val, log_likelihood_val, transition_params_val = bilstm_crf_model(
@@ -144,12 +132,12 @@ def train(configs, data_manager, logger):
 
         time_span = (time.time() - start_time) / 60
         val_res_str = ''
-        dev_f1_avg = 0
+        val_f1_avg = 0
         for k, v in val_results.items():
             val_results[k] /= num_val_iterations
             val_res_str += (k + ': %.3f ' % val_results[k])
             if k == 'f1':
-                dev_f1_avg = val_results[k]
+                val_f1_avg = val_results[k]
         for label, content in val_labels_results.items():
             val_label_str = ''
             for k, v in content.items():
@@ -158,9 +146,9 @@ def train(configs, data_manager, logger):
             logger.info('label: %s, %s' % (label, val_label_str))
         logger.info('time consumption:%.2f(min), %s' % (time_span, val_res_str))
 
-        if np.array(dev_f1_avg).mean() > best_f1_val:
+        if np.array(val_f1_avg).mean() > best_f1_val:
             unprocessed = 0
-            best_f1_val = np.array(dev_f1_avg).mean()
+            best_f1_val = np.array(val_f1_avg).mean()
             best_at_epoch = i + 1
             checkpoint_manager.save()
             logger.info('saved the new best model with f1: %.3f' % best_f1_val)

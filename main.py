@@ -9,7 +9,7 @@ import random
 import numpy as np
 import os
 from engines.train import train
-from engines.data import DataManager, BertDataManager
+from engines.data import DataManager
 from engines.configure import Configure
 from engines.utils.logger import get_logger
 from engines.predict import Predictor
@@ -66,10 +66,7 @@ if __name__ == '__main__':
     configs.show_data_summary(logger)
     set_env(configs)
     mode = configs.mode.lower()
-    if configs.use_bert:
-        dataManager = BertDataManager(configs, logger)
-    else:
-        dataManager = DataManager(configs, logger)
+    dataManager = DataManager(configs, logger)
     if mode == 'train':
         logger.info('mode: train')
         train(configs, dataManager, logger)
