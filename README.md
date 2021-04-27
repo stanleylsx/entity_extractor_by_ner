@@ -95,3 +95,9 @@ mode=interactive_predict
 + [维特比解码器](https://www.zhihu.com/question/20136144)
 + [最通俗易懂的BiLSTM-CRF模型中的CRF层介绍](https://zhuanlan.zhihu.com/p/44042528)
 + [CRF Layer on the Top of BiLSTM - 1](https://createmomo.github.io/2017/09/12/CRF_Layer_on_the_Top_of_BiLSTM_1/)
+
+## 公众号
+相关问题欢迎在公众号反馈：  
+
+![小贤算法屋](https://img-blog.csdnimg.cn/20210427094903895.jpg)
+
