@@ -245,7 +245,7 @@ class DataManager:
             val_dataset = tf.data.Dataset.from_tensor_slices((X_val, y_val, att_mask_val))
         else:
             # map the token and label into id
-            df_train['token_id'] = df_train.token.map(lambda x: -1 if str(x) == str(np.nan) else self.token2id[x])
+            df_train['token_id'] = df_train.token.map(lambda x: self.map_func(x, self.token2id))
             df_train['label_id'] = df_train.label.map(lambda x: -1 if str(x) == str(np.nan) else self.label2id[x])
             # convert the data in matrix
             X, y = self.prepare(df_train['token_id'], df_train['label_id'])

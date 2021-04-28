@@ -12,6 +12,7 @@
 2020-09-13|v3.0.0|增加Bert做embedding，通过配置支持BiLSTM-Crf和Bert-BiLSTM-Crf两种模型的训练与预测
 2021-04-21|v3.0.1|添加中断之后再训练逻辑、通过配置可选GPU和CPU、bug-fix
 2021-04-25|v3.1.0|使用tf.data.Dataset包装数据，合并数据处理类
+2021-04-25|v3.1.1|bug-fix:读取token出现KeyError
 
 ## 环境
 * python 3.6.7
