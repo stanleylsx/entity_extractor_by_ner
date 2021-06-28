@@ -67,15 +67,13 @@ def train(configs, data_manager, logger):
         for step, batch in tqdm(train_dataset.shuffle(len(train_dataset)).batch(batch_size).enumerate()):
             if configs.use_bert:
                 X_train_batch, y_train_batch, att_mask_batch = batch
-                # 计算没有加入pad之前的句子的长度
-                inputs_length = tf.math.count_nonzero(X_train_batch, 1)
                 # 获得bert的模型输出
                 model_inputs = bert_model(X_train_batch, attention_mask=att_mask_batch)[0]
             else:
                 X_train_batch, y_train_batch = batch
-                # 计算没有加入pad之前的句子的长度
-                inputs_length = tf.math.count_nonzero(X_train_batch, 1)
                 model_inputs = X_train_batch
+            # 计算没有加入pad之前的句子的长度
+            inputs_length = tf.math.count_nonzero(X_train_batch, 1)
             with tf.GradientTape() as tape:
                 logits, log_likelihood, transition_params = ner_model(
                     inputs=model_inputs, inputs_length=inputs_length, targets=y_train_batch, training=1)
@@ -109,13 +107,12 @@ def train(configs, data_manager, logger):
         for val_batch in tqdm(val_dataset.batch(batch_size)):
             if configs.use_bert:
                 X_val_batch, y_val_batch, att_mask_batch = val_batch
-                inputs_length_val = tf.math.count_nonzero(X_val_batch, 1)
                 # 获得bert的模型输出
                 model_inputs = bert_model(X_val_batch, attention_mask=att_mask_batch)[0]
             else:
                 X_val_batch, y_val_batch = val_batch
-                inputs_length_val = tf.math.count_nonzero(X_val_batch, 1)
                 model_inputs = X_val_batch
+            inputs_length_val = tf.math.count_nonzero(X_val_batch, 1)
             logits_val, log_likelihood_val, transition_params_val = ner_model(
                 inputs=model_inputs, inputs_length=inputs_length_val, targets=y_val_batch)
             val_loss = -tf.reduce_mean(log_likelihood_val)

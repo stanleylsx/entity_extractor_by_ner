@@ -18,7 +18,9 @@ vocabs_dir=data/example_datasets/vocabs
 
 log_dir=data/example_datasets/logs
 
-checkpoints_dir=checkpoints/datasets_bert-bilsm-crf
+checkpoints_dir=checkpoints/bert-bilsm-crf
+
+checkpoint_name=model
 
 ################ Labeling Scheme ################
 label_scheme=BIO
@@ -40,7 +42,7 @@ measuring_metrics=[precision,recall,f1,accuracy]
 
 ################ Model Configuration ################
 embedding_dim=300
-# int, must be consistent with `token_emb_dir' file
+# int
 
 hidden_dim=200
 
@@ -54,7 +56,7 @@ CUDA_VISIBLE_DEVICES=0
 
 seed=42
 
-################ Training Settings ###
+################ Training Settings ################
 epoch=300
 batch_size=32
 
@@ -71,4 +73,3 @@ is_early_stop=True
 patient=5
 # unnecessary if is_early_stop=False
 
-checkpoint_name=model
