@@ -49,8 +49,8 @@ def train(configs, data_manager, logger):
 
     train_dataset, val_dataset = data_manager.get_training_set()
 
-    bilstm_crf_model = NerModel(configs, vocab_size, num_classes, configs.use_bert)
-    checkpoint = tf.train.Checkpoint(model=bilstm_crf_model)
+    ner_model = NerModel(configs, vocab_size, num_classes)
+    checkpoint = tf.train.Checkpoint(model=ner_model)
     checkpoint_manager = tf.train.CheckpointManager(
         checkpoint, directory=checkpoints_dir, checkpoint_name=checkpoint_name, max_to_keep=max_to_keep)
     checkpoint.restore(checkpoint_manager.latest_checkpoint)
@@ -77,13 +77,13 @@ def train(configs, data_manager, logger):
                 inputs_length = tf.math.count_nonzero(X_train_batch, 1)
                 model_inputs = X_train_batch
             with tf.GradientTape() as tape:
-                logits, log_likelihood, transition_params = bilstm_crf_model(
+                logits, log_likelihood, transition_params = ner_model(
                     inputs=model_inputs, inputs_length=inputs_length, targets=y_train_batch, training=1)
                 loss = -tf.reduce_mean(log_likelihood)
             # 定义好参加梯度的参数
-            gradients = tape.gradient(loss, bilstm_crf_model.trainable_variables)
+            gradients = tape.gradient(loss, ner_model.trainable_variables)
             # 反向传播，自动微分计算
-            optimizer.apply_gradients(zip(gradients, bilstm_crf_model.trainable_variables))
+            optimizer.apply_gradients(zip(gradients, ner_model.trainable_variables))
             if step % configs.print_per_batch == 0 and step != 0:
                 batch_pred_sequence, _ = crf_decode(logits, transition_params, inputs_length)
                 measures, _ = metrics(
@@ -116,7 +116,7 @@ def train(configs, data_manager, logger):
                 X_val_batch, y_val_batch = val_batch
                 inputs_length_val = tf.math.count_nonzero(X_val_batch, 1)
                 model_inputs = X_val_batch
-            logits_val, log_likelihood_val, transition_params_val = bilstm_crf_model(
+            logits_val, log_likelihood_val, transition_params_val = ner_model(
                 inputs=model_inputs, inputs_length=inputs_length_val, targets=y_val_batch)
             val_loss = -tf.reduce_mean(log_likelihood_val)
             batch_pred_sequence_val, _ = crf_decode(logits_val, transition_params_val, inputs_length_val)

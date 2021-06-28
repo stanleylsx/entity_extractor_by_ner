@@ -21,11 +21,11 @@ class Predictor:
         logger.info('loading model parameter')
         if self.configs.use_bert:
             self.bert_model = TFBertModel.from_pretrained('bert-base-chinese')
-            self.bilstm_crf_model = NerModel(configs, vocab_size, num_classes, use_bert=True)
+            self.ner_model = NerModel(configs, vocab_size, num_classes)
         else:
-            self.bilstm_crf_model = NerModel(configs, vocab_size, num_classes)
+            self.ner_model = NerModel(configs, vocab_size, num_classes)
         # 实例化Checkpoint，设置恢复对象为新建立的模型
-        checkpoint = tf.train.Checkpoint(model=self.bilstm_crf_model)
+        checkpoint = tf.train.Checkpoint(model=self.ner_model)
         checkpoint.restore(tf.train.latest_checkpoint(configs.checkpoints_dir))  # 从文件恢复模型参数
         logger.info('loading model successfully')
 
@@ -42,7 +42,7 @@ class Predictor:
             X, y, Sentence = self.dataManager.prepare_single_sentence(sentence)
             model_inputs = X
         inputs_length = tf.math.count_nonzero(X, 1)
-        logits, log_likelihood, transition_params = self.bilstm_crf_model(
+        logits, log_likelihood, transition_params = self.ner_model(
                 inputs=model_inputs, inputs_length=inputs_length, targets=y)
         label_predicts, _ = crf_decode(logits, transition_params, inputs_length)
         label_predicts = label_predicts.numpy()
