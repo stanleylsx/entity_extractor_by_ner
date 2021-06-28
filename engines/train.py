@@ -9,7 +9,7 @@ import numpy as np
 import math
 import time
 from tqdm import tqdm
-from engines.model import BiLSTM_CRFModel
+from engines.model import NerModel
 from engines.utils.metrics import metrics
 from tensorflow_addons.text.crf import crf_decode
 from transformers import TFBertModel, BertTokenizer
@@ -49,15 +49,15 @@ def train(configs, data_manager, logger):
 
     train_dataset, val_dataset = data_manager.get_training_set()
 
-    bilstm_crf_model = BiLSTM_CRFModel(configs, vocab_size, num_classes, configs.use_bert)
+    bilstm_crf_model = NerModel(configs, vocab_size, num_classes, configs.use_bert)
     checkpoint = tf.train.Checkpoint(model=bilstm_crf_model)
     checkpoint_manager = tf.train.CheckpointManager(
         checkpoint, directory=checkpoints_dir, checkpoint_name=checkpoint_name, max_to_keep=max_to_keep)
     checkpoint.restore(checkpoint_manager.latest_checkpoint)
     if checkpoint_manager.latest_checkpoint:
-        print("Restored from {}".format(checkpoint_manager.latest_checkpoint))
+        print('Restored from {}'.format(checkpoint_manager.latest_checkpoint))
     else:
-        print("Initializing from scratch.")
+        print('Initializing from scratch.')
 
     num_val_iterations = int(math.ceil(1.0 * len(val_dataset) / batch_size))
     logger.info(('+' * 20) + 'training starting' + ('+' * 20))

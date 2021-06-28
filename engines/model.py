@@ -10,9 +10,9 @@ import tensorflow as tf
 from tensorflow_addons.text.crf import crf_log_likelihood
 
 
-class BiLSTM_CRFModel(tf.keras.Model, ABC):
+class NerModel(tf.keras.Model, ABC):
     def __init__(self, configs, vocab_size, num_classes, use_bert=False):
-        super(BiLSTM_CRFModel, self).__init__()
+        super(NerModel, self).__init__()
         self.use_bert = use_bert
         self.embedding = tf.keras.layers.Embedding(vocab_size, configs.embedding_dim, mask_zero=True)
         self.hidden_dim = configs.hidden_dim

@@ -5,7 +5,7 @@
 # @File : predict.py
 # @Software: PyCharm
 import tensorflow as tf
-from engines.model import BiLSTM_CRFModel
+from engines.model import NerModel
 from engines.utils.extract_entity import extract_entity
 from tensorflow_addons.text.crf import crf_decode
 from transformers import TFBertModel
@@ -21,9 +21,9 @@ class Predictor:
         logger.info('loading model parameter')
         if self.configs.use_bert:
             self.bert_model = TFBertModel.from_pretrained('bert-base-chinese')
-            self.bilstm_crf_model = BiLSTM_CRFModel(configs, vocab_size, num_classes, use_bert=True)
+            self.bilstm_crf_model = NerModel(configs, vocab_size, num_classes, use_bert=True)
         else:
-            self.bilstm_crf_model = BiLSTM_CRFModel(configs, vocab_size, num_classes)
+            self.bilstm_crf_model = NerModel(configs, vocab_size, num_classes)
         # 实例化Checkpoint，设置恢复对象为新建立的模型
         checkpoint = tf.train.Checkpoint(model=self.bilstm_crf_model)
         checkpoint.restore(tf.train.latest_checkpoint(configs.checkpoints_dir))  # 从文件恢复模型参数

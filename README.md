@@ -2,7 +2,8 @@
 
 **公众号文章：[命名实体识别常用算法及工程实现](https://mp.weixin.qq.com/s/KNNw9JUZxXljE87vVgW5Yg)**
 
-此仓库是基于Tensorflow2.3的NER任务项目，既可以使用BiLSTM-Crf模型，也可以使用Bert-BiLSTM-Crf模型，提供可配置文档，配置完可直接运行。
+此仓库是基于Tensorflow2.3的NER任务项目，既可以使用BiLSTM-Crf模型，也可以使用Bert-BiLSTM-Crf模型，提供可配置文档，配置完可直接运行。  
+目前仓库规划重构中，重构后的项目v4.0.0版本将增加对Bert-CRF的支持以及其和Bert-Bilstm-CRF中Bert的微调，并且解决GPU训练利用率低的情况。  
 
 ## 更新历史
 日期|版本|描述
@@ -96,9 +97,6 @@ mode=interactive_predict
 ## 参考
 + NER相关的论文整理在[papers](papers)下
 + [https://github.com/scofield7419/sequence-labeling-BiLSTM-CRF](https://github.com/scofield7419/sequence-labeling-BiLSTM-CRF)
-+ [维特比解码器](https://www.zhihu.com/question/20136144)
-+ [最通俗易懂的BiLSTM-CRF模型中的CRF层介绍](https://zhuanlan.zhihu.com/p/44042528)
-+ [CRF Layer on the Top of BiLSTM - 1](https://createmomo.github.io/2017/09/12/CRF_Layer_on_the_Top_of_BiLSTM_1/)
 
 ## 公众号
 相关问题欢迎在公众号反馈：  
