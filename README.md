@@ -24,6 +24,8 @@
 * **GPU:** tensorflow-gpu==2.3.0
 * tensorflow-addons==0.11.2
 * transformers==3.0.2
+* jieba==0.41
+* tqdm==4.48.2
 
 推荐使用GPU加速训练，其他环境见requirements.txt
 
