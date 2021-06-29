@@ -33,15 +33,15 @@
 ## 原理 
 ### Bilstm-CRF
 
-![bilstm-crf-model](https://img-blog.csdnimg.cn/20210629142251738.png) 
+![bilstm-crf-model](https://img-blog.csdnimg.cn/20210629194609507.png) 
 
 ### Finetune-Bert-CRF
 
-![bert-crf-model](https://img-blog.csdnimg.cn/20210629142251672.png) 
+![bert-crf-model](https://img-blog.csdnimg.cn/20210629194710746.png) 
 
 ### (Finetune)Bert-Bilstm-CRF
 
-![bert-bilstm-crf-model](https://img-blog.csdnimg.cn/20210629142251728.png) 
+![bert-bilstm-crf-model](https://img-blog.csdnimg.cn/20210629194719983.png) 
 
  
 ### CRF层
