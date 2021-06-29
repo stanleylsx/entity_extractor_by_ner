@@ -50,7 +50,12 @@ def train(configs, data_manager, logger):
     train_dataset, val_dataset = data_manager.get_training_set()
 
     ner_model = NerModel(configs, vocab_size, num_classes)
-    checkpoint = tf.train.Checkpoint(model=ner_model)
+
+    if configs.finetune:
+        checkpoint = tf.train.Checkpoint(ner_model=ner_model, bert_model=bert_model)
+    else:
+        checkpoint = tf.train.Checkpoint(ner_model=ner_model)
+
     checkpoint_manager = tf.train.CheckpointManager(
         checkpoint, directory=checkpoints_dir, checkpoint_name=checkpoint_name, max_to_keep=max_to_keep)
     checkpoint.restore(checkpoint_manager.latest_checkpoint)
@@ -79,7 +84,11 @@ def train(configs, data_manager, logger):
                     inputs=model_inputs, inputs_length=inputs_length, targets=y_train_batch, training=1)
                 loss = -tf.reduce_mean(log_likelihood)
             # 定义好参加梯度的参数
-            gradients = tape.gradient(loss, ner_model.trainable_variables)
+            if configs.finetune:
+                variables = ner_model.trainable_variables + bert_model.trainable_variables
+                gradients = tape.gradient(loss, variables)
+            else:
+                gradients = tape.gradient(loss, ner_model.trainable_variables)
             # 反向传播，自动微分计算
             optimizer.apply_gradients(zip(gradients, ner_model.trainable_variables))
             if step % configs.print_per_batch == 0 and step != 0:

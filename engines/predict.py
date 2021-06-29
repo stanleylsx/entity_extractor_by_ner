@@ -25,7 +25,10 @@ class Predictor:
         else:
             self.ner_model = NerModel(configs, vocab_size, num_classes)
         # 实例化Checkpoint，设置恢复对象为新建立的模型
-        checkpoint = tf.train.Checkpoint(model=self.ner_model)
+        if configs.finetune:
+            checkpoint = tf.train.Checkpoint(ner_model=self.ner_model, bert_model=self.bert_model)
+        else:
+            checkpoint = tf.train.Checkpoint(ner_model=self.ner_model)
         checkpoint.restore(tf.train.latest_checkpoint(configs.checkpoints_dir))  # 从文件恢复模型参数
         logger.info('loading model successfully')
 

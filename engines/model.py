@@ -14,6 +14,7 @@ class NerModel(tf.keras.Model, ABC):
     def __init__(self, configs, vocab_size, num_classes):
         super(NerModel, self).__init__()
         self.use_bert = configs.use_bert
+        self.use_bilstm = configs.use_bilstm
         self.embedding = tf.keras.layers.Embedding(vocab_size, configs.embedding_dim, mask_zero=True)
         self.hidden_dim = configs.hidden_dim
         self.dropout_rate = configs.dropout
@@ -28,9 +29,12 @@ class NerModel(tf.keras.Model, ABC):
             embedding_inputs = inputs
         else:
             embedding_inputs = self.embedding(inputs)
-        dropout_inputs = self.dropout(embedding_inputs, training)
-        bilstm_outputs = self.bilstm(dropout_inputs)
-        logits = self.dense(bilstm_outputs)
+        outputs = self.dropout(embedding_inputs, training)
+
+        if self.use_bilstm:
+            outputs = self.bilstm(outputs)
+
+        logits = self.dense(outputs)
         tensor_targets = tf.convert_to_tensor(targets, dtype=tf.int32)
         log_likelihood, self.transition_params = crf_log_likelihood(
             logits, tensor_targets, inputs_length, transition_params=self.transition_params)

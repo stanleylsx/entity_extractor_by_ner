@@ -37,6 +37,14 @@ class Configure:
         if the_item in config:
             self.use_bert = self.str2bool(config[the_item])
 
+        the_item = 'use_bilstm'
+        if the_item in config:
+            self.use_bilstm = self.str2bool(config[the_item])
+
+        the_item = 'finetune'
+        if the_item in config:
+            self.finetune = self.str2bool(config[the_item])
+
         the_item = 'vocabs_dir'
         if the_item in config:
             self.vocabs_dir = config[the_item]
@@ -183,6 +191,8 @@ class Configure:
         logger.info('     vocab             dir: {}'.format(self.vocabs_dir))
         logger.info('     delimiter            : {}'.format(self.delimiter))
         logger.info('     use              bert: {}'.format(self.use_bert))
+        logger.info('     use            bilstm: {}'.format(self.use_bilstm))
+        logger.info('     finetune             : {}'.format(self.finetune))
         logger.info('     checkpoints       dir: {}'.format(self.checkpoints_dir))
         logger.info('     log               dir: {}'.format(self.log_dir))
         logger.info(' ' + '++' * 20)
