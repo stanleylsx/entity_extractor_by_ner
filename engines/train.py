@@ -41,21 +41,16 @@ def train(configs, data_manager, logger):
     else:
         optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
 
-    if configs.use_bert:
-        bert_model = TFBertModel.from_pretrained('bert-base-chinese')
+    if configs.use_bert and not configs.finetune:
         tokenizer = BertTokenizer.from_pretrained('bert-base-chinese')
+        bert_model = TFBertModel.from_pretrained('bert-base-chinese')
     else:
         bert_model, tokenizer = None, None
 
     train_dataset, val_dataset = data_manager.get_training_set()
-
     ner_model = NerModel(configs, vocab_size, num_classes)
 
-    if configs.finetune:
-        checkpoint = tf.train.Checkpoint(ner_model=ner_model, bert_model=bert_model)
-    else:
-        checkpoint = tf.train.Checkpoint(ner_model=ner_model)
-
+    checkpoint = tf.train.Checkpoint(ner_model=ner_model)
     checkpoint_manager = tf.train.CheckpointManager(
         checkpoint, directory=checkpoints_dir, checkpoint_name=checkpoint_name, max_to_keep=max_to_keep)
     checkpoint.restore(checkpoint_manager.latest_checkpoint)
@@ -72,8 +67,12 @@ def train(configs, data_manager, logger):
         for step, batch in tqdm(train_dataset.shuffle(len(train_dataset)).batch(batch_size).enumerate()):
             if configs.use_bert:
                 X_train_batch, y_train_batch, att_mask_batch = batch
-                # 获得bert的模型输出
-                model_inputs = bert_model(X_train_batch, attention_mask=att_mask_batch)[0]
+                if configs.finetune:
+                    # 如果微调
+                    model_inputs = (X_train_batch, att_mask_batch)
+                else:
+                    # 不进行微调，Bert只做特征的增强
+                    model_inputs = bert_model(X_train_batch, attention_mask=att_mask_batch)[0]
             else:
                 X_train_batch, y_train_batch = batch
                 model_inputs = X_train_batch
@@ -84,12 +83,8 @@ def train(configs, data_manager, logger):
                     inputs=model_inputs, inputs_length=inputs_length, targets=y_train_batch, training=1)
                 loss = -tf.reduce_mean(log_likelihood)
             # 定义好参加梯度的参数
-            if configs.finetune:
-                variables = ner_model.trainable_variables + bert_model.trainable_variables
-                gradients = tape.gradient(loss, variables)
-            else:
-                variables = ner_model.trainable_variables
-                gradients = tape.gradient(loss, variables)
+            variables = ner_model.trainable_variables
+            gradients = tape.gradient(loss, variables)
             # 反向传播，自动微分计算
             optimizer.apply_gradients(zip(gradients, variables))
             if step % configs.print_per_batch == 0 and step != 0:
@@ -117,8 +112,10 @@ def train(configs, data_manager, logger):
         for val_batch in tqdm(val_dataset.batch(batch_size)):
             if configs.use_bert:
                 X_val_batch, y_val_batch, att_mask_batch = val_batch
-                # 获得bert的模型输出
-                model_inputs = bert_model(X_val_batch, attention_mask=att_mask_batch)[0]
+                if configs.finetune:
+                    model_inputs = (X_val_batch, att_mask_batch)
+                else:
+                    model_inputs = bert_model(X_val_batch, attention_mask=att_mask_batch)[0]
             else:
                 X_val_batch, y_val_batch = val_batch
                 model_inputs = X_val_batch
