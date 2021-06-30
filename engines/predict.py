@@ -19,16 +19,11 @@ class Predictor:
         self.logger = logger
         self.configs = configs
         logger.info('loading model parameter')
-        if self.configs.use_bert:
+        if self.configs.use_bert and not self.configs.finetune:
             self.bert_model = TFBertModel.from_pretrained('bert-base-chinese')
-            self.ner_model = NerModel(configs, vocab_size, num_classes)
-        else:
-            self.ner_model = NerModel(configs, vocab_size, num_classes)
+        self.ner_model = NerModel(configs, vocab_size, num_classes)
         # 实例化Checkpoint，设置恢复对象为新建立的模型
-        if configs.finetune:
-            checkpoint = tf.train.Checkpoint(ner_model=self.ner_model, bert_model=self.bert_model)
-        else:
-            checkpoint = tf.train.Checkpoint(ner_model=self.ner_model)
+        checkpoint = tf.train.Checkpoint(ner_model=self.ner_model)
         checkpoint.restore(tf.train.latest_checkpoint(configs.checkpoints_dir))  # 从文件恢复模型参数
         logger.info('loading model successfully')
 
@@ -40,7 +35,10 @@ class Predictor:
         """
         if self.configs.use_bert:
             X, y, att_mask, Sentence = self.dataManager.prepare_single_sentence(sentence)
-            model_inputs = self.bert_model(X, attention_mask=att_mask)[0]
+            if self.configs.finetune:
+                model_inputs = (X, att_mask)
+            else:
+                model_inputs = self.bert_model(X, attention_mask=att_mask)[0]
         else:
             X, y, Sentence = self.dataManager.prepare_single_sentence(sentence)
             model_inputs = X
