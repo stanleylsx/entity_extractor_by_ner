@@ -8,12 +8,16 @@ from abc import ABC
 
 import tensorflow as tf
 from tensorflow_addons.text.crf import crf_log_likelihood
+from transformers import TFBertModel
 
 
 class NerModel(tf.keras.Model, ABC):
     def __init__(self, configs, vocab_size, num_classes):
         super(NerModel, self).__init__()
         self.use_bert = configs.use_bert
+        self.finetune = configs.finetune
+        if self.use_bert and self.finetune:
+            self.bert_model = TFBertModel.from_pretrained('bert-base-chinese')
         self.use_bilstm = configs.use_bilstm
         self.embedding = tf.keras.layers.Embedding(vocab_size, configs.embedding_dim, mask_zero=True)
         self.hidden_dim = configs.hidden_dim
@@ -26,9 +30,13 @@ class NerModel(tf.keras.Model, ABC):
     @tf.function
     def call(self, inputs, inputs_length, targets, training=None):
         if self.use_bert:
-            embedding_inputs = inputs
+            if self.finetune:
+                embedding_inputs = self.bert_model(inputs[0], attention_mask=inputs[1])[0]
+            else:
+                embedding_inputs = inputs
         else:
             embedding_inputs = self.embedding(inputs)
+
         outputs = self.dropout(embedding_inputs, training)
 
         if self.use_bilstm:
