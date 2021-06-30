@@ -88,9 +88,10 @@ def train(configs, data_manager, logger):
                 variables = ner_model.trainable_variables + bert_model.trainable_variables
                 gradients = tape.gradient(loss, variables)
             else:
-                gradients = tape.gradient(loss, ner_model.trainable_variables)
+                variables = ner_model.trainable_variables
+                gradients = tape.gradient(loss, variables)
             # 反向传播，自动微分计算
-            optimizer.apply_gradients(zip(gradients, ner_model.trainable_variables))
+            optimizer.apply_gradients(zip(gradients, variables))
             if step % configs.print_per_batch == 0 and step != 0:
                 batch_pred_sequence, _ = crf_decode(logits, transition_params, inputs_length)
                 measures, _ = metrics(
