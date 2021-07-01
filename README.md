@@ -93,7 +93,7 @@ Finetune-Bert+BiLstm+Crf|True|True|True
 
 * Finetune-Bert-CRF模型下效果
 
-![bert-crf-train](https://img-blog.csdnimg.cn/20210629142922937.png)  
+![bert-crf-train](https://img-blog.csdnimg.cn/20210701175300657.png)  
 
 * Bert-Blism-CRF模型下效果
 
