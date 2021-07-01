@@ -84,6 +84,8 @@ def train(configs, data_manager, logger):
                 loss = -tf.reduce_mean(log_likelihood)
             # 定义好参加梯度的参数
             variables = ner_model.trainable_variables
+            # 将Bert里面的pooler层的参数去掉
+            variables = [var for var in variables if 'pooler' not in var.name]
             gradients = tape.gradient(loss, variables)
             # 反向传播，自动微分计算
             optimizer.apply_gradients(zip(gradients, variables))
