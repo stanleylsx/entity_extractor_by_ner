@@ -1,6 +1,7 @@
 # 实体识别
 
-**公众号文章：[命名实体识别常用算法及工程实现](https://mp.weixin.qq.com/s/KNNw9JUZxXljE87vVgW5Yg)**
+**公众号文章：[命名实体识别常用算法及工程实现](https://mp.weixin.qq.com/s/KNNw9JUZxXljE87vVgW5Yg)**  
+**公众号文章：[命名实体识别开源项目V4.0版本](https://mp.weixin.qq.com/s/oWHFdcBdVsifvuEyr_ruPQ)**  
 
 此仓库是基于Tensorflow2.3的NER任务项目，支持BiLSTM-Crf、Bert-BiLSTM-Crf、Bert-Crf，可对Bert进行微调，提供可配置文档，配置完可直接运行。
 
