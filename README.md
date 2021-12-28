@@ -54,7 +54,7 @@ CRF层需要使用viterbi译码法，知乎上[这个答案](https://www.zhihu.c
 
 ## 使用
 ### 训练
-将已经标注好的数据切割好训练、验证集放入data目录下，如果只提供训练集将会有程序自己按照9:1切割训练集与验证集。  
+将已经标注好的数据切割好训练、验证集放入data目录下(**这里只需要放这两个文件就好，lab2id和token2id两个文件不需要你自己定义，会自己生成**)，如果只提供训练集将会有程序自己按照9:1切割训练集与验证集。  
 在system.config的Datasets(Input/Output)下配置好数据集的路径、分隔符、模型保存地址等。  
 在system.config的Labeling Scheme配置标注模式。  
 在system.config的Model Configuration/Training Settings下配置模型参数和训练参数。  
