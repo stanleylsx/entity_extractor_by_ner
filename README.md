@@ -56,7 +56,7 @@ CRF层需要使用viterbi译码法，知乎上[这个答案](https://www.zhihu.c
 ### 训练
 **【step1】** 训练之前请在data目录下面建立自己的数据文件夹，然后在配置里的datasets_fold修改下你的数据文件夹地址，将已经标注好的数据切割好训练(train.csv)、验证集(dev.csv)放入你的数据目录下(**这里只需要放这两个文件就好，lab2id和token2id两个文件不需要你自己定义，会自己生成**),此处请修改配置里面的train_file和dev_file为自己的数据集文件名，如果只提供训练集将会有程序自己按照9:1切割训练集与验证集；  
 **【step2】** 配置好vocabs_dir和log_dir两个地址，它们分别对应词表生成的文件夹和训练过程的文件夹，demo数据是把它们放到了自己的数据文件夹下面，你可以改成自己想要的位置；  
-**【step3】** 配置好新的checkpoints_dir和checkpoint_name，前者是存放模型的文件夹，后面是模型文件的名字，因为项目是可以在原始模型上继续训练的，所以如果是新的数据集或者想从头训练一定要改！  
+**【step3】** 配置好新的checkpoints_dir和checkpoint_name，前者是存放模型的文件夹，后面是模型文件的名字，因为项目是可以在原始模型上继续训练的，所以如果是新的数据集或者想从头训练一定要改！这是很多人运行报错的原因，因为你自己的数据和配置跑在了原来的模型上；  
 **【step4】** 在system.config的Datasets(Input/Output)下配置好分隔符，在system.config的Labeling Scheme配置标注模式，在system.config的Model Configuration/Training Settings下配置模型参数和训练参数。  
 
 设定system.config的Status中的为train:
@@ -100,10 +100,9 @@ Finetune-Bert+BiLstm+Crf|True|True|True
 
 ![bert-bilstm-crf-train](https://img-blog.csdnimg.cn/20200913200450351.png)  
 
-***注(1):这里使用的[transformers](https://github.com/huggingface/transformers)包加载Bert，初次使用的时候会自动下载Bert的模型***  
-***注(2):当重新训练的时候，Bert-Bilstm-CRF和Bilstm-CRF各自自动生成自己vocabs/label2id文件，不能混用，如果需要共用，你可以手动的定义标签***   
-***注(3):使用Bert-Bilstm-CRF时候max_sequence_length不能超过512并且embedding_dim默认为768***  
-***注(4):微调Bert的时候learning_rate改小，设置为5e-5比较通用***
+***注(1):这里使用的[transformers](https://github.com/huggingface/transformers)包加载Bert，初次使用的时候会自动下载Bert的模型***   
+***注(2):使用Bert-Bilstm-CRF时候max_sequence_length不能超过512并且embedding_dim默认为768***  
+***注(3):微调Bert的时候learning_rate改小，设置为5e-5比较好，很多人因为learning_rate太大不收敛，一直-1***
 
 ### 在线预测
 仓库中已经训练好了Bilstm-CRF和Bert-Bilstm-CRF两个模型在同一份数据集上的参数，可直接进行试验，两者位于checkpoints/目录下  
