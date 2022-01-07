@@ -54,10 +54,10 @@ CRF层需要使用viterbi译码法，知乎上[这个答案](https://www.zhihu.c
 
 ## 使用
 ### 训练
-step1. 训练之前请在data目录下面建立自己的数据文件夹，然后在配置里的datasets_fold修改下你的数据文件夹地址，将已经标注好的数据切割好训练(train.csv)、验证集(dev.csv)放入你的数据目录下(**这里只需要放这两个文件就好，lab2id和token2id两个文件不需要你自己定义，会自己生成**),此处请修改配置里面的train_file和dev_file为自己的数据集文件名，如果只提供训练集将会有程序自己按照9:1切割训练集与验证集；  
-step2. 配置好vocabs_dir和log_dir两个地址，它们分别对应词标生成的文件夹和训练过程的文件夹；  
-step3. 配置好新的checkpoints_dir和checkpoint_name，前者是存放模型的文件夹，后面是模型文件的名字，因为项目是可以在原始模型上继续训练的，所以如果是新的数据集或者想从头训练一定要改！  
-step4. 在system.config的Datasets(Input/Output)下配置好分隔符，在system.config的Labeling Scheme配置标注模式，在system.config的Model Configuration/Training Settings下配置模型参数和训练参数。  
+**step1.** 训练之前请在data目录下面建立自己的数据文件夹，然后在配置里的datasets_fold修改下你的数据文件夹地址，将已经标注好的数据切割好训练(train.csv)、验证集(dev.csv)放入你的数据目录下(**这里只需要放这两个文件就好，lab2id和token2id两个文件不需要你自己定义，会自己生成**),此处请修改配置里面的train_file和dev_file为自己的数据集文件名，如果只提供训练集将会有程序自己按照9:1切割训练集与验证集；  
+**step2.** 配置好vocabs_dir和log_dir两个地址，它们分别对应词标生成的文件夹和训练过程的文件夹；  
+**step3.** 配置好新的checkpoints_dir和checkpoint_name，前者是存放模型的文件夹，后面是模型文件的名字，因为项目是可以在原始模型上继续训练的，所以如果是新的数据集或者想从头训练一定要改！  
+**step4.** 在system.config的Datasets(Input/Output)下配置好分隔符，在system.config的Labeling Scheme配置标注模式，在system.config的Model Configuration/Training Settings下配置模型参数和训练参数。  
 
 设定system.config的Status中的为train:
 ```
