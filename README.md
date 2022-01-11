@@ -102,7 +102,7 @@ Finetune-Bert+BiLstm+Crf|True|True|True
 
 ***注(1):这里使用的[transformers](https://github.com/huggingface/transformers)包加载Bert，初次使用的时候会自动下载Bert的模型***   
 ***注(2):使用Bert-Bilstm-CRF时候max_sequence_length不能超过512并且embedding_dim默认为768***  
-***注(3):微调Bert的时候learning_rate改小，设置为5e-5比较好，很多人因为learning_rate太大不收敛，一直-1***
+***注(3):微调Bert的时候learning_rate改小，设置为5e-5比较好，很多人因为learning_rate太大不收敛***
 
 ### 在线预测
 仓库中已经训练好了Bilstm-CRF和Bert-Bilstm-CRF两个模型在同一份数据集上的参数，可直接进行试验，两者位于checkpoints/目录下  
