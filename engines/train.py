@@ -109,7 +109,8 @@ def train(configs, data_manager, logger):
             val_results[measure] = 0
         for label, content in val_labels_results.items():
             for measure in configs.measuring_metrics:
-                val_labels_results[label][measure] = 0
+                if measure != 'accuracy':
+                    val_labels_results[label][measure] = 0
 
         for val_batch in tqdm(val_dataset.batch(batch_size)):
             if configs.use_bert:
