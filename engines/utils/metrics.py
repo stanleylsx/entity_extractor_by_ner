@@ -8,9 +8,9 @@ from engines.utils.extract_entity import extract_entity
 
 
 def metrics(X, y_true, y_pred, configs, data_manager, tokenizer):
-    precision = -1.0
-    recall = -1.0
-    f1 = -1.0
+    precision = 0.0
+    recall = 0.0
+    f1 = 0.0
 
     hit_num = 0
     pred_num = 0
@@ -70,9 +70,9 @@ def metrics(X, y_true, y_pred, configs, data_manager, tokenizer):
 
     # 按照字段切分
     for label in label_num.keys():
-        tmp_precision = 0
-        tmp_recall = 0
-        tmp_f1 = 0
+        tmp_precision = 0.0
+        tmp_recall = 0.0
+        tmp_f1 = 0.0
         # 只包括BI
         if label_num[label]['pred_num'] != 0:
             tmp_precision = 1.0 * label_num[label]['hit_num'] / label_num[label]['pred_num']
