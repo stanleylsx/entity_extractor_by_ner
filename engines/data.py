@@ -30,6 +30,11 @@ class DataManager:
         else:
             self.dev_file = None
 
+        if configs.test_file is not None:
+            self.test_file = configs.datasets_fold + '/' + configs.test_file
+        else:
+            self.test_file = None
+
         self.label_scheme = configs.label_scheme
         self.label_level = configs.label_level
         self.suffix = configs.suffix
@@ -285,6 +290,26 @@ class DataManager:
             df_val['label_id'] = df_val.label.map(lambda x: -1 if str(x) == str(np.nan) else self.label2id[x])
             X_val, y_val = self.prepare(df_val['token_id'], df_val['label_id'])
             return X_val, y_val
+
+    def get_test_dataset(self):
+        """
+        获取测试集
+        :return:
+        """
+        if self.test_file is None:
+            self.logger.info('test file not found')
+            raise Exception('test file not found')
+        df_test = read_csv(self.test_file, names=['token', 'label'], delimiter=self.configs.delimiter)
+        if self.configs.use_bert:
+            X_test, y_test, att_mask_test = self.prepare_bert_embedding(df_test)
+            test_dataset = tf.data.Dataset.from_tensor_slices((X_test, y_test, att_mask_test))
+            return test_dataset
+        else:
+            df_test['token_id'] = df_test.token.map(lambda x: self.map_func(x, self.token2id))
+            df_test['label_id'] = df_test.label.map(lambda x: -1 if str(x) == str(np.nan) else self.label2id[x])
+            X_test, y_test = self.prepare(df_test['token_id'], df_test['label_id'])
+            test_dataset = tf.data.Dataset.from_tensor_slices((X_test, y_test))
+            return test_dataset
 
     def map_func(self, x, token2id):
         if str(x) == str(np.nan):
