@@ -41,7 +41,6 @@ def train(configs, data_manager, logger):
     else:
         optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
 
-    tokenizer = BertTokenizer.from_pretrained('bert-base-chinese')
     if configs.use_bert and not configs.finetune:
         bert_model = TFBertModel.from_pretrained('bert-base-chinese')
     else:
