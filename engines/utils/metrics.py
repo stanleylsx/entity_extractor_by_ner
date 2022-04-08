@@ -7,7 +7,7 @@
 from engines.utils.extract_entity import extract_entity
 
 
-def metrics(X, y_true, y_pred, configs, data_manager, tokenizer):
+def metrics(X, y_true, y_pred, configs, data_manager):
     precision = 0.0
     recall = 0.0
     f1 = 0.0
@@ -28,7 +28,7 @@ def metrics(X, y_true, y_pred, configs, data_manager, tokenizer):
     X = X.numpy()
     for i in range(len(y_true)):
         if configs.use_bert:
-            x = tokenizer.convert_ids_to_tokens(X[i].tolist(), skip_special_tokens=True)
+            x = data_manager.tokenizer.convert_ids_to_tokens(X[i].tolist(), skip_special_tokens=True)
         else:
             x = [str(data_manager.id2token[val]) for val in X[i] if val != data_manager.token2id[data_manager.PADDING]]
         y = [str(data_manager.id2label[val]) for val in y_true[i] if val != data_manager.label2id[data_manager.PADDING]]
