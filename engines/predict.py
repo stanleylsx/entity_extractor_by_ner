@@ -93,8 +93,7 @@ class Predictor:
             test_loss = -tf.reduce_mean(log_likelihood_test)
             batch_pred_sequence_val, _ = crf_decode(logits_test, transition_params_test, inputs_length_test)
             measures, lab_measures = metrics(
-                X_test_batch, y_test_batch, batch_pred_sequence_val, self.configs, self.dataManager,
-                self.dataManager.tokenizer)
+                X_test_batch, y_test_batch, batch_pred_sequence_val, self.configs, self.dataManager)
 
             for k, v in measures.items():
                 test_results[k] += v
