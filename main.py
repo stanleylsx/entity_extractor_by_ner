@@ -82,7 +82,7 @@ if __name__ == '__main__':
             results = predictor.predict_one(sentence)
             print(results)
     elif mode == 'test':
-        logger.info('mode: train')
+        logger.info('mode: test')
         predictor = Predictor(configs, dataManager, logger)
         predictor.predict_one('warm start')
         predictor.predict_test()
