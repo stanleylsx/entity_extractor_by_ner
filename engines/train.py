@@ -128,7 +128,7 @@ def train(configs, data_manager, logger):
             val_loss = -tf.reduce_mean(log_likelihood_val)
             batch_pred_sequence_val, _ = crf_decode(logits_val, transition_params_val, inputs_length_val)
             measures, lab_measures = metrics(
-                X_val_batch, y_val_batch, batch_pred_sequence_val, configs, data_manager, tokenizer)
+                X_val_batch, y_val_batch, batch_pred_sequence_val, configs, data_manager)
 
             for k, v in measures.items():
                 val_results[k] += v
