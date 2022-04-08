@@ -12,7 +12,8 @@ from tqdm import tqdm
 from engines.model import NerModel
 from engines.utils.metrics import metrics
 from tensorflow_addons.text.crf import crf_decode
-from transformers import TFBertModel, BertTokenizer
+from transformers import TFBertModel
+from tensorflow_addons.optimizers import AdamW
 
 
 def train(configs, data_manager, logger):
@@ -29,7 +30,6 @@ def train(configs, data_manager, logger):
     epoch = configs.epoch
     batch_size = configs.batch_size
 
-    # 优化器大致效果Adagrad>Adam>RMSprop>SGD
     if configs.optimizer == 'Adagrad':
         optimizer = tf.keras.optimizers.Adagrad(learning_rate=learning_rate)
     elif configs.optimizer == 'Adadelta':
@@ -38,8 +38,10 @@ def train(configs, data_manager, logger):
         optimizer = tf.keras.optimizers.RMSprop(learning_rate=learning_rate)
     elif configs.optimizer == 'SGD':
         optimizer = tf.keras.optimizers.SGD(learning_rate=learning_rate)
-    else:
+    elif configs.optimizer == 'Adam':
         optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
+    else:
+        optimizer = AdamW(learning_rate=learning_rate)
 
     if configs.use_bert and not configs.finetune:
         bert_model = TFBertModel.from_pretrained('bert-base-chinese')
