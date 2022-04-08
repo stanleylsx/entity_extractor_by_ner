@@ -5,10 +5,14 @@
 # @File : predict.py
 # @Software: PyCharm
 import tensorflow as tf
+import time
+import math
 from engines.model import NerModel
 from engines.utils.extract_entity import extract_entity
 from tensorflow_addons.text.crf import crf_decode
 from transformers import TFBertModel
+from tqdm import tqdm
+from engines.utils.metrics import metrics
 
 
 class Predictor:
@@ -57,3 +61,57 @@ class Predictor:
             y_pred = y_pred[1:-1]
         entities, suffixes, indices = extract_entity(sentence, y_pred, self.dataManager)
         return entities, suffixes, indices
+
+    def predict_test(self):
+        loss_values = []
+        test_results = {}
+        test_labels_results = {}
+        for label in self.dataManager.suffix:
+            test_labels_results.setdefault(label, {})
+        for measure in self.configs.measuring_metrics:
+            test_results[measure] = 0
+        for label, content in test_labels_results.items():
+            for measure in self.configs.measuring_metrics:
+                if measure != 'accuracy':
+                    test_labels_results[label][measure] = 0
+        test_dataset = self.dataManager.get_test_dataset()
+        start_time = time.time()
+        num_test_iterations = int(math.ceil(1.0 * len(test_dataset) / self.dataManager.batch_size))
+        for test_batch in tqdm(test_dataset.batch(self.dataManager.batch_size)):
+            if self.configs.use_bert:
+                X_test_batch, y_test_batch, att_mask_batch = test_batch
+                if self.configs.finetune:
+                    model_inputs = (X_test_batch, att_mask_batch)
+                else:
+                    model_inputs = self.bert_model(X_test_batch, attention_mask=att_mask_batch)[0]
+            else:
+                X_test_batch, y_test_batch = test_batch
+                model_inputs = X_test_batch
+            inputs_length_test = tf.math.count_nonzero(X_test_batch, 1)
+            logits_test, log_likelihood_test, transition_params_test = self.ner_model(
+                inputs=model_inputs, inputs_length=inputs_length_test, targets=y_test_batch)
+            test_loss = -tf.reduce_mean(log_likelihood_test)
+            batch_pred_sequence_val, _ = crf_decode(logits_test, transition_params_test, inputs_length_test)
+            measures, lab_measures = metrics(
+                X_test_batch, y_test_batch, batch_pred_sequence_val, self.configs, self.dataManager,
+                self.dataManager.tokenizer)
+
+            for k, v in measures.items():
+                test_results[k] += v
+            for lab in lab_measures:
+                for k, v in lab_measures[lab].items():
+                    test_labels_results[lab][k] += v
+            loss_values.append(test_loss)
+
+        time_span = (time.time() - start_time) / 60
+        test_res_str = ''
+        for k, v in test_results.items():
+            test_results[k] /= num_test_iterations
+            test_res_str += (k + ': %.3f ' % test_results[k])
+        for label, content in test_labels_results.items():
+            test_label_str = ''
+            for k, v in content.items():
+                test_labels_results[label][k] /= num_test_iterations
+                test_label_str += (k + ': %.3f ' % test_labels_results[label][k])
+            self.logger.info('label: %s, %s' % (label, test_label_str))
+        self.logger.info('time consumption:%.2f(min), %s' % (time_span, test_res_str))
