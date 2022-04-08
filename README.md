@@ -114,6 +114,21 @@ Finetune-Bert+BiLstm+Crf|True|True|True
 
 ![online_predict](https://img-blog.csdnimg.cn/202009131958050.png)  
 
+### 批量测试
+将测试集放到你的数据目录下(测试集和训练集文件格式一样)，并修改配置如下：
+```
+################ Status ################
+mode=test
+# string: train/interactive_predict/test
+
+################ Datasets(Input/Output) ################
+# 此处展示的是demo数据集所在的文件夹，训练自己数据前请自己设置一个文件夹
+datasets_fold=data/example_datasets
+train_file=train.csv
+dev_file=dev.csv
+test_file=test.csv
+```
+
 ## 参考
 + NER相关的论文整理在[papers](papers)下
 + [https://github.com/scofield7419/sequence-labeling-BiLSTM-CRF](https://github.com/scofield7419/sequence-labeling-BiLSTM-CRF)
