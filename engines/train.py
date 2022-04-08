@@ -92,7 +92,7 @@ def train(configs, data_manager, logger):
             if step % configs.print_per_batch == 0 and step != 0:
                 batch_pred_sequence, _ = crf_decode(logits, transition_params, inputs_length)
                 measures, _ = metrics(
-                    X_train_batch, y_train_batch, batch_pred_sequence, configs, data_manager, tokenizer)
+                    X_train_batch, y_train_batch, batch_pred_sequence, configs, data_manager)
                 res_str = ''
                 for k, v in measures.items():
                     res_str += (k + ': %.3f ' % v)
