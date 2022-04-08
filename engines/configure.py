@@ -28,6 +28,11 @@ class Configure:
             self.dev_file = self.str2none(config[the_item])
         else:
             self.dev_file = None
+        the_item = 'test_file'
+        if the_item in config:
+            self.test_file = self.str2none(config[the_item])
+        else:
+            self.test_file = None
 
         the_item = 'delimiter'
         if the_item in config:
