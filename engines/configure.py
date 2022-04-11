@@ -38,13 +38,21 @@ class Configure:
         if the_item in config:
             self.delimiter = config[the_item]
 
-        the_item = 'use_bert'
+        the_item = 'use_pretrained_model'
         if the_item in config:
-            self.use_bert = self.str2bool(config[the_item])
+            self.use_pretrained_model = self.str2bool(config[the_item])
 
-        the_item = 'use_bilstm'
+        the_item = 'pretrained_model'
         if the_item in config:
-            self.use_bilstm = self.str2bool(config[the_item])
+            self.pretrained_model = config[the_item]
+
+        the_item = 'use_middle_model'
+        if the_item in config:
+            self.use_middle_model = self.str2bool(config[the_item])
+
+        the_item = 'middle_model'
+        if the_item in config:
+            self.middle_model = config[the_item]
 
         the_item = 'finetune'
         if the_item in config:
@@ -85,20 +93,25 @@ class Configure:
 
         the_item = 'embedding_dim'
         if the_item in config:
-            if not self.use_bert:
-                self.embedding_dim = int(config[the_item])
-            else:
-                self.embedding_dim = 768
+            self.embedding_dim = int(config[the_item])
 
         the_item = 'max_sequence_length'
         if the_item in config:
             self.max_sequence_length = int(config[the_item])
-        if self.use_bert and self.max_sequence_length > 512:
-            raise Exception('the max sequence length over 512 in Bert mode')
 
         the_item = 'hidden_dim'
         if the_item in config:
             self.hidden_dim = int(config[the_item])
+
+        the_item = 'filter_nums'
+        if the_item in config:
+            self.filter_nums = int(config[the_item])
+
+        the_item = 'idcnn_nums'
+        if the_item in config:
+            self.idcnn_nums = int(config[the_item])
+            if self.idcnn_nums <= 0:
+                raise Exception('idcnn numbers must over 0')
 
         the_item = 'CUDA_VISIBLE_DEVICES'
         if the_item in config:
@@ -141,6 +154,7 @@ class Configure:
         the_item = 'checkpoints_max_to_keep'
         if the_item in config:
             self.checkpoints_max_to_keep = int(config[the_item])
+
         the_item = 'print_per_batch'
         if the_item in config:
             self.print_per_batch = int(config[the_item])
@@ -195,9 +209,11 @@ class Configure:
         logger.info('     validation       file: {}'.format(self.dev_file))
         logger.info('     vocab             dir: {}'.format(self.vocabs_dir))
         logger.info('     delimiter            : {}'.format(self.delimiter))
-        logger.info('     use              bert: {}'.format(self.use_bert))
-        logger.info('     use            bilstm: {}'.format(self.use_bilstm))
+        logger.info('     use  pretrained model: {}'.format(self.use_pretrained_model))
+        logger.info('     pretrained      model: {}'.format(self.pretrained_model))
         logger.info('     finetune             : {}'.format(self.finetune))
+        logger.info('     use    middle   model: {}'.format(self.use_middle_model))
+        logger.info('     middle          model: {}'.format(self.middle_model))
         logger.info('     checkpoints       dir: {}'.format(self.checkpoints_dir))
         logger.info('     log               dir: {}'.format(self.log_dir))
         logger.info(' ' + '++' * 20)
@@ -211,6 +227,8 @@ class Configure:
         logger.info('     embedding         dim: {}'.format(self.embedding_dim))
         logger.info('     max  sequence  length: {}'.format(self.max_sequence_length))
         logger.info('     hidden            dim: {}'.format(self.hidden_dim))
+        logger.info('     filter           nums: {}'.format(self.filter_nums))
+        logger.info('     idcnn            nums: {}'.format(self.idcnn_nums))
         logger.info('     CUDA  VISIBLE  DEVICE: {}'.format(self.CUDA_VISIBLE_DEVICES))
         logger.info('     seed                 : {}'.format(self.seed))
         logger.info(' ' + '++' * 20)

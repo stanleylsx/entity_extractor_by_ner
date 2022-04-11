@@ -8,30 +8,48 @@ from abc import ABC
 
 import tensorflow as tf
 from tensorflow_addons.text.crf import crf_log_likelihood
-from transformers import TFBertModel
 
 
 class NerModel(tf.keras.Model, ABC):
     def __init__(self, configs, vocab_size, num_classes):
         super(NerModel, self).__init__()
-        self.use_bert = configs.use_bert
+        self.use_pretrained_model = configs.use_pretrained_model
         self.finetune = configs.finetune
-        if self.use_bert and self.finetune:
-            self.bert_model = TFBertModel.from_pretrained('bert-base-chinese')
-        self.use_bilstm = configs.use_bilstm
+
+        if self.use_pretrained_model and self.finetune:
+            if configs.pretrained_model == 'Bert':
+                from transformers import TFBertModel
+                self.pretrained_model = TFBertModel.from_pretrained('bert-base-chinese')
+
+        self.use_middle_model = configs.use_middle_model
+        self.middle_model = configs.middle_model
+        if self.use_middle_model:
+            if self.middle_model == 'bilstm':
+                self.hidden_dim = configs.hidden_dim
+                self.bilstm = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(self.hidden_dim, return_sequences=True))
+            if self.middle_model == 'idcnn':
+                filter_nums = configs.filter_nums
+                self.idcnn_nums = configs.idcnn_nums
+                self.cnn = tf.keras.Sequential([
+                    tf.keras.layers.Conv1D(filters=filter_nums, kernel_size=3, activation='relu',
+                                           padding='same', dilation_rate=1),
+                    tf.keras.layers.Conv1D(filters=filter_nums, kernel_size=3, activation='relu',
+                                           padding='same', dilation_rate=1),
+                    tf.keras.layers.Conv1D(filters=filter_nums, kernel_size=3, activation='relu',
+                                           padding='same', dilation_rate=2)])
+                self.idcnn = [self.cnn for _ in range(self.idcnn_nums)]
+
         self.embedding = tf.keras.layers.Embedding(vocab_size, configs.embedding_dim, mask_zero=True)
-        self.hidden_dim = configs.hidden_dim
         self.dropout_rate = configs.dropout
         self.dropout = tf.keras.layers.Dropout(self.dropout_rate)
-        self.bilstm = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(self.hidden_dim, return_sequences=True))
         self.dense = tf.keras.layers.Dense(num_classes)
         self.transition_params = tf.Variable(tf.random.uniform(shape=(num_classes, num_classes)))
 
     @tf.function
     def call(self, inputs, inputs_length, targets, training=None):
-        if self.use_bert:
+        if self.use_pretrained_model:
             if self.finetune:
-                embedding_inputs = self.bert_model(inputs[0], attention_mask=inputs[1])[0]
+                embedding_inputs = self.pretrained_model(inputs[0], attention_mask=inputs[1])[0]
             else:
                 embedding_inputs = inputs
         else:
@@ -39,8 +57,15 @@ class NerModel(tf.keras.Model, ABC):
 
         outputs = self.dropout(embedding_inputs, training)
 
-        if self.use_bilstm:
-            outputs = self.bilstm(outputs)
+        if self.use_middle_model:
+            if self.middle_model == 'bilstm':
+                outputs = self.bilstm(outputs)
+            if self.middle_model == 'idcnn':
+                cnn_outputs = [idcnn(outputs) for idcnn in self.idcnn]
+                if self.idcnn_nums == 1:
+                    outputs = cnn_outputs[0]
+                else:
+                    outputs = tf.keras.layers.concatenate(cnn_outputs, axis=-1, name='concatenate')
 
         logits = self.dense(outputs)
         tensor_targets = tf.convert_to_tensor(targets, dtype=tf.int32)

@@ -42,17 +42,17 @@ class DataManager:
         self.batch_size = configs.batch_size
 
         self.max_sequence_length = configs.max_sequence_length
-        self.embedding_dim = configs.embedding_dim
         self.vocabs_dir = configs.vocabs_dir
         self.token2id_file = self.vocabs_dir + '/token2id'
         self.label2id_file = self.vocabs_dir + '/label2id'
 
         self.token2id, self.id2token, self.label2id, self.id2label = self.load_vocab()
 
-        if configs.use_bert:
-            from transformers import BertTokenizer
-            self.tokenizer = BertTokenizer.from_pretrained('bert-base-chinese')
-            self.max_token_number = len(self.tokenizer.get_vocab())
+        if configs.use_pretrained_model:
+            if configs.pretrained_model == 'Bert':
+                from transformers import BertTokenizer
+                self.tokenizer = BertTokenizer.from_pretrained('bert-base-chinese')
+            self.max_token_number = len(self.tokenizer)
         else:
             self.max_token_number = len(self.token2id)
         self.max_label_number = len(self.label2id)
@@ -70,8 +70,8 @@ class DataManager:
 
         self.logger.info('loading vocab...')
         token2id, id2token = {}, {}
-        # 不使用Bert做嵌入
-        if not self.configs.use_bert:
+        # 不使用预训练模型做嵌入
+        if not self.configs.use_pretrained_model:
             with open(self.token2id_file, 'r', encoding='utf-8') as infile:
                 for row in infile:
                     row = row.strip()
@@ -96,7 +96,7 @@ class DataManager:
         """
         df_train = read_csv(train_path, names=['token', 'label'], delimiter=self.configs.delimiter)
         token2id, id2token = {}, {}
-        if not self.configs.use_bert:
+        if not self.configs.use_pretrained_model:
             tokens = list(set(df_train['token'][df_train['token'].notnull()]))
             token2id = dict(zip(tokens, range(1, len(tokens) + 1)))
             id2token = dict(zip(range(1, len(tokens) + 1), tokens))
@@ -166,9 +166,8 @@ class DataManager:
         y = np.array(self.padding(y))
         return X, y
 
-    def prepare_bert_embedding(self, df):
+    def prepare_pretrained_embedding(self, df):
         """
-        输出前接Bert做词嵌入时候X矩阵和y向量
         :param df:
         :return:
         """
@@ -221,8 +220,8 @@ class DataManager:
         :return:
         """
         df_train = read_csv(self.train_file, names=['token', 'label'], delimiter=self.configs.delimiter)
-        if self.configs.use_bert:
-            X, y, att_mask = self.prepare_bert_embedding(df_train)
+        if self.configs.use_pretrained_model:
+            X, y, att_mask = self.prepare_pretrained_embedding(df_train)
             # shuffle the samples
             num_samples = len(X)
             indices = np.arange(num_samples)
@@ -282,8 +281,8 @@ class DataManager:
         :return:
         """
         df_val = read_csv(self.dev_file, names=['token', 'label'], delimiter=self.configs.delimiter)
-        if self.configs.use_bert:
-            X_val, y_val, att_mask_val = self.prepare_bert_embedding(df_val)
+        if self.configs.use_pretrained_model:
+            X_val, y_val, att_mask_val = self.prepare_pretrained_embedding(df_val)
             return X_val, y_val, att_mask_val
         else:
             df_val['token_id'] = df_val.token.map(lambda x: self.map_func(x, self.token2id))
@@ -300,8 +299,8 @@ class DataManager:
             self.logger.info('test file not found')
             raise Exception('test file not found')
         df_test = read_csv(self.test_file, names=['token', 'label'], delimiter=self.configs.delimiter)
-        if self.configs.use_bert:
-            X_test, y_test, att_mask_test = self.prepare_bert_embedding(df_test)
+        if self.configs.use_pretrained_model:
+            X_test, y_test, att_mask_test = self.prepare_pretrained_embedding(df_test)
             test_dataset = tf.data.Dataset.from_tensor_slices((X_test, y_test, att_mask_test))
             return test_dataset
         else:
@@ -326,7 +325,7 @@ class DataManager:
         :return:
         """
         sentence = list(sentence)
-        if self.configs.use_bert:
+        if self.configs.use_pretrained_model:
             if len(sentence) <= self.max_sequence_length - 2:
                 x = self.tokenizer.encode(sentence)
                 att_mask = [1] * len(x)

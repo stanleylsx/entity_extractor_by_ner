@@ -10,7 +10,6 @@ import math
 from engines.model import NerModel
 from engines.utils.extract_entity import extract_entity
 from tensorflow_addons.text.crf import crf_decode
-from transformers import TFBertModel
 from tqdm import tqdm
 from engines.utils.metrics import metrics
 
@@ -23,8 +22,12 @@ class Predictor:
         self.logger = logger
         self.configs = configs
         logger.info('loading model parameter')
-        if self.configs.use_bert and not self.configs.finetune:
-            self.bert_model = TFBertModel.from_pretrained('bert-base-chinese')
+
+        if configs.use_pretrained_model and not configs.finetune:
+            if configs.pretrained_model == 'Bert':
+                from transformers import TFBertModel
+                self.pretrained_model = TFBertModel.from_pretrained('bert-base-chinese')
+
         self.ner_model = NerModel(configs, vocab_size, num_classes)
         # 实例化Checkpoint，设置恢复对象为新建立的模型
         if configs.finetune:
@@ -40,12 +43,12 @@ class Predictor:
         :param sentence:
         :return:
         """
-        if self.configs.use_bert:
+        if self.configs.use_pretrained_model:
             X, y, att_mask, Sentence = self.dataManager.prepare_single_sentence(sentence)
             if self.configs.finetune:
                 model_inputs = (X, att_mask)
             else:
-                model_inputs = self.bert_model(X, attention_mask=att_mask)[0]
+                model_inputs = self.pretrained_model(X, attention_mask=att_mask)[0]
         else:
             X, y, Sentence = self.dataManager.prepare_single_sentence(sentence)
             model_inputs = X
@@ -56,7 +59,7 @@ class Predictor:
         label_predicts = label_predicts.numpy()
         sentence = Sentence[0, 0:inputs_length[0]]
         y_pred = [str(self.dataManager.id2label[val]) for val in label_predicts[0][0:inputs_length[0]]]
-        if self.configs.use_bert:
+        if self.configs.use_pretrained_model:
             # 去掉[CLS]和[SEP]对应的位置
             y_pred = y_pred[1:-1]
         entities, suffixes, indices = extract_entity(sentence, y_pred, self.dataManager)
@@ -78,12 +81,12 @@ class Predictor:
         start_time = time.time()
         num_test_iterations = int(math.ceil(1.0 * len(test_dataset) / self.dataManager.batch_size))
         for test_batch in tqdm(test_dataset.batch(self.dataManager.batch_size)):
-            if self.configs.use_bert:
+            if self.configs.use_pretrained_model:
                 X_test_batch, y_test_batch, att_mask_batch = test_batch
                 if self.configs.finetune:
                     model_inputs = (X_test_batch, att_mask_batch)
                 else:
-                    model_inputs = self.bert_model(X_test_batch, attention_mask=att_mask_batch)[0]
+                    model_inputs = self.pretrained_model(X_test_batch, attention_mask=att_mask_batch)[0]
             else:
                 X_test_batch, y_test_batch = test_batch
                 model_inputs = X_test_batch

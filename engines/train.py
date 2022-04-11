@@ -12,7 +12,6 @@ from tqdm import tqdm
 from engines.model import NerModel
 from engines.utils.metrics import metrics
 from tensorflow_addons.text.crf import crf_decode
-from transformers import TFBertModel
 from tensorflow_addons.optimizers import AdamW
 
 
@@ -43,10 +42,11 @@ def train(configs, data_manager, logger):
     else:
         optimizer = AdamW(learning_rate=learning_rate, weight_decay=1e-2)
 
-    if configs.use_bert and not configs.finetune:
-        bert_model = TFBertModel.from_pretrained('bert-base-chinese')
-    else:
-        bert_model = None
+    pretrained_model = None
+    if configs.use_pretrained_model and not configs.finetune:
+        if configs.pretrained_model == 'Bert':
+            from transformers import TFBertModel
+            pretrained_model = TFBertModel.from_pretrained('bert-base-chinese')
 
     train_dataset, val_dataset = data_manager.get_training_set()
     ner_model = NerModel(configs, vocab_size, num_classes)
@@ -66,14 +66,14 @@ def train(configs, data_manager, logger):
         start_time = time.time()
         logger.info('epoch:{}/{}'.format(i + 1, epoch))
         for step, batch in tqdm(train_dataset.shuffle(len(train_dataset)).batch(batch_size).enumerate()):
-            if configs.use_bert:
+            if configs.use_pretrained_model:
                 X_train_batch, y_train_batch, att_mask_batch = batch
                 if configs.finetune:
                     # 如果微调
                     model_inputs = (X_train_batch, att_mask_batch)
                 else:
-                    # 不进行微调，Bert只做特征的增强
-                    model_inputs = bert_model(X_train_batch, attention_mask=att_mask_batch)[0]
+                    # 不进行微调，预训练模型只做特征的增强
+                    model_inputs = pretrained_model(X_train_batch, attention_mask=att_mask_batch)[0]
             else:
                 X_train_batch, y_train_batch = batch
                 model_inputs = X_train_batch
@@ -85,7 +85,7 @@ def train(configs, data_manager, logger):
                 loss = -tf.reduce_mean(log_likelihood)
             # 定义好参加梯度的参数
             variables = ner_model.trainable_variables
-            # 将Bert里面的pooler层的参数去掉
+            # 将预训练模型里面的pooler层的参数去掉
             variables = [var for var in variables if 'pooler' not in var.name]
             gradients = tape.gradient(loss, variables)
             # 反向传播，自动微分计算
@@ -114,12 +114,12 @@ def train(configs, data_manager, logger):
                     val_labels_results[label][measure] = 0
 
         for val_batch in tqdm(val_dataset.batch(batch_size)):
-            if configs.use_bert:
+            if configs.use_pretrained_model:
                 X_val_batch, y_val_batch, att_mask_batch = val_batch
                 if configs.finetune:
                     model_inputs = (X_val_batch, att_mask_batch)
                 else:
-                    model_inputs = bert_model(X_val_batch, attention_mask=att_mask_batch)[0]
+                    model_inputs = pretrained_model(X_val_batch, attention_mask=att_mask_batch)[0]
             else:
                 X_val_batch, y_val_batch = val_batch
                 model_inputs = X_val_batch

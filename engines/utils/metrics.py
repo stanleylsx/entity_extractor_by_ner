@@ -27,7 +27,7 @@ def metrics(X, y_true, y_pred, configs, data_manager):
     y_true = y_true.numpy()
     X = X.numpy()
     for i in range(len(y_true)):
-        if configs.use_bert:
+        if configs.use_pretrained_model:
             x = data_manager.tokenizer.convert_ids_to_tokens(X[i].tolist(), skip_special_tokens=True)
         else:
             x = [str(data_manager.id2token[val]) for val in X[i] if val != data_manager.token2id[data_manager.PADDING]]
