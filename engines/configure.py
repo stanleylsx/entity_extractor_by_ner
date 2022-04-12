@@ -129,6 +129,13 @@ class Configure:
         if the_item in config:
             self.patient = int(config[the_item])
 
+        the_item = 'use_gan'
+        if the_item in config:
+            self.use_gan = self.str2bool(config[the_item])
+        the_item = 'gan_method'
+        if the_item in config:
+            self.gan_method = config[the_item]
+
         the_item = 'epoch'
         if the_item in config:
             self.epoch = int(config[the_item])
@@ -238,6 +245,8 @@ class Configure:
         logger.info('     dropout              : {}'.format(self.dropout))
         logger.info('     learning         rate: {}'.format(self.learning_rate))
         logger.info('     optimizer            : {}'.format(self.optimizer))
+        logger.info('     use               gan: {}'.format(self.use_gan))
+        logger.info('     gan            method: {}'.format(self.gan_method))
         logger.info('     checkpoint       name: {}'.format(self.checkpoint_name))
         logger.info('     max       checkpoints: {}'.format(self.checkpoints_max_to_keep))
         logger.info('     print       per_batch: {}'.format(self.print_per_batch))
