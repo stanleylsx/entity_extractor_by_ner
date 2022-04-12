@@ -20,6 +20,8 @@ class NerModel(tf.keras.Model, ABC):
             if configs.pretrained_model == 'Bert':
                 from transformers import TFBertModel
                 self.pretrained_model = TFBertModel.from_pretrained('bert-base-chinese')
+        else:
+            self.embedding = tf.keras.layers.Embedding(vocab_size, configs.embedding_dim, mask_zero=True)
 
         self.use_middle_model = configs.use_middle_model
         self.middle_model = configs.middle_model
@@ -39,7 +41,6 @@ class NerModel(tf.keras.Model, ABC):
                                            padding='same', dilation_rate=2)])
                 self.idcnn = [self.cnn for _ in range(self.idcnn_nums)]
 
-        self.embedding = tf.keras.layers.Embedding(vocab_size, configs.embedding_dim, mask_zero=True)
         self.dropout_rate = configs.dropout
         self.dropout = tf.keras.layers.Dropout(self.dropout_rate)
         self.dense = tf.keras.layers.Dense(num_classes)
