@@ -1,7 +1,7 @@
 # 实体识别
 
 ![Authour](https://img.shields.io/badge/Author-StanleyLsx-blue.svg) 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/StanleyLsx/entity_extractor_by_ner)
+[![GitHub license](https://img.shields.io/badge/license-MIT-yellowgreen.svg)](https://github.com/StanleyLsx/entity_extractor_by_ner)
 
 **公众号文章：[命名实体识别常用算法及工程实现](https://mp.weixin.qq.com/s/KNNw9JUZxXljE87vVgW5Yg)**  
 **公众号文章：[命名实体识别开源项目V4.0版本](https://mp.weixin.qq.com/s/oWHFdcBdVsifvuEyr_ruPQ)**  
