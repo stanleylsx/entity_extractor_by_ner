@@ -86,3 +86,7 @@ if __name__ == '__main__':
         predictor = Predictor(configs, dataManager, logger)
         predictor.predict_one('warm start')
         predictor.predict_test()
+    elif mode == 'save_pb_model':
+        logger.info('mode: save_pb_model')
+        predictor = Predictor(configs, dataManager, logger)
+        predictor.save_pb()

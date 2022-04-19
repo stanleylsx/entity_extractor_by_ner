@@ -54,7 +54,7 @@ class Predictor:
             model_inputs = X
         inputs_length = tf.math.count_nonzero(X, 1)
         logits, log_likelihood, transition_params = self.ner_model(
-                inputs=model_inputs, inputs_length=inputs_length, targets=y)
+            inputs=model_inputs, inputs_length=inputs_length, targets=y)
         label_predicts, _ = crf_decode(logits, transition_params, inputs_length)
         label_predicts = label_predicts.numpy()
         sentence = Sentence[0, 0:inputs_length[0]]
@@ -117,3 +117,26 @@ class Predictor:
                 test_label_str += (k + ': %.3f ' % test_labels_results[label][k])
             self.logger.info('label: %s, %s' % (label, test_label_str))
         self.logger.info('time consumption:%.2f(min), %s' % (time_span, test_res_str))
+
+    def save_pb(self):
+        if self.configs.use_pretrained_model:
+            if self.configs.finetune:
+                tf.saved_model.save(
+                    self.ner_model, self.configs.checkpoints_dir, signatures=self.ner_model.call.get_concrete_function(
+                        (tf.TensorSpec([None, self.configs.max_sequence_length], tf.int32, name='token_inputs'),
+                         tf.TensorSpec([None, self.configs.max_sequence_length], tf.int32, name='mask_inputs')),
+                        tf.TensorSpec([None], tf.int32, name='inputs_length'),
+                        tf.TensorSpec([None, self.configs.max_sequence_length], tf.int32, name='targets')))
+            else:
+                tf.saved_model.save(
+                    self.ner_model, self.configs.checkpoints_dir, signatures=self.ner_model.call.get_concrete_function(
+                        tf.TensorSpec([None, self.configs.max_sequence_length, 768], tf.float32, name='token_inputs'),
+                        tf.TensorSpec([None], tf.int32, name='inputs_length'),
+                        tf.TensorSpec([None, self.configs.max_sequence_length], tf.int32, name='targets')))
+        else:
+            tf.saved_model.save(
+                self.ner_model, self.configs.checkpoints_dir, signatures=self.ner_model.call.get_concrete_function(
+                    tf.TensorSpec([None, self.configs.max_sequence_length], tf.int32, name='token_inputs'),
+                    tf.TensorSpec([None], tf.int32, name='inputs_length'),
+                    tf.TensorSpec([None, self.configs.max_sequence_length], tf.int32, name='targets')))
+        self.logger.info('The model has been saved')
