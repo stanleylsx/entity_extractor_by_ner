@@ -1,5 +1,7 @@
 # 实体识别
 
+![License](https://img.shields.io/badge/license-GPL3.0-green.svg)
+
 **公众号文章：[命名实体识别常用算法及工程实现](https://mp.weixin.qq.com/s/KNNw9JUZxXljE87vVgW5Yg)**  
 **公众号文章：[命名实体识别开源项目V4.0版本](https://mp.weixin.qq.com/s/oWHFdcBdVsifvuEyr_ruPQ)**  
 
