@@ -64,7 +64,7 @@ class DataManager:
         若不存在词表则生成，若已经存在则加载词表
         :return:
         """
-        if not os.path.isfile(self.token2id_file):
+        if not os.path.exists(self.token2id_file):
             self.logger.info('label vocab files not exist, building label vocab...')
             return self.build_vocab(self.train_file)
 
