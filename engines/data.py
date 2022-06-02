@@ -5,10 +5,13 @@
 # @File : data.py
 # @Software: PyCharm
 import os
+import time
+
 import numpy as np
 import tensorflow as tf
 from engines.utils.io_functions import read_csv
 from tqdm import tqdm
+from collections import Counter
 
 
 class DataManager:
@@ -144,21 +147,24 @@ class DataManager:
         y = []
         tmp_x = []
         tmp_y = []
-        for record in tqdm(zip(tokens, labels)):
-            token = record[0]
-            label = record[1]
-            if token == -1:  # empty line
-                if len(tmp_x) <= self.max_sequence_length:
-                    X.append(tmp_x)
-                    y.append(tmp_y)
+        lines = Counter(tokens).get(-1)
+        with tqdm(total=lines, desc='loading data') as bar:
+            for record in zip(tokens, labels):
+                token = record[0]
+                label = record[1]
+                if token == -1:  # empty line
+                    if len(tmp_x) <= self.max_sequence_length:
+                        X.append(tmp_x)
+                        y.append(tmp_y)
+                    else:
+                        X.append(tmp_x[:self.max_sequence_length])
+                        y.append(tmp_y[:self.max_sequence_length])
+                    tmp_x = []
+                    tmp_y = []
+                    bar.update()
                 else:
-                    X.append(tmp_x[:self.max_sequence_length])
-                    y.append(tmp_y[:self.max_sequence_length])
-                tmp_x = []
-                tmp_y = []
-            else:
-                tmp_x.append(token)
-                tmp_y.append(label)
+                    tmp_x.append(token)
+                    tmp_y.append(label)
         if is_padding:
             X = np.array(self.padding(X))
         else:
@@ -177,40 +183,43 @@ class DataManager:
         att_mask = []
         tmp_x = []
         tmp_y = []
-        for index, record in tqdm(df.iterrows()):
-            token = record.token
-            label = record.label
-            if str(token) == str(np.nan):
-                if len(tmp_x) <= self.max_sequence_length - 2:
-                    tmp_x = self.tokenizer.encode(tmp_x)
-                    tmp_att_mask = [1] * len(tmp_x)
-                    tmp_y = [self.label2id[y] for y in tmp_y]
-                    tmp_y.insert(0, self.label2id['O'])
-                    tmp_y.append(self.label2id['O'])
-                    # padding
-                    tmp_x += [0 for _ in range(self.max_sequence_length - len(tmp_x))]
-                    tmp_y += [self.label2id[self.PADDING] for _ in range(self.max_sequence_length - len(tmp_y))]
-                    tmp_att_mask += [0 for _ in range(self.max_sequence_length - len(tmp_att_mask))]
-                    X.append(tmp_x)
-                    y.append(tmp_y)
-                    att_mask.append(tmp_att_mask)
+        lines = df.token.isnull().sum()
+        with tqdm(total=lines, desc='loading data') as bar:
+            for index, record in df.iterrows():
+                token = record.token
+                label = record.label
+                if str(token) == str(np.nan):
+                    if len(tmp_x) <= self.max_sequence_length - 2:
+                        tmp_x = self.tokenizer.encode(tmp_x)
+                        tmp_att_mask = [1] * len(tmp_x)
+                        tmp_y = [self.label2id[y] for y in tmp_y]
+                        tmp_y.insert(0, self.label2id['O'])
+                        tmp_y.append(self.label2id['O'])
+                        # padding
+                        tmp_x += [0 for _ in range(self.max_sequence_length - len(tmp_x))]
+                        tmp_y += [self.label2id[self.PADDING] for _ in range(self.max_sequence_length - len(tmp_y))]
+                        tmp_att_mask += [0 for _ in range(self.max_sequence_length - len(tmp_att_mask))]
+                        X.append(tmp_x)
+                        y.append(tmp_y)
+                        att_mask.append(tmp_att_mask)
+                    else:
+                        # 此处的padding不能在self.max_sequence_length加2，否则不同维度情况下，numpy没办法转换成矩阵
+                        tmp_x = tmp_x[:self.max_sequence_length-2]
+                        tmp_x = self.tokenizer.encode(tmp_x)
+                        X.append(tmp_x)
+                        tmp_y = tmp_y[:self.max_sequence_length-2]
+                        tmp_y = [self.label2id[y] for y in tmp_y]
+                        tmp_y.insert(0, self.label2id['O'])
+                        tmp_y.append(self.label2id['O'])
+                        y.append(tmp_y)
+                        tmp_att_mask = [1] * self.max_sequence_length
+                        att_mask.append(tmp_att_mask)
+                    tmp_x = []
+                    tmp_y = []
+                    bar.update()
                 else:
-                    # 此处的padding不能在self.max_sequence_length加2，否则不同维度情况下，numpy没办法转换成矩阵
-                    tmp_x = tmp_x[:self.max_sequence_length-2]
-                    tmp_x = self.tokenizer.encode(tmp_x)
-                    X.append(tmp_x)
-                    tmp_y = tmp_y[:self.max_sequence_length-2]
-                    tmp_y = [self.label2id[y] for y in tmp_y]
-                    tmp_y.insert(0, self.label2id['O'])
-                    tmp_y.append(self.label2id['O'])
-                    y.append(tmp_y)
-                    tmp_att_mask = [1] * self.max_sequence_length
-                    att_mask.append(tmp_att_mask)
-                tmp_x = []
-                tmp_y = []
-            else:
-                tmp_x.append(token)
-                tmp_y.append(label)
+                    tmp_x.append(token)
+                    tmp_y.append(label)
         return np.array(X), np.array(y), np.array(att_mask)
 
     def get_training_set(self, train_val_ratio=0.9):
