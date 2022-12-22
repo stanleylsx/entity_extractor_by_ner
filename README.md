@@ -149,8 +149,4 @@ test_file=test.csv
 + NER相关的论文整理在[papers](papers)下
 + [https://github.com/scofield7419/sequence-labeling-BiLSTM-CRF](https://github.com/scofield7419/sequence-labeling-BiLSTM-CRF)
 
-## 公众号
-相关问题欢迎在公众号反馈：  
-
-![小贤算法屋](https://img-blog.csdnimg.cn/20210427094903895.jpg)
 
