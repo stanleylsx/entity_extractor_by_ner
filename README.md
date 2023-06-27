@@ -7,7 +7,8 @@
 **公众号文章：[命名实体识别开源项目V4.0版本](https://mp.weixin.qq.com/s/oWHFdcBdVsifvuEyr_ruPQ)**  
 
 此仓库是基于Tensorflow2.3的NER任务项目，支持BiLSTM-Crf、预训练模型-BiLSTM-Crf、预训练模型-Crf，可对Bert进行微调，提供可配置文档，配置完可直接运行。  
-NER除了CRF范式还有指针范式，做NER的朋友可以横向对比，可参考另外一个项目(基于torch框架的)[entity_extractor_by_pointer](https://github.com/StanleyLsx/entity_extractor_by_pointer)  
+NER除了CRF范式还有指针范式，做NER的朋友可以横向对比，可参考另外一个项目(基于torch框架的)[entity_extractor_by_pointer](https://github.com/StanleyLsx/entity_extractor_by_pointer) 。
+还有一个仓库[entity_extractor](https://github.com/StanleyLsx/entity_extractor)使用torch2把CRF范式还有指针范式进行了整合，并引入了更多tricks，是chatgpt时代以前用来打ner比赛用的，也可以使用和参考。  
 
 ## 更新历史
 日期| 版本     |描述
