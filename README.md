@@ -1,13 +1,9 @@
 # 实体识别
 
-![Authour](https://img.shields.io/badge/Author-StanleyLsx-blue.svg) 
+![Authour](https://img.shields.io/badge/Author-StanleyLsx-red.svg) 
 [![GitHub license](https://img.shields.io/badge/license-MIT-yellowgreen.svg)](https://github.com/StanleyLsx/entity_extractor_by_ner)
 
-**公众号文章：[命名实体识别常用算法及工程实现](https://mp.weixin.qq.com/s/KNNw9JUZxXljE87vVgW5Yg)**  
-**公众号文章：[命名实体识别开源项目V4.0版本](https://mp.weixin.qq.com/s/oWHFdcBdVsifvuEyr_ruPQ)**  
-
-此仓库是基于Tensorflow2.3的NER任务项目，支持BiLSTM-Crf、预训练模型-BiLSTM-Crf、预训练模型-Crf，可对Bert进行微调，提供可配置文档，配置完可直接运行。  
-NER除了CRF范式还有指针范式，做NER的朋友可以横向对比，可参考另外一个项目(基于torch框架的)[entity_extractor_by_pointer](https://github.com/StanleyLsx/entity_extractor_by_pointer)，还有一个仓库[entity_extractor](https://github.com/StanleyLsx/entity_extractor)使用torch2把CRF范式还有指针范式进行了整合，并引入了更多tricks，是chatgpt时代以前用来打ner比赛用的，也可以使用和参考。  
+此仓库是基于Tensorflow2.3的NER任务项目，支持BiLSTM-Crf、IDCNN-Crf、预训练模型-BiLSTM-Crf、预训练模型-Crf，可对Bert进行微调也可使用Bert获取embedding做特征的增强，项目提供了可配置文档，配置完可直接运行。  
 
 ## 更新历史
 日期| 版本     |描述
@@ -34,15 +30,15 @@ NER除了CRF范式还有指针范式，做NER的朋友可以横向对比，可�
 ## 原理 
 ### Bilstm-CRF
 
-![bilstm-crf-model](https://img-blog.csdnimg.cn/20210629194609507.png) 
+![bilstm-crf-model](img/bilstm-crf-model.png) 
 
 ### Finetune-Bert-CRF
 
-![bert-crf-model](https://img-blog.csdnimg.cn/20210629194710746.png) 
+![bert-crf-model](img/bert-crf-model.png) 
 
 ### (Finetune)Bert-Bilstm-CRF
 
-![bert-bilstm-crf-model](https://img-blog.csdnimg.cn/20210629194719983.png) 
+![bert-bilstm-crf-model](img/bert-bilstm-crf-model.png) 
 
  
 ### CRF层
@@ -103,15 +99,15 @@ Finetune-Bert+IDCNN+Crf|True| Bert             | True             |idcnn
 
 * Bilstm-CRF模型下效果
 
-![bilstm-crf-train](https://img-blog.csdnimg.cn/2020091319580672.png)  
+![bilstm-crf-train](img/bilstm-crf-train.png)  
 
 * Finetune-Bert-CRF模型下效果
 
-![bert-crf-train](https://img-blog.csdnimg.cn/20210701175300657.png)  
+![bert-crf-train](img/bert-crf-train.png)  
 
 * Bert-Blism-CRF模型下效果
 
-![bert-bilstm-crf-train](https://img-blog.csdnimg.cn/20200913200450351.png)  
+![bert-bilstm-crf-train](img/bert-bilstm-crf-train.png)  
 
 ***注(1):这里使用的[transformers](https://github.com/huggingface/transformers)包加载Bert，初次使用的时候会自动下载Bert的模型***   
 ***注(2):使用Bert-Bilstm-CRF时候max_sequence_length不能超过512并且embedding_dim默认为768***  
@@ -125,7 +121,7 @@ Finetune-Bert+IDCNN+Crf|True| Bert             | True             |idcnn
 最后，运行main.py开始在线预测。   
 下图为在线预测结果，你可以移植到自己项目里面做成对外接口。    
 
-![online_predict](https://img-blog.csdnimg.cn/202009131958050.png)  
+![online_predict](img/online_predict.png)  
 
 ### 批量测试
 将测试集放到你的数据目录下(测试集和训练集文件格式一样)，并修改配置如下：
@@ -142,8 +138,17 @@ dev_file=dev.csv
 test_file=test.csv
 ```
 
-## 参考
-+ NER相关的论文整理在[papers](papers)下
-+ [https://github.com/scofield7419/sequence-labeling-BiLSTM-CRF](https://github.com/scofield7419/sequence-labeling-BiLSTM-CRF)
+## 其它
 
++ NER除了CRF范式还有指针范式，做NER的朋友可以横向对比，可参考作者另外一个项目(基于torch框架的)[entity_extractor_by_pointer](https://github.com/StanleyLsx/entity_extractor_by_pointer)。
++ 本项目的torch实现版本[entity_extractor](https://github.com/StanleyLsx/entity_extractor)使用torch2把CRF范式还有指针范式进行了整合，并引入了更多tricks，是chatgpt时代以前用来打ner比赛用的，也可以使用和参考。
+
+## 参考
++ 公众号文章：[命名实体识别常用算法及工程实现](https://mp.weixin.qq.com/s/KNNw9JUZxXljE87vVgW5Yg)
++ 公众号文章：[命名实体识别开源项目V4.0版本](https://mp.weixin.qq.com/s/oWHFdcBdVsifvuEyr_ruPQ)
++ NER相关的论文整理在[papers](papers)下
++ [BiLSTM+CRF for sequential labeling tasksF](https://github.com/scofield7419/sequence-labeling-BiLSTM-CRF)
++ [最通俗易懂的BiLSTM-CRF模型中的CRF层介绍](https://zhuanlan.zhihu.com/p/44042528)  
++ [CRF Layer on the Top of BiLSTM - 1](https://createmomo.github.io/2017/09/12/CRF_Layer_on_the_Top_of_BiLSTM_1/)  
++ [如何通俗地讲解 viterbi 算法？](https://www.zhihu.com/question/20136144)
 
