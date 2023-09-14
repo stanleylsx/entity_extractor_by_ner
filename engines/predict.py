@@ -27,6 +27,9 @@ class Predictor:
             if configs.pretrained_model == 'Bert':
                 from transformers import TFBertModel
                 self.pretrained_model = TFBertModel.from_pretrained('bert-base-chinese')
+            elif configs.pretrained_model == 'AlBert':
+                from transformers import TFAlbertModel
+                self.pretrained_model = TFAlbertModel.from_pretrained('uer/albert-base-chinese-cluecorpussmall')
 
         self.ner_model = NerModel(configs, vocab_size, num_classes)
         # 实例化Checkpoint，设置恢复对象为新建立的模型

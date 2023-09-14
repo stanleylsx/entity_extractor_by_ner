@@ -53,6 +53,10 @@ class DataManager:
             if configs.pretrained_model == 'Bert':
                 from transformers import BertTokenizer
                 self.tokenizer = BertTokenizer.from_pretrained('bert-base-chinese')
+            elif configs.pretrained_model == 'AlBert':
+                from transformers import AlbertTokenizer
+                self.tokenizer = AlbertTokenizer.from_pretrained('uer/albert-base-chinese-cluecorpussmall')
+
             self.max_token_number = len(self.tokenizer)
         else:
             self.max_token_number = len(self.token2id)
