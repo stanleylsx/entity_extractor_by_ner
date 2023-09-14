@@ -69,7 +69,7 @@ class NerModel(tf.keras.Model, ABC):
                     outputs = tf.keras.layers.concatenate(cnn_outputs, axis=-1, name='concatenate')
 
         logits = self.dense(outputs)
-        tensor_targets = tf.convert_to_tensor(targets, dtype=tf.int32)
+        tensor_targets = tf.convert_to_tensor(targets, dtype=targets.dtype)
         log_likelihood, self.transition_params = crf_log_likelihood(
             logits, tensor_targets, inputs_length, transition_params=self.transition_params)
         return logits, log_likelihood, self.transition_params

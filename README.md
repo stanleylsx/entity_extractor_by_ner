@@ -17,17 +17,14 @@ NER除了CRF范式还有指针范式，做NER的朋友可以横向对比，可�
 2020-04-13| v1.2.0 |分别打印出每一个实体类别的指标
 2020-09-09| v2.0.0 |更新到tensorflow2.3版本
 2020-09-13| v3.0.0 |增加Bert做embedding，通过配置支持BiLSTM-Crf和Bert-BiLSTM-Crf两种模型的训练与预测
-2021-04-21| v3.0.1 |添加中断之后再训练逻辑、通过配置可选GPU和CPU、bug-fix
-2021-04-25| v3.1.0 |使用tf.data.Dataset包装数据，合并数据处理类
-2021-04-25| v3.1.1 |bug-fix:读取token出现KeyError
 2021-06-29| v4.0.0 |重构项目代码，增加对Bert-CRF的支持以及其和Bert-Bilstm-CRF中对Bert的微调的支持
 2022-04-11| v5.0.0 |增加测试集批量测试、增加一个idcnn模型、支持选择不同的预训练模型、支持两种对抗学习、保存pb格式
 
 ## 环境
-* tensorflow-gpu==2.3.0
-* tensorflow-addons==0.15.0
-* transformers==4.6.1
-* tqdm==4.62.3
+* python环境为3.9
+* tensorflow-gpu==2.11.0
+* tensorflow-addons==0.21.0
+* transformers==4.33.1
 
 推荐使用GPU加速训练，其他环境见requirements.txt
 
