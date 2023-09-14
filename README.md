@@ -21,10 +21,10 @@ NER除了CRF范式还有指针范式，做NER的朋友可以横向对比，可�
 2022-04-11| v5.0.0 |增加测试集批量测试、增加一个idcnn模型、支持选择不同的预训练模型、支持两种对抗学习、保存pb格式
 
 ## 环境
-* python环境为3.6
-* tensorflow-gpu==2.6.0
-* tensorflow-addons==0.21.0
-* transformers==4.33.1
+* python环境为3.7
+* tensorflow-gpu==2.3.0
+* tensorflow-addons==0.15.0
+* transformers==4.6.1
 
 推荐使用GPU加速训练，其他环境见requirements.txt
 

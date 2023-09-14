@@ -1,5 +1,5 @@
-tensorflow-gpu==2.6.0
-pandas==2.1.0
-transformers==4.33.1
+tensorflow-gpu==2.3.0
+pandas==1.3.5
+transformers==4.6.1
 tqdm==4.66.1
-tensorflow-addons==0.21.0
+tensorflow-addons==0.15.0
