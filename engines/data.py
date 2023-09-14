@@ -5,8 +5,6 @@
 # @File : data.py
 # @Software: PyCharm
 import os
-import time
-
 import numpy as np
 import tensorflow as tf
 from engines.utils.io_functions import read_csv
@@ -101,6 +99,8 @@ class DataManager:
         token2id, id2token = {}, {}
         if not self.configs.use_pretrained_model:
             tokens = list(set(df_train['token'][df_train['token'].notnull()]))
+            # 过滤掉为空的token不纳入词表
+            tokens = [tokens for token in tokens if token if token not in [' ', '']]
             token2id = dict(zip(tokens, range(1, len(tokens) + 1)))
             id2token = dict(zip(range(1, len(tokens) + 1), tokens))
             id2token[0] = self.PADDING
@@ -204,10 +204,10 @@ class DataManager:
                         att_mask.append(tmp_att_mask)
                     else:
                         # 此处的padding不能在self.max_sequence_length加2，否则不同维度情况下，numpy没办法转换成矩阵
-                        tmp_x = tmp_x[:self.max_sequence_length-2]
+                        tmp_x = tmp_x[:self.max_sequence_length - 2]
                         tmp_x = self.tokenizer.encode(tmp_x)
                         X.append(tmp_x)
-                        tmp_y = tmp_y[:self.max_sequence_length-2]
+                        tmp_y = tmp_y[:self.max_sequence_length - 2]
                         tmp_y = [self.label2id[y] for y in tmp_y]
                         tmp_y.insert(0, self.label2id['O'])
                         tmp_y.append(self.label2id['O'])
@@ -341,7 +341,7 @@ class DataManager:
                 x += [0 for _ in range(self.max_sequence_length - len(x))]
                 att_mask += [0 for _ in range(self.max_sequence_length - len(att_mask))]
             else:
-                sentence = sentence[:self.max_sequence_length-2]
+                sentence = sentence[:self.max_sequence_length - 2]
                 x = self.tokenizer.encode(sentence)
                 att_mask = [1] * len(x)
             y = [self.label2id['O']] * self.max_sequence_length
