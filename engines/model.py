@@ -20,6 +20,9 @@ class NerModel(tf.keras.Model, ABC):
             if configs.pretrained_model == 'Bert':
                 from transformers import TFBertModel
                 self.pretrained_model = TFBertModel.from_pretrained('bert-base-chinese')
+            elif configs.pretrained_model == 'AlBert':
+                from transformers import TFAlbertModel
+                self.pretrained_model = TFAlbertModel.from_pretrained('uer/albert-base-chinese-cluecorpussmall')
         else:
             self.embedding = tf.keras.layers.Embedding(vocab_size, configs.embedding_dim, mask_zero=True)
 
