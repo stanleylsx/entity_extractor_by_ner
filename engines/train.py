@@ -109,8 +109,7 @@ class Train:
                         variables[0].assign_add(delta)
 
                         with tf.GradientTape() as gan_tape:
-                            logits, log_likelihood, _ = self.ner_model(inputs=model_inputs, inputs_length=inputs_length,
-                                                                  targets=y_train_batch, training=1)
+                            logits, log_likelihood, _ = self.ner_model(inputs=model_inputs, inputs_length=inputs_length, targets=y_train_batch, training=1)
                             loss = -tf.reduce_mean(log_likelihood)
                         gan_gradients = gan_tape.gradient(loss, variables)
                         gradients = [gradients[i].assign_add(grad) for i, grad in enumerate(gan_gradients)]
@@ -142,8 +141,7 @@ class Train:
                             else:
                                 gradients = origin_gradients
                             with tf.GradientTape() as gan_tape:
-                                logits, log_likelihood, _ = self.ner_model(inputs=model_inputs, inputs_length=inputs_length,
-                                                                      targets=y_train_batch, training=1)
+                                logits, log_likelihood, _ = self.ner_model(inputs=model_inputs, inputs_length=inputs_length, targets=y_train_batch, training=1)
                                 loss = -tf.reduce_mean(log_likelihood)
                             gan_gradients = gan_tape.gradient(loss, variables)
                             gradients = [gradients[i].assign_add(grad) for i, grad in enumerate(gan_gradients)]
