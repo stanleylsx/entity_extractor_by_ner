@@ -1,7 +1,9 @@
 # 实体识别
 
 ![Authour](https://img.shields.io/badge/Author-StanleyLsx-red.svg) 
-[![GitHub license](https://img.shields.io/badge/license-MIT-yellowgreen.svg)](https://github.com/StanleyLsx/entity_extractor_by_ner)
+[![License Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+![python_version](https://img.shields.io/badge/Python-3.7-green.svg)
+[![tensorflow_version](https://img.shields.io/badge/tensorflow-2.3-pink.svg)](requirements.txt)
 
 此仓库是基于Tensorflow2.3的NER任务项目，支持BiLSTM-Crf、IDCNN-Crf、预训练模型-BiLSTM-Crf、预训练模型-Crf，可对Bert进行微调也可使用Bert获取embedding做特征的增强，项目提供了可配置文档，配置完可直接运行。  
 
@@ -84,15 +86,15 @@ middle_model=bilstm
 
 模型配置  
 
-模型|use_pretrained_model| pretrained_model | use_middle_model |middle_model
-:---|:---|:-----------------|:-----------------|---
-BiLstm+Crf|False| None             | True             |bilstm
-IDCNN+Crf|False| None             | True             |idcnn
-Bert+BiLstm+Crf|True| Bert             | True             |bilstm
-Bert+IDCNN+Crf|True| Bert             | True             |idcnn
-Finetune-Bert+Crf|True| Bert            | False            |None
-Finetune-Bert+BiLstm+Crf|True| Bert             | True             |bilstm
-Finetune-Bert+IDCNN+Crf|True| Bert             | True             |idcnn
+模型                     |use_pretrained_model| pretrained_model | use_middle_model |middle_model|
+:------------------------|:-------------------|:-----------------|:-----------------|------------|
+BiLstm+Crf               |False               | None             | True             |bilstm      |
+IDCNN+Crf                |False               | None             | True             |idcnn       |
+Bert+BiLstm+Crf          |True                | Bert             | True             |bilstm      |
+Bert+IDCNN+Crf           |True                | Bert             | True             |idcnn       |
+Finetune-Bert+Crf        |True                | Bert             | False            |None        |
+Finetune-Bert+BiLstm+Crf |True                | Bert             | True             |bilstm      |
+Finetune-Bert+IDCNN+Crf  |True                | Bert             | True             |idcnn       |
 
   
 运行main.py开始训练。  
@@ -109,14 +111,15 @@ Finetune-Bert+IDCNN+Crf|True| Bert             | True             |idcnn
 
 ![bert-bilstm-crf-train](img/bert-bilstm-crf-train.png)  
 
-***注(1):这里使用的[transformers](https://github.com/huggingface/transformers)包加载Bert，初次使用的时候会自动下载Bert的模型***   
+***注(1):这里使用的[transformers](https://github.com/huggingface/transformers)包加载Bert，初次使用的时候会自动下载Bert的模型，如果有离线训练或者部署需求的，需要将对应的模型下载到本地***   
 ***注(2):使用Bert-Bilstm-CRF时候max_sequence_length不能超过512并且embedding_dim默认为768***  
 ***注(3):微调Bert的时候learning_rate改小，设置为5e-5比较好，很多人因为learning_rate太大不收敛***
 
 ### 在线预测
-仓库中已经训练好了Bilstm-CRF和Bert-Bilstm-CRF两个模型在同一份数据集上的参数，可直接进行试验，两者位于checkpoints/目录下  
+仓库中已经训练好了Bilstm-CRF、Bert-Bilstm-CRF和IDCNN-CRF三个模型在项目demo数据集上的参数，可直接进行试验，两者位于checkpoints/目录下  
 * 使用Bilstm-CRF模型时使用bilstm-crf/里的system.config配置
 * 使用Bert-Bilstm-CRF模型时使用bert-bilsm-crf/里的system.config配置   
+* 使用IDCNN-CRF模型时使用idcnn-crf/里的system.config配置   
 将对应的配置替换掉当前的配置。  
 最后，运行main.py开始在线预测。   
 下图为在线预测结果，你可以移植到自己项目里面做成对外接口。    
