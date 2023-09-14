@@ -119,9 +119,9 @@ Finetune-Bert+IDCNN+Crf  |True                | Bert             | True         
 仓库中已经训练好了Bilstm-CRF、Bert-Bilstm-CRF和IDCNN-CRF三个模型在项目demo数据集上的参数，可直接进行试验，两者位于checkpoints/目录下  
 * 使用Bilstm-CRF模型时使用bilstm-crf/里的system.config配置
 * 使用Bert-Bilstm-CRF模型时使用bert-bilsm-crf/里的system.config配置   
-* 使用IDCNN-CRF模型时使用idcnn-crf/里的system.config配置
+* 使用IDCNN-CRF模型时使用idcnn-crf/里的system.config配置  
 
-将对应的配置替换掉当前的配置。  
+将以上对应的配置替换掉当前system.config的配置。  
 最后，运行main.py开始在线预测。   
 下图为在线预测结果，你可以移植到自己项目里面做成对外接口。    
 
