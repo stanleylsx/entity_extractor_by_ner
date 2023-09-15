@@ -27,10 +27,10 @@ class Predictor:
             huggingface_tag = configs.huggingface_tag
             if configs.pretrained_model == 'Bert':
                 from transformers import TFBertModel
-                self.pretrained_model = TFBertModel.from_pretrained(configs.huggingface_tag)
+                self.pretrained_model = TFBertModel.from_pretrained(huggingface_tag)
             elif configs.pretrained_model == 'AlBert':
                 from transformers import TFAlbertModel
-                self.pretrained_model = TFAlbertModel.from_pretrained(configs.huggingface_tag)
+                self.pretrained_model = TFAlbertModel.from_pretrained(huggingface_tag)
 
         self.ner_model = NerModel(configs, vocab_size, num_classes)
         # 实例化Checkpoint，设置恢复对象为新建立的模型

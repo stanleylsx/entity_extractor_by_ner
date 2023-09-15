@@ -49,8 +49,8 @@ class DataManager:
 
         self.token2id, self.id2token, self.label2id, self.id2label = self.load_vocab()
 
-        huggingface_tag = configs.huggingface_tag
         if configs.use_pretrained_model:
+            huggingface_tag = configs.huggingface_tag
             if configs.pretrained_model == 'Bert':
                 from transformers import BertTokenizer
                 self.tokenizer = BertTokenizer.from_pretrained(huggingface_tag)
@@ -147,7 +147,6 @@ class DataManager:
         :param is_padding:
         :return:
         """
-        self.logger.info('loading data...')
         X = []
         y = []
         tmp_x = []
@@ -182,7 +181,6 @@ class DataManager:
         :param df:
         :return:
         """
-        self.logger.info('loading data...')
         X = []
         y = []
         att_mask = []
@@ -190,7 +188,7 @@ class DataManager:
         tmp_y = []
         lines = df.token.isnull().sum()
         with tqdm(total=lines, desc='loading data') as bar:
-            for index, record in df.iterrows():
+            for _, record in df.iterrows():
                 token = record.token
                 label = record.label
                 if str(token) == str(np.nan):
@@ -233,6 +231,7 @@ class DataManager:
         :param train_val_ratio:
         :return:
         """
+        self.logger.info('loading train data...')
         df_train = read_csv(self.train_file, names=['token', 'label'], delimiter=self.configs.delimiter)
         if self.configs.use_pretrained_model:
             X, y, att_mask = self.prepare_pretrained_embedding(df_train)
@@ -294,6 +293,7 @@ class DataManager:
         获取验证集
         :return:
         """
+        self.logger.info('loading validation data...')
         df_val = read_csv(self.dev_file, names=['token', 'label'], delimiter=self.configs.delimiter)
         if self.configs.use_pretrained_model:
             X_val, y_val, att_mask_val = self.prepare_pretrained_embedding(df_val)
@@ -312,6 +312,7 @@ class DataManager:
         if self.test_file is None:
             self.logger.info('test file not found')
             raise Exception('test file not found')
+        self.logger.info('loading test data...')
         df_test = read_csv(self.test_file, names=['token', 'label'], delimiter=self.configs.delimiter)
         if self.configs.use_pretrained_model:
             X_test, y_test, att_mask_test = self.prepare_pretrained_embedding(df_test)
