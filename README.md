@@ -72,6 +72,12 @@ use_pretrained_model=True
 pretrained_model=Bert
 ```
 
+huggingface上的模型tag:  
+![huggingface-tag](img/huggingface-tag.png)  
+```
+huggingface_tag=bert-base-chinese
+```
+
 是否微调预训练模型:     
 ```
 finetune=True

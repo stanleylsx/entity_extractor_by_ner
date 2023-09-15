@@ -49,13 +49,14 @@ class DataManager:
 
         self.token2id, self.id2token, self.label2id, self.id2label = self.load_vocab()
 
+        huggingface_tag = configs.huggingface_tag
         if configs.use_pretrained_model:
             if configs.pretrained_model == 'Bert':
                 from transformers import BertTokenizer
-                self.tokenizer = BertTokenizer.from_pretrained('bert-base-chinese')
+                self.tokenizer = BertTokenizer.from_pretrained(huggingface_tag)
             elif configs.pretrained_model == 'AlBert':
                 from transformers import BertTokenizer
-                self.tokenizer = BertTokenizer.from_pretrained('uer/albert-base-chinese-cluecorpussmall')
+                self.tokenizer = BertTokenizer.from_pretrained(huggingface_tag)
 
             self.max_token_number = len(self.tokenizer)
         else:

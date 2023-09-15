@@ -44,9 +44,13 @@ class Train:
             self.optimizer = AdamW(learning_rate=learning_rate, weight_decay=1e-2)
 
         if configs.use_pretrained_model and not configs.finetune:
+            huggingface_tag = configs.huggingface_tag
             if configs.pretrained_model == 'Bert':
                 from transformers import TFBertModel
-                self.pretrained_model = TFBertModel.from_pretrained('bert-base-chinese')
+                self.pretrained_model = TFBertModel.from_pretrained(huggingface_tag)
+            elif configs.pretrained_model == 'AlBert':
+                from transformers import TFAlbertModel
+                self.pretrained_model = TFAlbertModel.from_pretrained(huggingface_tag)
 
         self.ner_model = NerModel(configs, vocab_size, num_classes)
 

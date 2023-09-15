@@ -17,12 +17,13 @@ class NerModel(tf.keras.Model, ABC):
         self.finetune = configs.finetune
 
         if self.use_pretrained_model and self.finetune:
+            huggingface_tag = configs.huggingface_tag
             if configs.pretrained_model == 'Bert':
                 from transformers import TFBertModel
-                self.pretrained_model = TFBertModel.from_pretrained('bert-base-chinese')
+                self.pretrained_model = TFBertModel.from_pretrained(huggingface_tag)
             elif configs.pretrained_model == 'AlBert':
                 from transformers import TFAlbertModel
-                self.pretrained_model = TFAlbertModel.from_pretrained('uer/albert-base-chinese-cluecorpussmall')
+                self.pretrained_model = TFAlbertModel.from_pretrained(huggingface_tag)
         else:
             self.embedding = tf.keras.layers.Embedding(vocab_size, configs.embedding_dim, mask_zero=True)
 

@@ -24,12 +24,13 @@ class Predictor:
         logger.info('loading model parameter')
 
         if configs.use_pretrained_model and not configs.finetune:
+            huggingface_tag = configs.huggingface_tag
             if configs.pretrained_model == 'Bert':
                 from transformers import TFBertModel
-                self.pretrained_model = TFBertModel.from_pretrained('bert-base-chinese')
+                self.pretrained_model = TFBertModel.from_pretrained(configs.huggingface_tag)
             elif configs.pretrained_model == 'AlBert':
                 from transformers import TFAlbertModel
-                self.pretrained_model = TFAlbertModel.from_pretrained('uer/albert-base-chinese-cluecorpussmall')
+                self.pretrained_model = TFAlbertModel.from_pretrained(configs.huggingface_tag)
 
         self.ner_model = NerModel(configs, vocab_size, num_classes)
         # 实例化Checkpoint，设置恢复对象为新建立的模型
