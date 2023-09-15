@@ -72,7 +72,7 @@ use_pretrained_model=True
 pretrained_model=Bert
 ```
 
-huggingface上的模型tag:  
+[huggingface](https://huggingface.co/models?sort=trending&search=chinese)上的模型tag:  
 ![huggingface-tag](img/huggingface-tag.png)  
 ```
 huggingface_tag=bert-base-chinese
