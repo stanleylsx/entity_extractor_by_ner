@@ -162,3 +162,6 @@ test_file=test.csv
 + [CRF Layer on the Top of BiLSTM - 1](https://createmomo.github.io/2017/09/12/CRF_Layer_on_the_Top_of_BiLSTM_1/)  
 + [如何通俗地讲解 viterbi 算法？](https://www.zhihu.com/question/20136144)
 
+## Star History
+
+![Star History Chart](https://api.star-history.com/svg?repos=StanleyLsx/entity_extractor_by_ner&type=Date)
