@@ -1,6 +1,6 @@
 # 实体识别
 
-![Authour](https://img.shields.io/badge/Author-StanleyLsx-red.svg) 
+![Authour](https://img.shields.io/badge/Author-stanleylsx-red.svg) 
 [![License Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 ![python_version](https://img.shields.io/badge/Python-3.7-green.svg)
 [![tensorflow_version](https://img.shields.io/badge/tensorflow-2.3-pink.svg)](requirements.txt)
