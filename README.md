@@ -164,4 +164,4 @@ test_file=test.csv
 
 ## Star History
 
-![Star History Chart](https://api.star-history.com/svg?repos=StanleyLsx/entity_extractor_by_ner&type=Date)
+![Star History Chart](https://api.star-history.com/svg?repos=stanleylsx/entity_extractor_by_ner&type=Date)
