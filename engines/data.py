@@ -105,7 +105,7 @@ class DataManager:
         if not self.configs.use_pretrained_model:
             tokens = list(set(df_train['token'][df_train['token'].notnull()]))
             # 过滤掉为空的token不纳入词表
-            tokens = [tokens for token in tokens if token if token not in [' ', '']]
+            tokens = [token for token in tokens if token if token not in [' ', '']]
             token2id = dict(zip(tokens, range(1, len(tokens) + 1)))
             id2token = dict(zip(range(1, len(tokens) + 1), tokens))
             id2token[0] = self.PADDING
