@@ -1,4 +1,4 @@
-# 实体识别
+# Entity Extractor By Ner
 
 ![Authour](https://img.shields.io/badge/Author-stanleylsx-red.svg) 
 [![License Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
